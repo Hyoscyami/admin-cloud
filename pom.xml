@@ -13,9 +13,18 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>admin-cloud</name>
     <description>Demo project for Spring Boot</description>
+    <packaging>pom</packaging>
     <properties>
         <java.version>11</java.version>
     </properties>
+    <modules>
+        <module>admin</module>
+        <module>authentication</module>
+        <module>authorization</module>
+        <module>config</module>
+        <module>gateway</module>
+        <module>register</module>
+    </modules>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

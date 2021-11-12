@@ -3,6 +3,14 @@ server:
 spring:
   application:
     name: admin
+  security:
+    oauth2:
+      client:
+        registration:
+          admin:
+            provider: admin
+            client-id: admin
+            client-secret: 123456
 eureka:
   instance:
     hostname: localhost

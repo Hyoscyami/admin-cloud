@@ -19,7 +19,6 @@
     </properties>
     <modules>
         <module>admin</module>
-        <module>authentication</module>
         <module>authorization</module>
         <module>config</module>
         <module>gateway</module>

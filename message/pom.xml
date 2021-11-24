@@ -9,26 +9,13 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.xushifei</groupId>
-    <artifactId>admin-cloud</artifactId>
+    <artifactId>message</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>admin-cloud</name>
+    <name>message</name>
     <description>Demo project for Spring Boot</description>
-    <packaging>pom</packaging>
     <properties>
         <java.version>11</java.version>
     </properties>
-    <modules>
-        <module>common</module>
-        <module>admin</module>
-        <module>authorization</module>
-        <module>config</module>
-        <module>gateway</module>
-        <module>register</module>
-        <module>generator</module>
-        <module>file</module>
-        <module>message</module>
-        <module>job</module>
-    </modules>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

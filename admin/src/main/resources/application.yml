@@ -8,18 +8,16 @@ spring:
       client:
         registration:
           admin:
-            provider: admin
+            provider: admin-cloud
             client-id: admin
             client-secret: 123456
+            client-name: admin
             authorization-grant-type: authorization_code
-            redirect-uri: "{baseUrl}/authorized/admin"
+            scope: openid
+            redirect-uri: "{baseUrl}/authorized/{registration}"
         provider:
-          admin:
-            authorization-uri: http://localhost:8764/oauth2/authorize
-            token-uri: https://your-subdomain.oktapreview.com/oauth2/v1/token
-            user-info-uri: https://your-subdomain.oktapreview.com/oauth2/v1/userinfo
-            user-name-attribute: sub
-            jwk-set-uri: https://your-subdomain.oktapreview.com/oauth2/v1/keys
+          admin-cloud:
+            issuer-uri: http://auth-server:8764
 
 eureka:
   instance:

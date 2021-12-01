@@ -39,6 +39,11 @@
             <artifactId>spring-security-oauth2-authorization-server</artifactId>
             <version>0.2.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.xushifei</groupId>
+            <artifactId>uims-auth-client</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

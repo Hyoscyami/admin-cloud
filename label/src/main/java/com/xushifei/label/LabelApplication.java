@@ -1,12 +1,12 @@
-package com.xushifei.common;
+package com.xushifei.label;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CommonApplication {
+public class LabelApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(CommonApplication.class, args);
+    SpringApplication.run(LabelApplication.class, args);
   }
 }

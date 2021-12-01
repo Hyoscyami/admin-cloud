@@ -29,6 +29,7 @@
         <module>message</module>
         <module>job</module>
         <module>uims</module>
+        <module>label</module>
     </modules>
     <dependencies>
         <dependency>

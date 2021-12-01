@@ -43,6 +43,11 @@
             <artifactId>spring-security-oauth2-client</artifactId>
             <version>${security.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.xushifei</groupId>
+            <artifactId>uims-biz-client</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -50,6 +55,15 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.6.0</version>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>

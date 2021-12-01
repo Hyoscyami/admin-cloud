@@ -11,16 +11,31 @@
     <artifactId>uims-auth-client</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>uims-auth-client</name>
-    <description>Demo project for Spring Boot</description>
+    <description>授权服务器使用该client进行认证授权</description>
     <properties>
         <java.version>11</java.version>
     </properties>
-
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>3.0.5</version>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.6.0</version>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>

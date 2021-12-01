@@ -20,6 +20,7 @@
     <modules>
         <module>uims-auth-client</module>
         <module>uims-biz-client</module>
+        <module>uims-server</module>
     </modules>
     <build>
         <plugins>

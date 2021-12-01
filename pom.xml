@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.6</version>
+        <version>2.6.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.xushifei</groupId>
@@ -28,6 +28,7 @@
         <module>file</module>
         <module>message</module>
         <module>job</module>
+        <module>uims</module>
     </modules>
     <dependencies>
         <dependency>
@@ -47,6 +48,15 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.6.0</version>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>

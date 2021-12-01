@@ -23,7 +23,7 @@ import java.util.UUID;
  * @author xushifei
  * @date 2021/11/17
  */
-@Configuration(proxyBeanMethods = false)
+@Configuration
 public class AuthorizationServerConfig {
   /**
    * 安全过滤器

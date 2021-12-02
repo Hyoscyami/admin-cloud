@@ -58,8 +58,7 @@ public class AuthorizationServerConfig {
             .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
             .build();
 
-    JdbcRegisteredClientRepository registeredClientRepository =
-        new JdbcRegisteredClientRepository();
+    ClientRepository registeredClientRepository = new ClientRepository();
     registeredClientRepository.save(registeredClient);
 
     return registeredClientRepository;

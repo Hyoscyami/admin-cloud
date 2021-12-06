@@ -10,7 +10,7 @@ import org.springframework.security.oauth2.server.authorization.OAuth2Authorizat
  * @author xushifei
  * @date 2021/12/3
  */
-public class RedisOauth2AuthorizationServiceImpl implements OAuth2AuthorizationService {
+public class RedisOauth2AuthorizationService implements OAuth2AuthorizationService {
   /**
    * Saves the {@link OAuth2Authorization}.
    *

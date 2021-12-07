@@ -16,7 +16,8 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class OAuth2LoginSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests(authorize -> authorize.anyRequest().authenticated())
-        .oauth2Login(withDefaults());
+    http.authorizeRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
+        .oauth2Login(oauth2Login -> oauth2Login.loginPage("/oauth2/authorization/admin-oidc"))
+        .oauth2Client(withDefaults());
   }
 }

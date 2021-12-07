@@ -7,7 +7,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/Hyoscyami/admin-cloud
+          uri: file://E://学习代码//admin-cloud//admin-cloud
           search-paths: /config/src/main/resources/config/{application}
 eureka:
   instance:

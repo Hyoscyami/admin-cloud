@@ -23,6 +23,7 @@
         <module>common</module>
         <module>core</module>
         <module>admin</module>
+        <module>developer-platform</module>
         <module>authorization</module>
         <module>config</module>
         <module>gateway</module>

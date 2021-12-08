@@ -8,24 +8,14 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <artifactId>developer-platform-biz-client</artifactId>
+    <artifactId>developer-platform-beans</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>developer-platform-biz-client</name>
+    <name>developer-platform-beans</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.xushifei</groupId>
-            <artifactId>developer-platform-beans</artifactId>
-            <version>${developer-platform-beans.version}</version>
-        </dependency>
-    </dependencies>
+
     <build>
         <plugins>
             <plugin>

@@ -9,13 +9,19 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <artifactId>message</artifactId>
+    <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>message</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
+        <message-beans.version>0.0.1-SNAPSHOT</message-beans.version>
     </properties>
-
+    <modules>
+        <module>message-beans</module>
+        <module>message-client</module>
+        <module>message-server</module>
+    </modules>
     <build>
         <plugins>
             <plugin>

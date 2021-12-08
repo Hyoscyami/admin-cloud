@@ -15,9 +15,11 @@
     <description>开发者平台</description>
     <properties>
         <java.version>11</java.version>
+        <developer-platform-beans.version>0.0.1-SNAPSHOT</developer-platform-beans.version>
     </properties>
 
     <modules>
+        <module>developer-platform-beans</module>
         <module>developer-platform-auth-client</module>
         <module>developer-platform-biz-client</module>
         <module>developer-platform-server</module>
@@ -30,5 +32,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

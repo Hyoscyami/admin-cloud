@@ -14,7 +14,7 @@ spring:
             client-name: admin
             authorization-grant-type: authorization_code
             scope: openid
-            redirect-uri: "{baseUrl}/authorized/admin"
+            redirect-uri: "{baseUrl}/login/oauth2/code/admin"
         provider:
           admin-cloud:
             issuer-uri: http://auth-server:8764
@@ -25,3 +25,9 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+    org.springframework.security.oauth2: INFO

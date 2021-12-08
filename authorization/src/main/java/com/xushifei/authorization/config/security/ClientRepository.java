@@ -24,7 +24,9 @@ public class ClientRepository implements RegisteredClientRepository {
    * @param registeredClient the {@link RegisteredClient}
    */
   @Override
-  public void save(RegisteredClient registeredClient) {}
+  public void save(RegisteredClient registeredClient) {
+    log.info("save registeredClient:{}", registeredClient);
+  }
 
   /**
    * Returns the registered client identified by the provided {@code id}, or {@code null} if not
@@ -35,7 +37,8 @@ public class ClientRepository implements RegisteredClientRepository {
    */
   @Override
   public RegisteredClient findById(String id) {
-    return RegisteredClient.withId(id)
+    log.info("findById:{}", id);
+    return RegisteredClient.withId("1")
         .clientId("admin")
         .clientSecret("{noop}123456")
         .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
@@ -60,7 +63,8 @@ public class ClientRepository implements RegisteredClientRepository {
    */
   @Override
   public RegisteredClient findByClientId(String clientId) {
-    return RegisteredClient.withId(UUID.randomUUID().toString())
+    log.info("findByClientId:{}", clientId);
+    return RegisteredClient.withId("1")
         .clientId(clientId)
         .clientSecret("{noop}123456")
         .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)

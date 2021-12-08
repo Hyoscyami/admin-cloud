@@ -14,7 +14,7 @@ spring:
             client-name: admin
             authorization-grant-type: authorization_code
             scope: openid
-            redirect-uri: "{baseUrl}/authorized/{registration}"
+            redirect-uri: "{baseUrl}/authorized/admin"
         provider:
           admin-cloud:
             issuer-uri: http://auth-server:8764

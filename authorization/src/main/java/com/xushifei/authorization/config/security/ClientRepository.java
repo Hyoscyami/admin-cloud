@@ -1,4 +1,4 @@
-package com.xushifei.authorization.config;
+package com.xushifei.authorization.config.security;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
@@ -42,7 +42,7 @@ public class ClientRepository implements RegisteredClientRepository {
         .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
         .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
         .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-        .redirectUri("http://127.0.0.1:8763/login/oauth2/code/admin-oidc")
+        .redirectUri("http://127.0.0.1:8763/login/oauth2/code/admin")
         .redirectUri("http://127.0.0.1:8763/authorized")
         .scope(OidcScopes.OPENID)
         .scope("message.read")
@@ -67,7 +67,7 @@ public class ClientRepository implements RegisteredClientRepository {
         .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
         .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
         .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-        .redirectUri("http://127.0.0.1:8763/login/oauth2/code/admin-oidc")
+        .redirectUri("http://127.0.0.1:8763/login/oauth2/code/admin")
         .redirectUri("http://127.0.0.1:8763/authorized")
         .scope(OidcScopes.OPENID)
         .scope("message.read")

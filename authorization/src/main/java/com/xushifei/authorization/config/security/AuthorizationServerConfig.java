@@ -1,4 +1,4 @@
-package com.xushifei.authorization.config;
+package com.xushifei.authorization.config.security;
 
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -21,6 +21,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsentService;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
+import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -30,7 +31,7 @@ import org.springframework.security.web.SecurityFilterChain;
  * @author xushifei
  * @date 2021/11/17
  */
-@EnableWebSecurity
+@Configuration(proxyBeanMethods = false)
 public class AuthorizationServerConfig {
   /**
    * 安全过滤器
@@ -90,13 +91,7 @@ public class AuthorizationServerConfig {
   }
 
   @Bean
-  UserDetailsService users() {
-    UserDetails user =
-        User.withDefaultPasswordEncoder()
-            .username("user1")
-            .password("password")
-            .roles("USER")
-            .build();
-    return new InMemoryUserDetailsManager(user);
+  public ProviderSettings providerSettings() {
+    return ProviderSettings.builder().issuer("http://auth-server:8764").build();
   }
 }

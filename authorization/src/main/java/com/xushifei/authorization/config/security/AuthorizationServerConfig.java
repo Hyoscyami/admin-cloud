@@ -18,12 +18,20 @@ import org.springframework.security.config.annotation.web.configuration.OAuth2Au
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.oauth2.core.AuthorizationGrantType;
+import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
+import org.springframework.security.oauth2.core.oidc.OidcScopes;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsentService;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
+import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
+import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
+import org.springframework.security.oauth2.server.authorization.config.ClientSettings;
 import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import java.util.UUID;
 
 /**
  * 授权服务器配置
@@ -55,28 +63,43 @@ public class AuthorizationServerConfig {
    */
   @Bean
   public RegisteredClientRepository registeredClientRepository() {
-    return new ClientRepository();
+    RegisteredClient registeredClient =
+        RegisteredClient.withId(UUID.randomUUID().toString())
+            .clientId("admin")
+            .clientSecret("{noop}123456")
+            .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+            .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+            .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+            .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+            .redirectUri("http://127.0.0.1:8080/login/oauth2/code/admin-oidc")
+            .redirectUri("http://127.0.0.1:8080/authorized")
+            .scope(OidcScopes.OPENID)
+            .scope("message.read")
+            .scope("message.write")
+            .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
+            .build();
+    return new InMemoryRegisteredClientRepository(registeredClient);
   }
 
-  /**
-   * 授权信息业务类
-   *
-   * @return
-   */
-  @Bean
-  public OAuth2AuthorizationService authorizationService() {
-    return new InMemoryOAuth2AuthorizationService();
-  }
-
-  /**
-   * 自定义授权业务类
-   *
-   * @return
-   */
-  @Bean
-  public OAuth2AuthorizationConsentService authorizationConsentService() {
-    return new InMemoryOAuth2AuthorizationConsentService();
-  }
+  /// **
+  // * 授权信息业务类
+  // *
+  // * @return
+  // */
+  // @Bean
+  // public OAuth2AuthorizationService authorizationService() {
+  //  return new InMemoryOAuth2AuthorizationService();
+  // }
+  //
+  /// **
+  // * 自定义授权业务类
+  // *
+  // * @return
+  // */
+  // @Bean
+  // public OAuth2AuthorizationConsentService authorizationConsentService() {
+  //  return new InMemoryOAuth2AuthorizationConsentService();
+  // }
 
   /**
    * Json Web 秘钥

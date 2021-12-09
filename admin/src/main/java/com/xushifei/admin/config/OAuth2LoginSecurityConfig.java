@@ -25,27 +25,8 @@ public class OAuth2LoginSecurityConfig {
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.authorizeRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
-        .oauth2Login(oauth2Login -> oauth2Login.loginPage("/oauth2/authorization/admin"))
+        .oauth2Login(oauth2Login -> oauth2Login.loginPage("/oauth2/authorization/admin-oidc"))
         .oauth2Client(withDefaults());
     return http.build();
-  }
-
-  @Bean
-  OAuth2AuthorizedClientManager authorizedClientManager(
-      ClientRegistrationRepository clientRegistrationRepository,
-      OAuth2AuthorizedClientRepository authorizedClientRepository) {
-
-    OAuth2AuthorizedClientProvider authorizedClientProvider =
-        OAuth2AuthorizedClientProviderBuilder.builder()
-            .authorizationCode()
-            .refreshToken()
-            .clientCredentials()
-            .build();
-    DefaultOAuth2AuthorizedClientManager authorizedClientManager =
-        new DefaultOAuth2AuthorizedClientManager(
-            clientRegistrationRepository, authorizedClientRepository);
-    authorizedClientManager.setAuthorizedClientProvider(authorizedClientProvider);
-
-    return authorizedClientManager;
   }
 }

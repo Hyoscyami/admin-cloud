@@ -7,14 +7,29 @@ spring:
     oauth2:
       client:
         registration:
-          admin:
+          admin-oidc:
             provider: admin-cloud
             client-id: admin
             client-secret: 123456
-            client-name: admin
             authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8763/login/oauth2/code/{registrationId}"
             scope: openid
-            redirect-uri: "{baseUrl}/login/oauth2/code/admin"
+            client-name: admin-oidc
+            admin-authorization-code:
+              provider: admin-cloud
+              client-id: admin
+              client-secret: 123456
+              authorization-grant-type: authorization_code
+              redirect-uri: "http://127.0.0.1:8763/authorized"
+              scope: message.read,message.write
+              client-name: admin-authorization-code
+            admin-credentials:
+              provider: admin-cloud
+              client-id: admin
+              client-secret: 123456
+              authorization-grant-type: client_credentials
+              scope: message.read,message.write
+              client-name: admin-credentials-credentials
         provider:
           admin-cloud:
             issuer-uri: http://auth-server:8764

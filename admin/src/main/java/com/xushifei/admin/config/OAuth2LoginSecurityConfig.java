@@ -25,8 +25,7 @@ public class OAuth2LoginSecurityConfig {
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.authorizeRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
-        .oauth2Login(oauth2Login -> oauth2Login.loginPage("/oauth2/authorization/admin-oidc"))
-        .oauth2Client(withDefaults());
+        .oauth2Login(withDefaults());
     return http.build();
   }
 }

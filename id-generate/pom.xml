@@ -4,23 +4,22 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.xushifei</groupId>
-        <artifactId>uims</artifactId>
+        <artifactId>admin-cloud</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <artifactId>uims-auth-client</artifactId>
+    <artifactId>id-generate</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>uims-auth-client</name>
-    <description>授权服务器使用该client进行认证授权</description>
+    <name>id-generate-server</name>
+    <packaging>pom</packaging>
+    <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>id-generate-client</module>
+        <module>id-generate-server</module>
+    </modules>
     <build>
         <plugins>
             <plugin>

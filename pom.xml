@@ -22,13 +22,13 @@
     <modules>
         <module>common</module>
         <module>core</module>
-        <module>admin</module>
+        <module>admin-server</module>
         <module>developer-platform</module>
-        <module>authorization</module>
-        <module>config</module>
+        <module>authorization-server</module>
+        <module>config-server</module>
         <module>gateway</module>
         <module>register</module>
-        <module>generator</module>
+        <module>code-generator</module>
         <module>file</module>
         <module>message</module>
         <module>job</module>

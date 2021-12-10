@@ -23,8 +23,8 @@ public class CodeGeneratorUtils {
       "jdbc:mysql://localhost:3306/%s?useUnicode=true&allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=utf8";
 
   public static void main(String[] args) {
-    GeneratorCodeConfig config = getDefaultGenerator("admin", "user");
-    config.setTableName("role");
+    GeneratorCodeConfig config = getDefaultGenerator("id.generate.server", "id_generate");
+    config.setTableName("segment_alloc");
     generateCode(config);
   }
 
@@ -161,22 +161,22 @@ public class CodeGeneratorUtils {
   /**
    * 获取默认的代码生成对象
    *
-   * @param serverName 服务名
+   * @param packageName 包名
    * @param databaseName 数据库名
    * @return
    */
   public static GeneratorCodeConfig getDefaultGenerator(
-      final String serverName, final String databaseName) {
+      final String packageName, final String databaseName) {
     GeneratorCodeConfig generatorCodeConfig = new GeneratorCodeConfig();
     generatorCodeConfig.setAuthorName("xushifei");
-    generatorCodeConfig.setClassOutPutFilePath("./" + serverName + "/src/main/java");
-    generatorCodeConfig.setXmlOutPutFilePath("./" + serverName + "/src/main/resources/mapper");
+    generatorCodeConfig.setClassOutPutFilePath("./" + packageName + "/src/main/java");
+    generatorCodeConfig.setXmlOutPutFilePath("./" + packageName + "/src/main/resources/mapper");
     generatorCodeConfig.setDriverName("com.mysql.cj.jdbc.Driver");
     generatorCodeConfig.setDataSourceUrl(String.format(DATA_SOURCE_URL, databaseName));
     generatorCodeConfig.setDataSourceUserName("root");
     generatorCodeConfig.setDataSourcePassword("Root@123");
     generatorCodeConfig.setModuleName("");
-    generatorCodeConfig.setParentPackageName("com.xushifei." + serverName);
+    generatorCodeConfig.setParentPackageName("com.xushifei." + packageName);
     return generatorCodeConfig;
   }
 }

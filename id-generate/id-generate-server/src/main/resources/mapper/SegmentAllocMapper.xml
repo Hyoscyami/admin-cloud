@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xushifei.id.generate.server.mapper.SegmentAllocMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xushifei.id.generate.server.entity.SegmentAlloc">
+        <result column="id" property="id"/>
+        <result column="deleted" property="deleted"/>
+        <result column="biz_tag" property="bizTag"/>
+        <result column="max_id" property="maxId"/>
+        <result column="step" property="step"/>
+        <result column="type" property="type"/>
+        <result column="code" property="code"/>
+        <result column="sort" property="sort"/>
+        <result column="status" property="status"/>
+        <result column="note" property="note"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="creator_id" property="creatorId"/>
+        <result column="creator_name" property="creatorName"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="modifier_id" property="modifierId"/>
+        <result column="modifier_name" property="modifierName"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        deleted,
+        biz_tag, max_id, step, `type`, `code`, sort, `status`, note, tenant_id, create_time, creator_id, creator_name, modify_time, modifier_id, modifier_name
+    </sql>
+    <!--根据业务标识更新最大步长-->
+    <update id="updateMaxIdByBizTag">
+        UPDATE id_generate.segment_alloc
+        <choose>
+            <when test="step != null">
+                SET max_id = max_id + #{step}
+            </when>
+            <otherwise>
+                SET max_id = max_id + step
+            </otherwise>
+        </choose>
+        WHERE biz_tag = #{bizTag}
+    </update>
+
+</mapper>

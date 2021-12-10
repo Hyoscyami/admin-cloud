@@ -18,6 +18,9 @@
         <java.version>11</java.version>
         <spring-boot.version>2.6.1</spring-boot.version>
         <spring-cloud.version>2021.0.0</spring-cloud.version>
+        <mybatis-plus-boot-starter.version>3.4.3.4</mybatis-plus-boot-starter.version>
+        <mybatis-plus-generator>3.5.1</mybatis-plus-generator>
+        <common.version>0.0.1-SNAPSHOT</common.version>
     </properties>
     <modules>
         <module>common</module>
@@ -34,6 +37,7 @@
         <module>job</module>
         <module>uims</module>
         <module>label</module>
+        <module>id-generate</module>
     </modules>
     <dependencies>
         <dependency>
@@ -90,6 +94,21 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus-generator}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xushifei</groupId>
+                <artifactId>common</artifactId>
+                <version>${common.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -11,11 +11,20 @@
     <artifactId>core</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>core</name>
+    <packaging>pom</packaging>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
     </properties>
-
+    <dependencies>
+        <dependency>
+            <groupId>com.xushifei</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
+    </dependencies>
+    <modules>
+        <module>core-web</module>
+    </modules>
     <build>
         <plugins>
             <plugin>

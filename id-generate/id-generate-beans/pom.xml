@@ -8,24 +8,25 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <artifactId>id-generate-client</artifactId>
+    <artifactId>id-generate-beans</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>id-generate-client</name>
+    <name>id-generate-beans</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
     </properties>
     <dependencies>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>com.xushifei</groupId>
-            <artifactId>id-generate-beans</artifactId>
-            <version>${id-generate.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>

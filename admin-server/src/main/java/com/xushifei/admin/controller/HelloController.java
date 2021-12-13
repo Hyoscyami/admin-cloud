@@ -1,5 +1,8 @@
 package com.xushifei.admin.controller;
 
+import com.xushifei.id.generate.beans.dto.req.SnowflakeIdReq;
+import com.xushifei.id.generate.manager.IdManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,8 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class HelloController {
+  @Autowired private IdManager idManager;
+
   @GetMapping("/")
-  public String hello() {
-    return "hello";
+  public Long hello() {
+    return idManager.getSnowflakeId(new SnowflakeIdReq());
   }
 }

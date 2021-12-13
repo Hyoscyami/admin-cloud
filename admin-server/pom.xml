@@ -41,6 +41,11 @@
             <artifactId>uims-biz-client</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.xushifei</groupId>
+            <artifactId>id-generate-client</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

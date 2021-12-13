@@ -2,6 +2,7 @@ package com.xushifei.id.generate.server.service.impl;
 
 import com.xushifei.id.generate.beans.dto.req.BaseIdAllocReq;
 import com.xushifei.id.generate.server.service.IdGenerateService;
+import com.xushifei.id.generate.server.utils.SnowflakeIdWorker;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
  */
 @Service("snowflakeIdService")
 public class SnowflakeIdServiceImpl implements IdGenerateService {
+  private final SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1, 1);
   /**
    * 获取单个唯一id
    *
@@ -22,7 +24,7 @@ public class SnowflakeIdServiceImpl implements IdGenerateService {
    */
   @Override
   public Long getId(BaseIdAllocReq req) {
-    return 1L;
+    return idWorker.nextId();
   }
 
   /**

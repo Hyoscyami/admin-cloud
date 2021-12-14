@@ -16,6 +16,6 @@ public class HelloController {
 
   @GetMapping("/")
   public Long hello() {
-    return idManager.getSnowflakeId(new SnowflakeIdReq());
+    return idManager.getSnowflakeId();
   }
 }

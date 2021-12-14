@@ -45,10 +45,10 @@ public class IdManager {
   /**
    * 获取雪花算法ID
    *
-   * @param req
    * @return
    */
-  public Long getSnowflakeId(SnowflakeIdReq req) {
+  public Long getSnowflakeId() {
+    SnowflakeIdReq req = new SnowflakeIdReq();
     req.setHostName(this.hostname);
     req.setServerPort(this.serverPort);
     ApiResponse<Long> response = idClient.getSnowflakeId(req);

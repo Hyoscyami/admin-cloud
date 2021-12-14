@@ -50,8 +50,9 @@ public class SnowflakeIdWorker {
   private final long workerIdBits = 5L;
   /** 数据中心长度 */
   private final long datacenterIdBits = 5L;
-  // 最大值
+  /** 工作id最大值 */
   private long maxWorkerId = ~(-1L << workerIdBits);
+  /** 数据中心id最大值 */
   private long maxDatacenterId = ~(-1L << datacenterIdBits);
   /** 序列号id长度 */
   private final long sequenceBits = 12L;
@@ -65,17 +66,17 @@ public class SnowflakeIdWorker {
   /** 时间戳需要左移位数 12+5+5=22位 */
   private final long timestampLeftShift = sequenceBits + workerIdBits + datacenterIdBits;
 
-  // 上次时间戳，初始值为负数
+  /** 上次时间戳，初始值为负数 */
   private long lastTimestamp = -1L;
 
-  public long getTimestamp() {
-    return Instant.now().toEpochMilli();
-  }
-
-  // 下一个ID生成算法
+  /**
+   * 下一个ID生成算法
+   *
+   * @return
+   */
   public synchronized long nextId() {
     // 当前时间戳
-    long timestamp = getCurrentTimestamp();
+    long timestamp = this.getCurrentTimestamp();
 
     // 获取当前时间戳如果小于上次时间戳，则表示时间戳获取出现异常
     if (timestamp < lastTimestamp) {
@@ -110,7 +111,12 @@ public class SnowflakeIdWorker {
         | sequence;
   }
 
-  // 获取时间戳，并与上次时间戳比较
+  /**
+   * 获取时间戳，并与上次时间戳比较，如果上一次时间戳大于当前时间戳，说明时钟回拨了，进行循环等待
+   *
+   * @param lastTimestamp
+   * @return
+   */
   private long tilNextMillis(long lastTimestamp) {
     long timestamp = this.getCurrentTimestamp();
     while (timestamp <= lastTimestamp) {
@@ -119,7 +125,11 @@ public class SnowflakeIdWorker {
     return timestamp;
   }
 
-  // 获取系统时间戳
+  /**
+   * 获取当前时间戳，毫秒级
+   *
+   * @return
+   */
   private long getCurrentTimestamp() {
     return Instant.now().toEpochMilli();
   }

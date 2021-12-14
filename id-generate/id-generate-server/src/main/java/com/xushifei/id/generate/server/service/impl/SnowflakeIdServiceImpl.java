@@ -24,6 +24,9 @@ public class SnowflakeIdServiceImpl implements IdGenerateService {
    */
   @Override
   public Long getId(BaseIdAllocReq req) {
+    // 根据hostname和serverPort查询本地缓存是否有记录
+    // 有记录，取出并生成id
+    // 无记录，redis分布式锁，并生成一条hostname、serverPort与
     return idWorker.nextId();
   }
 

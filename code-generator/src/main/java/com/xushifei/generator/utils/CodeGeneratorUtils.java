@@ -23,8 +23,7 @@ public class CodeGeneratorUtils {
       "jdbc:mysql://localhost:3306/%s?useUnicode=true&allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=utf8";
 
   public static void main(String[] args) {
-    GeneratorCodeConfig config =
-        getDefaultGenerator("developer.platform.server", "developer_platform");
+    GeneratorCodeConfig config = getDefaultGenerator("authorization.server", "developer_platform");
     // config.setTableName("segment_alloc");
     generateCode(config);
   }
@@ -63,10 +62,13 @@ public class CodeGeneratorUtils {
         .entityBuilder()
         .enableLombok()
         .enableRemoveIsPrefix()
-        .superClass("com.xushifei.admin.entity.BaseEntity")
+        .superClass("com.xushifei.common.entity.BaseEntity")
         .addSuperEntityColumns(
             "id",
             "deleted",
+            "code",
+            "tenantId",
+            "note",
             "status",
             "createTime",
             "modifyTime",
@@ -178,7 +180,7 @@ public class CodeGeneratorUtils {
     generatorCodeConfig.setDriverName("com.mysql.cj.jdbc.Driver");
     generatorCodeConfig.setDataSourceUrl(String.format(DATA_SOURCE_URL, databaseName));
     generatorCodeConfig.setDataSourceUserName("root");
-    generatorCodeConfig.setDataSourcePassword("Root@123");
+    generatorCodeConfig.setDataSourcePassword("");
     generatorCodeConfig.setModuleName("");
     generatorCodeConfig.setParentPackageName("com.xushifei." + packageName);
     return generatorCodeConfig;

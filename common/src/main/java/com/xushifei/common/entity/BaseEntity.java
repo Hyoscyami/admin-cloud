@@ -45,6 +45,8 @@ public class BaseEntity {
 
   /** 更新人id */
   protected Long modifierId;
+  /** 编码 */
+  protected String code;
   /** 租户id */
   protected Long tenantId;
   /** 备注 */

@@ -1,5 +1,6 @@
 package com.xushifei.authorization.config.security;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
@@ -7,6 +8,7 @@ import org.springframework.security.oauth2.core.oidc.OidcScopes;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.ClientSettings;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
@@ -17,6 +19,8 @@ import java.util.UUID;
  * @date 2021/11/26
  */
 @Slf4j
+@Service
+@RequiredArgsConstructor
 public class ClientRepository implements RegisteredClientRepository {
   /**
    * Saves the registered client.

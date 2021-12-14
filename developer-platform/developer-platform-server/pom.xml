@@ -15,7 +15,21 @@
     <properties>
         <java.version>11</java.version>
     </properties>
-
+    <dependencies>
+        <dependency>
+            <groupId>com.xushifei</groupId>
+            <artifactId>core-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>

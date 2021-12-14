@@ -23,8 +23,9 @@ public class CodeGeneratorUtils {
       "jdbc:mysql://localhost:3306/%s?useUnicode=true&allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=utf8";
 
   public static void main(String[] args) {
-    GeneratorCodeConfig config = getDefaultGenerator("id.generate.server", "id_generate");
-    config.setTableName("segment_alloc");
+    GeneratorCodeConfig config =
+        getDefaultGenerator("developer.platform.server", "developer_platform");
+    // config.setTableName("segment_alloc");
     generateCode(config);
   }
 
@@ -74,7 +75,7 @@ public class CodeGeneratorUtils {
             "creatorName",
             "modifierName");
     // controller配置
-    config.controllerBuilder().enableRestStyle();
+    config.controllerBuilder().enableRestStyle().enableHyphenStyle();
     // service配置
     config
         .serviceBuilder()
@@ -89,7 +90,10 @@ public class CodeGeneratorUtils {
    * @return
    */
   public static void initTemplateConfig(TemplateConfig.Builder builder) {
-    builder.entity("/templates/code-generate/entity.java").build();
+    builder
+        .entity("/templates/code-generate/entity.java")
+        .controller("/templates/code-generate/controller.java")
+        .build();
   }
 
   /**

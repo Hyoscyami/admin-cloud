@@ -81,26 +81,6 @@ public class AuthorizationServerConfig {
     return new InMemoryRegisteredClientRepository(registeredClient);
   }
 
-  /// **
-  // * 授权信息业务类
-  // *
-  // * @return
-  // */
-  // @Bean
-  // public OAuth2AuthorizationService authorizationService() {
-  //  return new InMemoryOAuth2AuthorizationService();
-  // }
-  //
-  /// **
-  // * 自定义授权业务类
-  // *
-  // * @return
-  // */
-  // @Bean
-  // public OAuth2AuthorizationConsentService authorizationConsentService() {
-  //  return new InMemoryOAuth2AuthorizationConsentService();
-  // }
-
   /**
    * Json Web 秘钥
    *

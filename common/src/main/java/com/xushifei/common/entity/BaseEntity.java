@@ -45,6 +45,10 @@ public class BaseEntity {
 
   /** 更新人id */
   protected Long modifierId;
+  /** 租户id */
+  protected Long tenantId;
+  /** 备注 */
+  protected String note;
 
   /** 新增时初始化信息 */
   protected void assignCreateInfo() {

@@ -96,6 +96,7 @@ public class CodeGeneratorUtils {
         Arrays.asList(
             "id",
             "type",
+            "name",
             "deleted",
             "code",
             "tenantId",

@@ -32,11 +32,6 @@ public class Client extends BaseEntity {
     private String clientSecret;
 
     /**
-     * 客户端名称
-     */
-    private String name;
-
-    /**
      * 重定向地址
      */
     private String redirectUri;

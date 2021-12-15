@@ -26,11 +26,6 @@ public class Scope extends BaseEntity {
     private Long parentId;
 
     /**
-     * 权限名称
-     */
-    private String name;
-
-    /**
      * 值
      */
     private String value;

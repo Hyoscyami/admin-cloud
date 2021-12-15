@@ -32,10 +32,5 @@ public class ClientGroupRelation extends BaseEntity {
      */
     private Long groupId;
 
-    /**
-     * 名称
-     */
-    private String name;
-
 
 }

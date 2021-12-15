@@ -8,9 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * <p>
  * 客户端分组关联
- * </p>
  *
  * @author xushifei
  * @since 2021-12-15
@@ -20,17 +18,9 @@ import lombok.Setter;
 @TableName("client_group_relation")
 public class ClientGroupRelation extends BaseEntity {
 
-    private static final long serialVersionUID = 1L;
+  /** 客户端id */
+  private Long clientId;
 
-    /**
-     * 客户端id
-     */
-    private Long clientId;
-
-    /**
-     * 分组id
-     */
-    private Long groupId;
-
-
+  /** 分组id */
+  private Long groupId;
 }

@@ -62,7 +62,12 @@ public class CodeGeneratorUtils {
       builder.addInclude(generatorCodeConfig.getTableName());
     }
     // 实体配置
-    builder.entityBuilder().enableLombok().enableRemoveIsPrefix().superClass(BaseEntity.class);
+    builder
+        .entityBuilder()
+        .enableLombok()
+        .disableSerialVersionUID()
+        .enableRemoveIsPrefix()
+        .superClass(BaseEntity.class);
     // controller配置
     builder.controllerBuilder().enableRestStyle().enableHyphenStyle();
     // service配置

@@ -7,9 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * <p>
  * 权限
- * </p>
  *
  * @author xushifei
  * @since 2021-12-15
@@ -18,17 +16,9 @@ import lombok.Setter;
 @Setter
 public class Scope extends BaseEntity {
 
-    private static final long serialVersionUID = 1L;
+  /** 父id */
+  private Long parentId;
 
-    /**
-     * 父id
-     */
-    private Long parentId;
-
-    /**
-     * 值
-     */
-    private String value;
-
-
+  /** 值 */
+  private String value;
 }

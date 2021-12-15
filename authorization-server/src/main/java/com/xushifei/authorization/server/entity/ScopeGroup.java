@@ -8,9 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * <p>
  * 权限分组
- * </p>
  *
  * @author xushifei
  * @since 2021-12-15
@@ -18,9 +16,4 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("scope_group")
-public class ScopeGroup extends BaseEntity {
-
-    private static final long serialVersionUID = 1L;
-
-
-}
+public class ScopeGroup extends BaseEntity {}

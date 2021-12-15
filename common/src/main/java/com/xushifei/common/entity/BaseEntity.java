@@ -21,7 +21,8 @@ public class BaseEntity {
   protected Long id;
   /** 是否被删除，1：被删除，0：未删除 */
   protected Boolean deleted;
-
+  /** 类型 */
+  protected Integer type;
   /** 状态，1：启用，2：禁用 */
   protected Integer status;
   /** 排序值，默认为1 */

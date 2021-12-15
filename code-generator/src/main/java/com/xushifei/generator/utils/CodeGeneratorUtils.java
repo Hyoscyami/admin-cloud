@@ -6,10 +6,14 @@ import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.querys.MySqlQuery;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.baomidou.mybatisplus.generator.keywords.MySqlKeyWordsHandler;
+import com.xushifei.common.entity.BaseEntity;
 import com.xushifei.generator.config.GeneratorCodeConfig;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * 代码生成工具
@@ -23,8 +27,8 @@ public class CodeGeneratorUtils {
       "jdbc:mysql://localhost:3306/%s?useUnicode=true&allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=utf8";
 
   public static void main(String[] args) {
-    GeneratorCodeConfig config = getDefaultGenerator("authorization.server", "developer_platform");
-    // config.setTableName("segment_alloc");
+    GeneratorCodeConfig config = getDefaultGenerator("authorization.server", "authorization");
+    // config.setTableName("client");
     generateCode(config);
   }
 
@@ -38,6 +42,7 @@ public class CodeGeneratorUtils {
         .globalConfig(builder -> initGlobalConfigBuilder(builder, generatorCodeConfig))
         .packageConfig(builder -> initPackageConfigBuilder(builder, generatorCodeConfig))
         .strategyConfig(builder -> initStrategyConfigBuilder(builder, generatorCodeConfig))
+        .injectionConfig(CodeGeneratorUtils::initInjectionConfigBuilder)
         .templateConfig(CodeGeneratorUtils::initTemplateConfig)
         .templateEngine(new FreemarkerTemplateEngine())
         .execute();
@@ -56,35 +61,18 @@ public class CodeGeneratorUtils {
     if (StringUtils.hasLength(generatorCodeConfig.getTableName())) {
       builder.addInclude(generatorCodeConfig.getTableName());
     }
-    StrategyConfig config = builder.build();
     // 实体配置
-    config
-        .entityBuilder()
-        .enableLombok()
-        .enableRemoveIsPrefix()
-        .superClass("com.xushifei.common.entity.BaseEntity")
-        .addSuperEntityColumns(
-            "id",
-            "deleted",
-            "code",
-            "tenantId",
-            "note",
-            "status",
-            "createTime",
-            "modifyTime",
-            "creatorId",
-            "modifierId",
-            "creatorName",
-            "modifierName");
+    builder.entityBuilder().enableLombok().enableRemoveIsPrefix().superClass(BaseEntity.class);
     // controller配置
-    config.controllerBuilder().enableRestStyle().enableHyphenStyle();
+    builder.controllerBuilder().enableRestStyle().enableHyphenStyle();
     // service配置
-    config
+    builder
         .serviceBuilder()
         .convertServiceFileName((entityName -> "I" + entityName + "Support"))
         .convertServiceImplFileName((entityName -> entityName + "Support"));
     // mapper配置
-    config.mapperBuilder().enableBaseResultMap().enableBaseColumnList();
+    builder.mapperBuilder().enableBaseResultMap().enableBaseColumnList();
+    builder.build();
   }
   /**
    * 模板配置
@@ -99,21 +87,28 @@ public class CodeGeneratorUtils {
   }
 
   /**
-   * 注入配置
+   * 自定义注入配置
    *
-   * @return
+   * @param builder
    */
-  public static InjectionConfig initInjectionConfig() {
-    return new InjectionConfig.Builder()
-        .beforeOutputFile(
-            ((tableInfo, stringObjectMap) -> {
-              System.out.println(
-                  "tableInfo:" + tableInfo.getEntityName() + "map:" + stringObjectMap);
-            }))
-        .customMap(Collections.singletonMap("ignoreColumns", "id"))
-        .build();
+  private static void initInjectionConfigBuilder(InjectionConfig.Builder builder) {
+    List<String> entityIgnoreColumns =
+        Arrays.asList(
+            "id",
+            "type",
+            "deleted",
+            "code",
+            "tenantId",
+            "note",
+            "status",
+            "createTime",
+            "modifyTime",
+            "creatorId",
+            "modifierId",
+            "creatorName",
+            "modifierName");
+    builder.customMap(Collections.singletonMap("ignoreColumns", entityIgnoreColumns)).build();
   }
-
   /**
    * 包配置
    *
@@ -130,7 +125,8 @@ public class CodeGeneratorUtils {
         .pathInfo(
             Collections.singletonMap(
                 OutputFile.mapperXml, generatorCodeConfig.getXmlOutPutFilePath()))
-        .parent(generatorCodeConfig.getParentPackageName());
+        .parent(generatorCodeConfig.getParentPackageName())
+        .build();
   }
   /**
    * 数据源配置
@@ -162,7 +158,8 @@ public class CodeGeneratorUtils {
         .fileOverride()
         .disableOpenDir()
         .outputDir(generatorCodeConfig.getClassOutPutFilePath())
-        .author(generatorCodeConfig.getAuthorName());
+        .author(generatorCodeConfig.getAuthorName())
+        .build();
   }
   /**
    * 获取默认的代码生成对象
@@ -180,7 +177,7 @@ public class CodeGeneratorUtils {
     generatorCodeConfig.setDriverName("com.mysql.cj.jdbc.Driver");
     generatorCodeConfig.setDataSourceUrl(String.format(DATA_SOURCE_URL, databaseName));
     generatorCodeConfig.setDataSourceUserName("root");
-    generatorCodeConfig.setDataSourcePassword("");
+    generatorCodeConfig.setDataSourcePassword("Root@123");
     generatorCodeConfig.setModuleName("");
     generatorCodeConfig.setParentPackageName("com.xushifei." + packageName);
     return generatorCodeConfig;

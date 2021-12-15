@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author xushifei
- * @since 2021-12-14
+ * @since 2021-12-15
  */
 @Service
 public class ScopeSupport extends ServiceImpl<ScopeMapper, Scope> implements IScopeSupport {

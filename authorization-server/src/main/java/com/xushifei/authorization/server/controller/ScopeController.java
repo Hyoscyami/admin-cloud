@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 权限 前端控制器
  *
  * @author xushifei
- * @since 2021-12-14
+ * @since 2021-12-15
  */
 @RestController
 @RequestMapping("/api/scope")

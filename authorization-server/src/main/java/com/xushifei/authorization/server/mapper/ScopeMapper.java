@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author xushifei
- * @since 2021-12-14
+ * @since 2021-12-15
  */
 public interface ScopeMapper extends BaseMapper<Scope> {
 

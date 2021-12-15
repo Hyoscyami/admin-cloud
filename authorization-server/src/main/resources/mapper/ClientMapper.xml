@@ -6,6 +6,7 @@
     <resultMap id="BaseResultMap" type="com.xushifei.authorization.server.entity.Client">
         <result column="id" property="id" />
         <result column="deleted" property="deleted" />
+        <result column="sort" property="sort" />
         <result column="note" property="note" />
         <result column="client_id" property="clientId" />
         <result column="client_secret" property="clientSecret" />
@@ -22,7 +23,6 @@
         <result column="signature_algorithm" property="signatureAlgorithm" />
         <result column="type" property="type" />
         <result column="code" property="code" />
-        <result column="sort" property="sort" />
         <result column="status" property="status" />
         <result column="tenant_id" property="tenantId" />
         <result column="create_time" property="createTime" />
@@ -37,8 +37,9 @@
     <sql id="Base_Column_List">
         id,
         deleted,
+        sort,
         note,
-        client_id, client_secret, `name`, redirect_uri, is_admin, authentication_method, authorization_grant_type, is_require_proof_key, is_authorization_consent, access_token_time_to_live, is_reuse_refresh_tokens, refresh_token_time_to_live, signature_algorithm, `type`, `code`, sort, `status`, tenant_id, create_time, creator_id, creator_name, modify_time, modifier_id, modifier_name
+        client_id, client_secret, `name`, redirect_uri, is_admin, authentication_method, authorization_grant_type, is_require_proof_key, is_authorization_consent, access_token_time_to_live, is_reuse_refresh_tokens, refresh_token_time_to_live, signature_algorithm, `type`, `code`, `status`, tenant_id, create_time, creator_id, creator_name, modify_time, modifier_id, modifier_name
     </sql>
 
 </mapper>

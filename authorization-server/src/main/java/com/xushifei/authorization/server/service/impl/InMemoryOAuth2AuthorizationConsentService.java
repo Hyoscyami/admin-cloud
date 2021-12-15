@@ -1,4 +1,4 @@
-package com.xushifei.authorization.server.service;
+package com.xushifei.authorization.server.service.impl;
 
 import org.springframework.lang.Nullable;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsent;

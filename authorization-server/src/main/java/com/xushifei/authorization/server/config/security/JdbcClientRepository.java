@@ -1,7 +1,9 @@
 package com.xushifei.authorization.server.config.security;
 
 import com.xushifei.authorization.server.entity.Client;
-import com.xushifei.authorization.server.support.IClientSupport;
+import com.xushifei.authorization.server.entity.Scope;
+import com.xushifei.authorization.server.service.ClientService;
+import com.xushifei.authorization.server.support.ClientSupport;
 import com.xushifei.common.enums.ApiCodeEnum;
 import com.xushifei.common.exception.BusinessException;
 import com.xushifei.common.utils.ConditionUtils;
@@ -18,7 +20,9 @@ import org.springframework.security.oauth2.server.authorization.config.TokenSett
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * client持久化
@@ -30,7 +34,8 @@ import java.util.Objects;
 @Service
 @RequiredArgsConstructor
 public class JdbcClientRepository implements RegisteredClientRepository {
-  private final IClientSupport clientSupport;
+  private final ClientService clientService;
+  private final ClientSupport clientSupport;
   /**
    * Saves the registered client.
    *
@@ -38,8 +43,9 @@ public class JdbcClientRepository implements RegisteredClientRepository {
    */
   @Override
   public void save(RegisteredClient registeredClient) {
-    Client client = this.convertToClient(registeredClient);
-    clientSupport.saveOrUpdate(client);
+    throw new BusinessException(ApiCodeEnum.SYSTEM_ERROR.getCode(), "暂不支持动态注册客户端");
+    // Client client = this.convertToClient(registeredClient);
+    // clientSupport.saveOrUpdate(client);
   }
 
   /**
@@ -83,21 +89,7 @@ public class JdbcClientRepository implements RegisteredClientRepository {
    */
   @Override
   public RegisteredClient findById(String id) {
-    Client client = clientSupport.getById(id);
-    return RegisteredClient.withId("1")
-        .clientId("admin")
-        .clientSecret("{noop}123456")
-        .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-        .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-        .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-        .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-        .redirectUri("http://127.0.0.1:8763/login/oauth2/code/admin-oidc")
-        .redirectUri("http://127.0.0.1:8763/authorized")
-        .scope(OidcScopes.OPENID)
-        .scope("message.read")
-        .scope("message.write")
-        .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
-        .build();
+    return this.convertToRegisteredClient(clientSupport.getById(id));
   }
 
   /**
@@ -107,6 +99,7 @@ public class JdbcClientRepository implements RegisteredClientRepository {
    * @return
    */
   private RegisteredClient convertToRegisteredClient(Client client) {
+    // 客户端基本信息
     RegisteredClient.Builder builder = RegisteredClient.withId(String.valueOf(client.getId()));
     builder.clientId(client.getClientId()).clientSecret(client.getClientSecret());
     StringUtils.commaDelimitedListToSet(client.getAuthenticationMethod()).stream()
@@ -116,6 +109,20 @@ public class JdbcClientRepository implements RegisteredClientRepository {
         .map(this::getGrantTypeByValue)
         .forEach(builder::authorizationGrantType);
     builder.redirectUri(client.getRedirectUri());
+    List<String> scopeValues =
+        clientService.listScopesByClientId(client.getId()).stream()
+            .map(Scope::getValue)
+            .collect(Collectors.toList());
+    builder.scopes(scopes -> scopes.addAll(scopeValues));
+
+    // 客户端设置
+    ClientSettings.Builder clientSettingsBuilder = ClientSettings.builder();
+    ConditionUtils.acceptIfNotNull(
+        client.getAuthorizationConsent(), clientSettingsBuilder::requireAuthorizationConsent);
+    ConditionUtils.acceptIfNotNull(
+        client.getRequireProofKey(), clientSettingsBuilder::requireProofKey);
+    builder.clientSettings(clientSettingsBuilder.build());
+
     return builder.build();
   }
 
@@ -185,20 +192,7 @@ public class JdbcClientRepository implements RegisteredClientRepository {
    */
   @Override
   public RegisteredClient findByClientId(String clientId) {
-    log.info("findByClientId:{}", clientId);
-    return RegisteredClient.withId("1")
-        .clientId(clientId)
-        .clientSecret("{noop}123456")
-        .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-        .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-        .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-        .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-        .redirectUri("http://127.0.0.1:8763/login/oauth2/code/admin-oidc")
-        .redirectUri("http://127.0.0.1:8763/authorized")
-        .scope(OidcScopes.OPENID)
-        .scope("message.read")
-        .scope("message.write")
-        .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
-        .build();
+    Client client = clientSupport.lambdaQuery().eq(Client::getClientId, clientId).one();
+    return this.convertToRegisteredClient(client);
   }
 }

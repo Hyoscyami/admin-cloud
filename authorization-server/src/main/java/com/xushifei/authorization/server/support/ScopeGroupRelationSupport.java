@@ -4,13 +4,9 @@ import com.xushifei.authorization.server.entity.ScopeGroupRelation;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
- * <p>
  * 权限分组关联 服务类
- * </p>
  *
  * @author xushifei
  * @since 2021-12-15
  */
-public interface IScopeGroupRelationSupport extends IService<ScopeGroupRelation> {
-
-}
+public interface ScopeGroupRelationSupport extends IService<ScopeGroupRelation> {}

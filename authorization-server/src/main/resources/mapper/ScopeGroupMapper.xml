@@ -4,30 +4,41 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.xushifei.authorization.server.entity.ScopeGroup">
-        <result column="id" property="id" />
-        <result column="deleted" property="deleted" />
-        <result column="sort" property="sort" />
-        <result column="note" property="note" />
-        <result column="name" property="name" />
-        <result column="type" property="type" />
-        <result column="code" property="code" />
-        <result column="status" property="status" />
-        <result column="tenant_id" property="tenantId" />
-        <result column="create_time" property="createTime" />
-        <result column="creator_id" property="creatorId" />
-        <result column="creator_name" property="creatorName" />
-        <result column="modify_time" property="modifyTime" />
-        <result column="modifier_id" property="modifierId" />
-        <result column="modifier_name" property="modifierName" />
+        <result column="id" property="id"/>
+        <result column="deleted" property="deleted"/>
+        <result column="sort" property="sort"/>
+        <result column="note" property="note"/>
+        <result column="name" property="name"/>
+        <result column="type" property="type"/>
+        <result column="code" property="code"/>
+        <result column="status" property="status"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="creator_id" property="creatorId"/>
+        <result column="creator_name" property="creatorName"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="modifier_id" property="modifierId"/>
+        <result column="modifier_name" property="modifierName"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id,
+        id
+        ,
         deleted,
         sort,
         note,
         `name`, `type`, `code`, `status`, tenant_id, create_time, creator_id, creator_name, modify_time, modifier_id, modifier_name
     </sql>
+    <!--    根据clientId查询分组-->
+    <select id="listByClientId" resultMap="BaseResultMap">
+        select sg.*
+        from client_group_relation cgr,
+             scope_group sg
+        where cgr.client_id = #{clientId}
+          and cgr.deleted = 0
+          and cgr.group_id = sg.id
+          and sg.deleted = 0
+    </select>
 
 </mapper>

@@ -1,4 +1,4 @@
-package com.xushifei.authorization.server.service;
+package com.xushifei.authorization.server.service.impl;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

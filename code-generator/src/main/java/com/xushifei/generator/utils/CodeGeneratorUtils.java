@@ -73,7 +73,7 @@ public class CodeGeneratorUtils {
     // service配置
     builder
         .serviceBuilder()
-        .convertServiceFileName((entityName -> "I" + entityName + "Support"))
+        .convertServiceFileName((entityName -> entityName + "Support"))
         .convertServiceImplFileName((entityName -> entityName + "Support"));
     // mapper配置
     builder.mapperBuilder().enableBaseResultMap().enableBaseColumnList();

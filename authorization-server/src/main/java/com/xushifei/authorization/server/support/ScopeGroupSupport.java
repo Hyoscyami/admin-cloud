@@ -3,14 +3,20 @@ package com.xushifei.authorization.server.support;
 import com.xushifei.authorization.server.entity.ScopeGroup;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
- * <p>
  * 权限分组 服务类
- * </p>
  *
  * @author xushifei
  * @since 2021-12-15
  */
-public interface IScopeGroupSupport extends IService<ScopeGroup> {
-
+public interface ScopeGroupSupport extends IService<ScopeGroup> {
+  /**
+   * 根据clientId查询分组
+   *
+   * @param clientId
+   * @return
+   */
+  List<ScopeGroup> listByClientId(Long clientId);
 }

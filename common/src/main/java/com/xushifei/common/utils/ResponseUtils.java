@@ -1,14 +1,8 @@
 package com.xushifei.common.utils;
 
 import com.xushifei.common.enums.ApiCodeEnum;
-import com.xushifei.common.model.ApiResponse;
+import com.xushifei.common.dto.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-
-import java.io.IOException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 
 /**
  * @author xushifei

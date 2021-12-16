@@ -2,7 +2,7 @@ package com.xushifei.id.generate.manager;
 
 import com.xushifei.common.enums.ApiCodeEnum;
 import com.xushifei.common.exception.BusinessException;
-import com.xushifei.common.model.ApiResponse;
+import com.xushifei.common.dto.ApiResponse;
 import com.xushifei.id.generate.beans.dto.req.SegmentIdReq;
 import com.xushifei.id.generate.beans.dto.req.SnowflakeIdReq;
 import com.xushifei.id.generate.client.IdClient;

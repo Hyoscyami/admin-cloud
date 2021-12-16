@@ -19,6 +19,8 @@ public class BaseQuery {
   protected Integer size;
   /** 分页起始偏移量 */
   protected Integer offset;
+  /** 编码 */
+  protected List<String> codes;
   /** 类型 */
   protected List<Integer> types;
   /** 是否启用，1：启用，0：禁用 */
@@ -39,9 +41,9 @@ public class BaseQuery {
    *
    * @return
    */
-  public int calculateOffset() {
-    if (!needPage()) {
-      throw new BusinessException(ApiCodeEnum.PARAM_ERROR.getCode(), "不需要分页时，不用计算偏移量");
+  public Integer calculateOffset() {
+    if (!this.needPage()) {
+      return null;
     }
     return (page - 1) * size;
   }

@@ -1,6 +1,6 @@
 package com.xushifei.id.generate.server.controller;
 
-import com.xushifei.common.model.ApiResponse;
+import com.xushifei.common.dto.ApiResponse;
 import com.xushifei.common.utils.ResponseUtils;
 import com.xushifei.id.generate.beans.dto.req.SegmentIdReq;
 import com.xushifei.id.generate.beans.dto.req.SnowflakeIdReq;

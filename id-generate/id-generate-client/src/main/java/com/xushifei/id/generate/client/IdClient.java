@@ -1,6 +1,6 @@
 package com.xushifei.id.generate.client;
 
-import com.xushifei.common.model.ApiResponse;
+import com.xushifei.common.dto.ApiResponse;
 import com.xushifei.id.generate.beans.dto.req.SegmentIdReq;
 import com.xushifei.id.generate.beans.dto.req.SnowflakeIdReq;
 import org.springframework.cloud.openfeign.FeignClient;

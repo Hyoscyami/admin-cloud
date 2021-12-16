@@ -8,12 +8,10 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.baomidou.mybatisplus.generator.keywords.MySqlKeyWordsHandler;
 import com.xushifei.common.entity.BaseEntity;
 import com.xushifei.generator.config.GeneratorCodeConfig;
+import com.xushifei.generator.enums.CodeTemplateEnum;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * 代码生成工具
@@ -28,7 +26,7 @@ public class CodeGeneratorUtils {
 
   public static void main(String[] args) {
     GeneratorCodeConfig config = getDefaultGenerator("authorization.server", "authorization");
-    // config.setTableName("client");
+    config.setTableName("client");
     generateCode(config);
   }
 
@@ -44,7 +42,7 @@ public class CodeGeneratorUtils {
         .strategyConfig(builder -> initStrategyConfigBuilder(builder, generatorCodeConfig))
         .injectionConfig(CodeGeneratorUtils::initInjectionConfigBuilder)
         .templateConfig(CodeGeneratorUtils::initTemplateConfig)
-        .templateEngine(new FreemarkerTemplateEngine())
+        .templateEngine(new MyFreemarkerTemplateEngine())
         .execute();
   }
 
@@ -86,8 +84,8 @@ public class CodeGeneratorUtils {
    */
   public static void initTemplateConfig(TemplateConfig.Builder builder) {
     builder
-        .entity("/templates/code-generate/entity.java")
-        .controller("/templates/code-generate/controller.java")
+        .entity(CodeTemplateEnum.ENTITY_TEMPLATE_PATH.getValue())
+        .controller(CodeTemplateEnum.CONTROLLER_TEMPLATE_PATH.getValue())
         .build();
   }
 
@@ -113,7 +111,18 @@ public class CodeGeneratorUtils {
             "modifierId",
             "creatorName",
             "modifierName");
-    builder.customMap(Collections.singletonMap("ignoreColumns", entityIgnoreColumns)).build();
+    builder
+        .beforeOutputFile(
+            ((tableInfo, objectMap) -> {
+              objectMap.put(
+                  "addDtoName",
+                  String.format(
+                      CodeTemplateEnum.ADD_DTO_CLASS_NAME.getValue(), tableInfo.getEntityName()));
+            }))
+        .customMap(Collections.singletonMap("ignoreColumns", entityIgnoreColumns))
+        .customFile(
+            Collections.singletonMap("add", CodeTemplateEnum.ADD_DTO_TEMPLATE_PATH.getValue()))
+        .build();
   }
   /**
    * 包配置

@@ -18,11 +18,11 @@ import lombok.ToString;
 <#if entityLombokModel>
 @ToString
 </#if>
-public class ${addDtoName} {
+public class ${addTemplateDto.className} {
     private static final long serialVersionUID = 1L;
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>
-    <#if ignoreColumns?seq_contains(field.propertyName)>
+    <#if addTemplateDto.ignoreColumns?seq_contains(field.propertyName)>
     <#else>
     <#if field.keyFlag>
         <#assign keyPropertyName="${field.propertyName}"/>

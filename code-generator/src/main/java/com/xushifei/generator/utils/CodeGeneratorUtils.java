@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.baomidou.mybatisplus.generator.keywords.MySqlKeyWordsHandler;
 import com.xushifei.common.entity.BaseEntity;
 import com.xushifei.generator.config.GeneratorCodeConfig;
+import com.xushifei.generator.dto.AddTemplateDto;
 import com.xushifei.generator.enums.CodeTemplateEnum;
 import org.springframework.util.StringUtils;
 
@@ -111,13 +112,24 @@ public class CodeGeneratorUtils {
             "modifierId",
             "creatorName",
             "modifierName");
+    AddTemplateDto addTemplateDto = new AddTemplateDto();
+    addTemplateDto.setIgnoreColumns(
+        Arrays.asList(
+            "id",
+            "deleted",
+            "createTime",
+            "modifyTime",
+            "creatorId",
+            "modifierId",
+            "creatorName",
+            "modifierName"));
     builder
         .beforeOutputFile(
             ((tableInfo, objectMap) -> {
-              objectMap.put(
-                  "addDtoName",
+              addTemplateDto.setClassName(
                   String.format(
                       CodeTemplateEnum.ADD_DTO_CLASS_NAME.getValue(), tableInfo.getEntityName()));
+              objectMap.put("addTemplateDto", addTemplateDto);
             }))
         .customMap(Collections.singletonMap("ignoreColumns", entityIgnoreColumns))
         .customFile(
@@ -192,7 +204,7 @@ public class CodeGeneratorUtils {
     generatorCodeConfig.setDriverName("com.mysql.cj.jdbc.Driver");
     generatorCodeConfig.setDataSourceUrl(String.format(DATA_SOURCE_URL, databaseName));
     generatorCodeConfig.setDataSourceUserName("root");
-    generatorCodeConfig.setDataSourcePassword("Root@123");
+    generatorCodeConfig.setDataSourcePassword("");
     generatorCodeConfig.setModuleName("");
     generatorCodeConfig.setParentPackageName("com.xushifei." + packageName);
     return generatorCodeConfig;

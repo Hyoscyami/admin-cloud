@@ -80,7 +80,51 @@ public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
         (key, value) -> {
           // 新增DTO
           this.createAddDTO(tableInfo, objectMap);
+          // 更新DTO
+          this.createUpdateDTO(tableInfo, objectMap);
+          // 查询DTO模板
+          this.createQueryDTO(tableInfo, objectMap);
+          // vo模板
+          this.createVO(tableInfo, objectMap);
         });
+  }
+
+  /**
+   * VO模板
+   *
+   * @param tableInfo
+   * @param objectMap
+   */
+  private void createVO(TableInfo tableInfo, Map<String, Object> objectMap) {
+    String className =
+        String.format(CodeTemplateEnum.VO_CLASS_NAME.getValue(), tableInfo.getEntityName());
+    String fileName =
+        this.getPathInfo(OutputFile.other)
+            + File.separator
+            + "vo"
+            + File.separator
+            + className
+            + ".java";
+    this.outputFile(new File(fileName), objectMap, CodeTemplateEnum.VO_TEMPLATE_PATH.getValue());
+  }
+  /**
+   * 查询DTO模板
+   *
+   * @param tableInfo
+   * @param objectMap
+   */
+  private void createQueryDTO(TableInfo tableInfo, Map<String, Object> objectMap) {
+    String className =
+        String.format(CodeTemplateEnum.QUERY_DTO_CLASS_NAME.getValue(), tableInfo.getEntityName());
+    String fileName =
+        this.getPathInfo(OutputFile.other)
+            + File.separator
+            + "query"
+            + File.separator
+            + className
+            + ".java";
+    this.outputFile(
+        new File(fileName), objectMap, CodeTemplateEnum.QUERY_DTO_TEMPLATE_PATH.getValue());
   }
 
   /**
@@ -96,6 +140,25 @@ public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
         this.getPathInfo(OutputFile.other)
             + File.separator
             + "add"
+            + File.separator
+            + className
+            + ".java";
+    this.outputFile(
+        new File(fileName), objectMap, CodeTemplateEnum.ADD_DTO_TEMPLATE_PATH.getValue());
+  }
+  /**
+   * 更新DTO模板
+   *
+   * @param tableInfo
+   * @param objectMap
+   */
+  private void createUpdateDTO(TableInfo tableInfo, Map<String, Object> objectMap) {
+    String className =
+        String.format(CodeTemplateEnum.UPDATE_DTO_CLASS_NAME.getValue(), tableInfo.getEntityName());
+    String fileName =
+        this.getPathInfo(OutputFile.other)
+            + File.separator
+            + "update"
             + File.separator
             + className
             + ".java";

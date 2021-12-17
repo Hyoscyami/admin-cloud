@@ -33,6 +33,8 @@ spring:
         provider:
           admin-cloud:
             issuer-uri: http://auth-server:8764
+  profiles:
+    active: dev
 
 eureka:
   instance:

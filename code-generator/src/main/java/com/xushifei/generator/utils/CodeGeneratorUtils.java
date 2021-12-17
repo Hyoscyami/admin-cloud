@@ -4,11 +4,12 @@ import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.querys.MySqlQuery;
-import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.baomidou.mybatisplus.generator.keywords.MySqlKeyWordsHandler;
 import com.xushifei.common.entity.BaseEntity;
+import com.xushifei.common.query.BaseQuery;
+import com.xushifei.common.vo.BaseVO;
 import com.xushifei.generator.config.GeneratorCodeConfig;
-import com.xushifei.generator.dto.AddTemplateDto;
+import com.xushifei.generator.dto.CodeTemplateDTO;
 import com.xushifei.generator.enums.CodeTemplateEnum;
 import org.springframework.util.StringUtils;
 
@@ -24,6 +25,23 @@ public class CodeGeneratorUtils {
   /** 数据库连接地址模板 */
   private static final String DATA_SOURCE_URL =
       "jdbc:mysql://localhost:3306/%s?useUnicode=true&allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=utf8";
+  /** base entity 和 base vo等基础父类的字段，子类不需要生成这些 */
+  private static final List<String> BASE_COLUMNS =
+      Arrays.asList(
+          "id",
+          "type",
+          "name",
+          "deleted",
+          "code",
+          "tenantId",
+          "note",
+          "status",
+          "createTime",
+          "modifyTime",
+          "creatorId",
+          "modifierId",
+          "creatorName",
+          "modifierName");
 
   public static void main(String[] args) {
     GeneratorCodeConfig config = getDefaultGenerator("authorization.server", "authorization");
@@ -96,24 +114,88 @@ public class CodeGeneratorUtils {
    * @param builder
    */
   private static void initInjectionConfigBuilder(InjectionConfig.Builder builder) {
-    List<String> entityIgnoreColumns =
+    builder
+        .beforeOutputFile(
+            ((tableInfo, objectMap) -> {
+              objectMap.put("addTemplateDto", getAddTemplateDTO(tableInfo.getEntityName()));
+              objectMap.put("updateTemplateDto", getUpdateTemplateDTO(tableInfo.getEntityName()));
+              objectMap.put("queryTemplateDto", getQueryTemplateDTO(tableInfo.getEntityName()));
+              objectMap.put("voTemplate", getVOTemplate(tableInfo.getEntityName()));
+            }))
+        .customMap(Collections.singletonMap("ignoreColumns", BASE_COLUMNS))
+        // 占个坑位，随便填的，会跑自定义生成文件就行
+        .customFile(
+            Collections.singletonMap("add", CodeTemplateEnum.ADD_DTO_TEMPLATE_PATH.getValue()))
+        .build();
+  }
+
+  /**
+   * 获取vo代码生成模板
+   *
+   * @param entityName
+   * @return
+   */
+  private static CodeTemplateDTO getVOTemplate(final String entityName) {
+    CodeTemplateDTO dto = new CodeTemplateDTO();
+    dto.setSuperClassCompleteName(BaseVO.class.getName());
+    dto.setSuperClassSimpleName(BaseVO.class.getSimpleName());
+    dto.setClassName(String.format(CodeTemplateEnum.VO_CLASS_NAME.getValue(), entityName));
+    dto.setIgnoreColumns(BASE_COLUMNS);
+    return dto;
+  }
+
+  /**
+   * 初始化查询DTO
+   *
+   * @param entityName
+   * @return
+   */
+  private static CodeTemplateDTO getQueryTemplateDTO(final String entityName) {
+    CodeTemplateDTO dto = new CodeTemplateDTO();
+    dto.setSuperClassCompleteName(BaseQuery.class.getName());
+    dto.setSuperClassSimpleName(BaseQuery.class.getSimpleName());
+    dto.setClassName(String.format(CodeTemplateEnum.QUERY_DTO_CLASS_NAME.getValue(), entityName));
+    dto.setIgnoreColumns(
         Arrays.asList(
             "id",
-            "type",
             "name",
-            "deleted",
-            "code",
-            "tenantId",
-            "note",
-            "status",
             "createTime",
             "modifyTime",
             "creatorId",
             "modifierId",
             "creatorName",
-            "modifierName");
-    AddTemplateDto addTemplateDto = new AddTemplateDto();
-    addTemplateDto.setIgnoreColumns(
+            "modifierName"));
+    return dto;
+  }
+  /**
+   * 初始化更新DTO
+   *
+   * @param entityName
+   * @return
+   */
+  private static CodeTemplateDTO getUpdateTemplateDTO(final String entityName) {
+    CodeTemplateDTO dto = new CodeTemplateDTO();
+    dto.setIgnoreColumns(
+        Arrays.asList(
+            "deleted",
+            "createTime",
+            "modifyTime",
+            "creatorId",
+            "modifierId",
+            "creatorName",
+            "modifierName"));
+    dto.setClassName(String.format(CodeTemplateEnum.UPDATE_DTO_CLASS_NAME.getValue(), entityName));
+    return dto;
+  }
+  /**
+   * 初始化新增DTO
+   *
+   * @param entityName
+   * @return
+   */
+  private static CodeTemplateDTO getAddTemplateDTO(final String entityName) {
+    CodeTemplateDTO dto = new CodeTemplateDTO();
+    dto.setIgnoreColumns(
         Arrays.asList(
             "id",
             "deleted",
@@ -123,19 +205,10 @@ public class CodeGeneratorUtils {
             "modifierId",
             "creatorName",
             "modifierName"));
-    builder
-        .beforeOutputFile(
-            ((tableInfo, objectMap) -> {
-              addTemplateDto.setClassName(
-                  String.format(
-                      CodeTemplateEnum.ADD_DTO_CLASS_NAME.getValue(), tableInfo.getEntityName()));
-              objectMap.put("addTemplateDto", addTemplateDto);
-            }))
-        .customMap(Collections.singletonMap("ignoreColumns", entityIgnoreColumns))
-        .customFile(
-            Collections.singletonMap("add", CodeTemplateEnum.ADD_DTO_TEMPLATE_PATH.getValue()))
-        .build();
+    dto.setClassName(String.format(CodeTemplateEnum.ADD_DTO_CLASS_NAME.getValue(), entityName));
+    return dto;
   }
+
   /**
    * 包配置
    *
@@ -204,7 +277,7 @@ public class CodeGeneratorUtils {
     generatorCodeConfig.setDriverName("com.mysql.cj.jdbc.Driver");
     generatorCodeConfig.setDataSourceUrl(String.format(DATA_SOURCE_URL, databaseName));
     generatorCodeConfig.setDataSourceUserName("root");
-    generatorCodeConfig.setDataSourcePassword("");
+    generatorCodeConfig.setDataSourcePassword("Root@123");
     generatorCodeConfig.setModuleName("");
     generatorCodeConfig.setParentPackageName("com.xushifei." + packageName);
     return generatorCodeConfig;

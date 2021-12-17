@@ -20,6 +20,8 @@ public class BaseVO {
   protected Long id;
   /** 名称 */
   protected String name;
+  /** 类型 */
+  protected Integer type;
   /** 状态，1：启用，2：禁用 */
   protected Integer status;
   /** 排序值，默认为1 */
@@ -28,7 +30,6 @@ public class BaseVO {
   @JsonDeserialize(using = LocalDateTimeDeserializer.class)
   @JsonSerialize(using = LocalDateTimeSerializer.class)
   protected LocalDateTime createTime;
-
   /** 更新时间 */
   @JsonDeserialize(using = LocalDateTimeDeserializer.class)
   @JsonSerialize(using = LocalDateTimeSerializer.class)
@@ -37,4 +38,10 @@ public class BaseVO {
   protected String creatorName;
   /** 修改人名称 */
   protected String modifierName;
+  /** 编码 */
+  protected String code;
+  /** 租户id */
+  protected Long tenantId;
+  /** 备注 */
+  protected String note;
 }

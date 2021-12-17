@@ -5,13 +5,17 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * 新增DTO模板
+ * 新增请求代码生成模板
  *
  * @author xushifei
  * @since 2021/12/16
  */
 @Data
-public class AddTemplateDto {
+public class CodeTemplateDTO {
+  /** 父类完整名称，如com.xushifei.generator.dto.CodeTemplateDTO */
+  private String superClassCompleteName;
+  /** 父类名称 */
+  private String superClassSimpleName;
   /** 类名 */
   private String className;
   /** 忽略字段 */

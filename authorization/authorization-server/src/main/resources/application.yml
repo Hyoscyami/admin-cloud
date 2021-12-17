@@ -3,6 +3,11 @@ server:
 spring:
   application:
     name: authorization-server
+  profiles:
+    active: dev
+swagger:
+  enable: true
+  controller: com.xushifei.authorization.server.controller
 eureka:
   instance:
     hostname: localhost

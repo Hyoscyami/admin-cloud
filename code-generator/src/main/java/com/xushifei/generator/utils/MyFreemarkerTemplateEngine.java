@@ -169,6 +169,6 @@ public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
             + className
             + ".java";
     this.outputFile(
-        new File(fileName), objectMap, CodeTemplateEnum.ADD_DTO_TEMPLATE_PATH.getValue());
+        new File(fileName), objectMap, CodeTemplateEnum.UPDATE_DTO_TEMPLATE_PATH.getValue());
   }
 }

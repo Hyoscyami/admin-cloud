@@ -8,6 +8,7 @@ import lombok.Data;
 </#if>
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.validation.constraints.NotNull;
 /**
  * <p>
  * ${table.comment!}
@@ -28,7 +29,9 @@ public class ${updateTemplateDto.className} {
     <#if field.keyFlag>
         <#assign keyPropertyName="${field.propertyName}"/>
     </#if>
-
+    <#if field.keyIdentityFlag>
+    @NotNull(message = "id不能为空")
+    </#if>
     <#if field.comment!?length gt 0>
     /**
      * ${field.comment}

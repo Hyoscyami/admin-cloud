@@ -17,6 +17,8 @@ public enum CodeTemplateEnum {
   UPDATE_DTO_CLASS_NAME("Update%sReq"),
   QUERY_DTO_CLASS_NAME("Query%sReq"),
   VO_CLASS_NAME("%sVO"),
+  /** 生成类文件路径 */
+  BASE_OUT_PUT_FILE_PATH("baseOutPutFilePath"),
   /** 生成模板路径 */
   ENTITY_TEMPLATE_PATH("/templates/code-generate/entity.java"),
   CONTROLLER_TEMPLATE_PATH("/templates/code-generate/entity.java"),

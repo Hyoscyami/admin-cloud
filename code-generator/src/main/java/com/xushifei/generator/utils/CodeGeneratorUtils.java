@@ -13,7 +13,9 @@ import com.xushifei.generator.dto.CodeTemplateDTO;
 import com.xushifei.generator.enums.CodeTemplateEnum;
 import org.springframework.util.StringUtils;
 
+import java.io.File;
 import java.util.*;
+import java.util.regex.Matcher;
 
 /**
  * 代码生成工具
@@ -59,7 +61,7 @@ public class CodeGeneratorUtils {
         .globalConfig(builder -> initGlobalConfigBuilder(builder, generatorCodeConfig))
         .packageConfig(builder -> initPackageConfigBuilder(builder, generatorCodeConfig))
         .strategyConfig(builder -> initStrategyConfigBuilder(builder, generatorCodeConfig))
-        .injectionConfig(CodeGeneratorUtils::initInjectionConfigBuilder)
+        .injectionConfig(builder -> initInjectionConfigBuilder(builder, generatorCodeConfig))
         .templateConfig(CodeGeneratorUtils::initTemplateConfig)
         .templateEngine(new MyFreemarkerTemplateEngine())
         .execute();
@@ -113,7 +115,8 @@ public class CodeGeneratorUtils {
    *
    * @param builder
    */
-  private static void initInjectionConfigBuilder(InjectionConfig.Builder builder) {
+  private static void initInjectionConfigBuilder(
+      InjectionConfig.Builder builder, GeneratorCodeConfig generatorCodeConfig) {
     builder
         .beforeOutputFile(
             ((tableInfo, objectMap) -> {
@@ -121,6 +124,13 @@ public class CodeGeneratorUtils {
               objectMap.put("updateTemplateDto", getUpdateTemplateDTO(tableInfo.getEntityName()));
               objectMap.put("queryTemplateDto", getQueryTemplateDTO(tableInfo.getEntityName()));
               objectMap.put("voTemplate", getVOTemplate(tableInfo.getEntityName()));
+              objectMap.put(
+                  "baseOutPutFilePath",
+                  generatorCodeConfig.getClassOutPutFilePath()
+                      + File.separator
+                      + generatorCodeConfig
+                          .getParentPackageName()
+                          .replaceAll("\\.", Matcher.quoteReplacement(File.separator)));
             }))
         .customMap(Collections.singletonMap("ignoreColumns", BASE_COLUMNS))
         // 占个坑位，随便填的，会跑自定义生成文件就行

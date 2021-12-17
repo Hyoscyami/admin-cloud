@@ -99,7 +99,7 @@ public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
     String className =
         String.format(CodeTemplateEnum.VO_CLASS_NAME.getValue(), tableInfo.getEntityName());
     String fileName =
-        this.getPathInfo(OutputFile.other)
+        objectMap.get(CodeTemplateEnum.BASE_OUT_PUT_FILE_PATH.getValue())
             + File.separator
             + "vo"
             + File.separator
@@ -117,7 +117,9 @@ public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
     String className =
         String.format(CodeTemplateEnum.QUERY_DTO_CLASS_NAME.getValue(), tableInfo.getEntityName());
     String fileName =
-        this.getPathInfo(OutputFile.other)
+        objectMap.get(CodeTemplateEnum.BASE_OUT_PUT_FILE_PATH.getValue())
+            + File.separator
+            + "dto"
             + File.separator
             + "query"
             + File.separator
@@ -137,7 +139,9 @@ public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
     String className =
         String.format(CodeTemplateEnum.ADD_DTO_CLASS_NAME.getValue(), tableInfo.getEntityName());
     String fileName =
-        this.getPathInfo(OutputFile.other)
+        objectMap.get(CodeTemplateEnum.BASE_OUT_PUT_FILE_PATH.getValue())
+            + File.separator
+            + "dto"
             + File.separator
             + "add"
             + File.separator
@@ -156,7 +160,9 @@ public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
     String className =
         String.format(CodeTemplateEnum.UPDATE_DTO_CLASS_NAME.getValue(), tableInfo.getEntityName());
     String fileName =
-        this.getPathInfo(OutputFile.other)
+        objectMap.get(CodeTemplateEnum.BASE_OUT_PUT_FILE_PATH.getValue())
+            + File.separator
+            + "dto"
             + File.separator
             + "update"
             + File.separator

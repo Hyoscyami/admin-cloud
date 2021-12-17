@@ -21,7 +21,7 @@ public enum CodeTemplateEnum {
   BASE_OUT_PUT_FILE_PATH("baseOutPutFilePath"),
   /** 生成模板路径 */
   ENTITY_TEMPLATE_PATH("/templates/code-generate/entity.java"),
-  CONTROLLER_TEMPLATE_PATH("/templates/code-generate/entity.java"),
+  CONTROLLER_TEMPLATE_PATH("/templates/code-generate/controller.java"),
   ADD_DTO_TEMPLATE_PATH("/templates/code-generate/add.java.ftl"),
   UPDATE_DTO_TEMPLATE_PATH("/templates/code-generate/update.java.ftl"),
   QUERY_DTO_TEMPLATE_PATH("/templates/code-generate/query.java.ftl"),

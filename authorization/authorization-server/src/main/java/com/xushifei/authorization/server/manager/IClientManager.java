@@ -1,4 +1,4 @@
-package com.xushifei.authorization.server.support;
+package com.xushifei.authorization.server.manager;
 
 import com.xushifei.authorization.server.entity.Client;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -9,4 +9,4 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author xushifei
  * @since 2021-12-15
  */
-public interface ClientSupport extends IService<Client> {}
+public interface IClientManager extends IService<Client> {}

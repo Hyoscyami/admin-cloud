@@ -1,4 +1,4 @@
-package com.xushifei.authorization.server.support;
+package com.xushifei.authorization.server.manager;
 
 import com.xushifei.authorization.server.entity.Scope;
 import com.baomidou.mybatisplus.extension.service.IService;

@@ -1,4 +1,4 @@
-package com.xushifei.authorization.server.support.impl;
+package com.xushifei.authorization.server.manager.impl;
 
 import com.xushifei.authorization.server.entity.Scope;
 import com.xushifei.authorization.server.mapper.ScopeMapper;
@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Service
 public class ScopeSupport extends ServiceImpl<ScopeMapper, Scope>
-    implements com.xushifei.authorization.server.support.ScopeSupport {
+    implements com.xushifei.authorization.server.manager.ScopeSupport {
   /**
    * 根据权限组ID查询权限列表
    *

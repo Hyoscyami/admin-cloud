@@ -1,4 +1,4 @@
-package com.xushifei.authorization.server.support.impl;
+package com.xushifei.authorization.server.manager.impl;
 
 import com.xushifei.authorization.server.entity.ScopeGroup;
 import com.xushifei.authorization.server.mapper.ScopeGroupMapper;
@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Service
 public class ScopeGroupSupport extends ServiceImpl<ScopeGroupMapper, ScopeGroup>
-    implements com.xushifei.authorization.server.support.ScopeGroupSupport {
+    implements com.xushifei.authorization.server.manager.ScopeGroupSupport {
   /**
    * 根据clientId查询分组
    *

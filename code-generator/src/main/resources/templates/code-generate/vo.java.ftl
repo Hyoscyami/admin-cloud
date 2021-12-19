@@ -8,6 +8,7 @@ import lombok.Data;
 </#if>
 <#if voTemplate.superClassCompleteName??>
 import ${voTemplate.superClassCompleteName};
+import lombok.EqualsAndHashCode;
 </#if>
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -24,6 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
 </#if>
 @ApiModel(value = "${table.comment!}", description = "${table.comment!}展示层")
 <#if voTemplate.superClassCompleteName??>
+@EqualsAndHashCode(callSuper = true)
 public class ${voTemplate.className} extends ${voTemplate.superClassSimpleName}{
 <#else>
 public class ${voTemplate.className} {

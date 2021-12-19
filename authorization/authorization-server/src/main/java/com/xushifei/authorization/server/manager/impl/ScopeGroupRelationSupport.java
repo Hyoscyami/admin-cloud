@@ -1,4 +1,4 @@
-package com.xushifei.authorization.server.support.impl;
+package com.xushifei.authorization.server.manager.impl;
 
 import com.xushifei.authorization.server.entity.ScopeGroupRelation;
 import com.xushifei.authorization.server.mapper.ScopeGroupRelationMapper;
@@ -14,4 +14,4 @@ import org.springframework.stereotype.Service;
 @Service
 public class ScopeGroupRelationSupport
     extends ServiceImpl<ScopeGroupRelationMapper, ScopeGroupRelation>
-    implements com.xushifei.authorization.server.support.ScopeGroupRelationSupport {}
+    implements com.xushifei.authorization.server.manager.ScopeGroupRelationSupport {}

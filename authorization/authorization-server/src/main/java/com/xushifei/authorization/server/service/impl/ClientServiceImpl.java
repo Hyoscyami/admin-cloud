@@ -1,12 +1,15 @@
 package com.xushifei.authorization.server.service.impl;
 
+import com.xushifei.authorization.server.dto.add.AddClientReq;
 import com.xushifei.authorization.server.entity.Client;
 import com.xushifei.authorization.server.entity.Scope;
 import com.xushifei.authorization.server.entity.ScopeGroup;
+import com.xushifei.authorization.server.manager.impl.ClientManager;
 import com.xushifei.authorization.server.service.ClientService;
-import com.xushifei.authorization.server.support.ClientSupport;
-import com.xushifei.authorization.server.support.ScopeSupport;
-import com.xushifei.authorization.server.support.impl.ScopeGroupSupport;
+import com.xushifei.authorization.server.manager.IClientManager;
+import com.xushifei.authorization.server.manager.ScopeSupport;
+import com.xushifei.authorization.server.manager.impl.ScopeGroupSupport;
+import com.xushifei.common.service.impl.BaseServiceImpl;
 import com.xushifei.common.utils.AssertUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,10 +29,11 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class ClientServiceImpl implements ClientService {
-  private final ClientSupport clientSupport;
+public class ClientServiceImpl extends BaseServiceImpl<ClientManager, Client>
+    implements ClientService {
   private final ScopeGroupSupport scopeGroupSupport;
   private final ScopeSupport scopeSupport;
+
   /**
    * 根据客户端ID查询权限列表
    *
@@ -39,7 +43,7 @@ public class ClientServiceImpl implements ClientService {
   @Override
   public List<Scope> listScopesByClientId(Long clientId) {
     AssertUtils.notNull(clientId, "clientId不能为空");
-    Client client = clientSupport.getById(clientId);
+    Client client = this.manager.getById(clientId);
     AssertUtils.notNull(client, "clientId不存在");
     // 超管客户端，返回全部权限
     if (client.getAdmin()) {
@@ -51,5 +55,16 @@ public class ClientServiceImpl implements ClientService {
     }
     return scopeSupport.listByGroupIds(
         scopeGroups.stream().map(ScopeGroup::getId).collect(Collectors.toList()));
+  }
+
+  /**
+   * 新增
+   *
+   * @param req
+   * @return
+   */
+  @Override
+  public void add(AddClientReq req) {
+    this.save(req);
   }
 }

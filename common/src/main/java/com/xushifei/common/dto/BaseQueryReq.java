@@ -1,4 +1,4 @@
-package com.xushifei.common.query;
+package com.xushifei.common.dto;
 
 import com.xushifei.common.enums.ApiCodeEnum;
 import com.xushifei.common.exception.BusinessException;
@@ -12,7 +12,7 @@ import java.util.Objects;
  * @date 2021/11/16
  */
 @Data
-public class BaseQuery {
+public class BaseQueryReq {
   /** 页码 */
   protected Integer page;
   /** 页大小 */
@@ -37,14 +37,14 @@ public class BaseQuery {
   }
 
   /**
-   * 获取偏移量
+   * 根据分页参数计算偏移量偏移量
    *
    * @return
    */
-  public Integer calculateOffset() {
+  public void calculateOffset() {
     if (!this.needPage()) {
-      return null;
+      return;
     }
-    return (page - 1) * size;
+    this.offset = (page - 1) * size;
   }
 }

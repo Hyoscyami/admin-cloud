@@ -1,6 +1,8 @@
 package com.xushifei.authorization.server.service;
 
+import com.xushifei.authorization.server.dto.add.AddClientReq;
 import com.xushifei.authorization.server.entity.Scope;
+import com.xushifei.authorization.server.vo.ClientVO;
 
 import java.util.List;
 
@@ -18,4 +20,12 @@ public interface ClientService {
    * @return
    */
   List<Scope> listScopesByClientId(Long clientId);
+
+  /**
+   * 新增
+   *
+   * @param req
+   * @return
+   */
+  void add(AddClientReq req);
 }

@@ -3,7 +3,7 @@ package com.xushifei.authorization.server.config.security;
 import com.xushifei.authorization.server.entity.Client;
 import com.xushifei.authorization.server.entity.Scope;
 import com.xushifei.authorization.server.service.ClientService;
-import com.xushifei.authorization.server.support.ClientSupport;
+import com.xushifei.authorization.server.manager.IClientManager;
 import com.xushifei.common.enums.ApiCodeEnum;
 import com.xushifei.common.exception.BusinessException;
 import com.xushifei.common.utils.ConditionUtils;
@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class JdbcClientRepository implements RegisteredClientRepository {
   private final ClientService clientService;
-  private final ClientSupport clientSupport;
+  private final IClientManager IClientManager;
   /**
    * Saves the registered client.
    *
@@ -88,7 +88,7 @@ public class JdbcClientRepository implements RegisteredClientRepository {
    */
   @Override
   public RegisteredClient findById(String id) {
-    return this.convertToRegisteredClient(clientSupport.getById(id));
+    return this.convertToRegisteredClient(IClientManager.getById(id));
   }
 
   /**
@@ -191,7 +191,7 @@ public class JdbcClientRepository implements RegisteredClientRepository {
    */
   @Override
   public RegisteredClient findByClientId(String clientId) {
-    Client client = clientSupport.lambdaQuery().eq(Client::getClientId, clientId).one();
+    Client client = IClientManager.lambdaQuery().eq(Client::getClientId, clientId).one();
     return this.convertToRegisteredClient(client);
   }
 }

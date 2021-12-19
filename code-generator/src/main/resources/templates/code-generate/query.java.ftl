@@ -8,6 +8,7 @@ import lombok.Data;
 </#if>
 <#if queryTemplateDto.superClassCompleteName??>
 import ${queryTemplateDto.superClassCompleteName};
+import lombok.EqualsAndHashCode;
 </#if>
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -24,6 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
 </#if>
 @ApiModel(value = "${table.comment!}", description = "查询${table.comment!}")
 <#if queryTemplateDto.superClassCompleteName??>
+@EqualsAndHashCode(callSuper = true)
 public class ${queryTemplateDto.className} extends ${queryTemplateDto.superClassSimpleName}{
 <#else>
 public class ${queryTemplateDto.className} {

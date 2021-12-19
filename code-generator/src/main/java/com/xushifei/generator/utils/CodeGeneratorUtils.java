@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.querys.MySqlQuery;
 import com.baomidou.mybatisplus.generator.keywords.MySqlKeyWordsHandler;
 import com.xushifei.common.entity.BaseEntity;
-import com.xushifei.common.query.BaseQuery;
+import com.xushifei.common.dto.BaseQueryReq;
 import com.xushifei.common.vo.BaseVO;
 import com.xushifei.generator.config.GeneratorCodeConfig;
 import com.xushifei.generator.dto.CodeTemplateDTO;
@@ -162,8 +162,8 @@ public class CodeGeneratorUtils {
    */
   private static CodeTemplateDTO getQueryTemplateDTO(final String entityName) {
     CodeTemplateDTO dto = new CodeTemplateDTO();
-    dto.setSuperClassCompleteName(BaseQuery.class.getName());
-    dto.setSuperClassSimpleName(BaseQuery.class.getSimpleName());
+    dto.setSuperClassCompleteName(BaseQueryReq.class.getName());
+    dto.setSuperClassSimpleName(BaseQueryReq.class.getSimpleName());
     dto.setClassName(String.format(CodeTemplateEnum.QUERY_DTO_CLASS_NAME.getValue(), entityName));
     dto.setIgnoreColumns(
         Arrays.asList(
@@ -287,7 +287,7 @@ public class CodeGeneratorUtils {
     generatorCodeConfig.setDriverName("com.mysql.cj.jdbc.Driver");
     generatorCodeConfig.setDataSourceUrl(String.format(DATA_SOURCE_URL, databaseName));
     generatorCodeConfig.setDataSourceUserName("root");
-    generatorCodeConfig.setDataSourcePassword("Root@123");
+    generatorCodeConfig.setDataSourcePassword("");
     generatorCodeConfig.setModuleName("");
     generatorCodeConfig.setParentPackageName("com.xushifei." + packageName);
     return generatorCodeConfig;

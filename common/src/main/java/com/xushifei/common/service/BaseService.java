@@ -1,6 +1,7 @@
 package com.xushifei.common.service;
 
 import com.xushifei.common.dto.BaseAddReq;
+import com.xushifei.common.entity.BaseEntity;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -12,7 +13,7 @@ import java.util.List;
  * @author xushifei
  * @since 2021/12/18
  */
-public interface BaseService<T> {
+public interface BaseService<T extends BaseEntity> {
   /**
    * 保存
    *

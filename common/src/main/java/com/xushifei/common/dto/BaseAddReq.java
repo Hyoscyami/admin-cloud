@@ -6,7 +6,4 @@ package com.xushifei.common.dto;
  * @author xushifei
  * @since 2021/12/18
  */
-public class BaseAddReq {
-  /** 租户ID */
-  protected Long tenantId;
-}
+public class BaseAddReq {}

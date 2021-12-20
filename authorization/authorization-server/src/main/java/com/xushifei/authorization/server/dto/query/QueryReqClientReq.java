@@ -81,10 +81,6 @@ public class QueryReqClientReq extends BaseQueryReq {
   @ApiModelProperty(value = "编码")
   private String code;
 
-  /** 是否有效，1：有效，0：无效 */
-  @ApiModelProperty(value = "是否有效，1：有效，0：无效")
-  private Integer status;
-
   /** 租户id */
   @ApiModelProperty(value = "租户id")
   private Long tenantId;

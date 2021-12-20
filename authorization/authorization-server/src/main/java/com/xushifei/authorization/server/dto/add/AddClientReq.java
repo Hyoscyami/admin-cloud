@@ -1,9 +1,6 @@
 package com.xushifei.authorization.server.dto.add;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.xushifei.common.dto.BaseAddReq;
-import com.xushifei.common.entity.BaseEntity;
-import java.time.LocalDateTime;
 import lombok.Data;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,8 +12,8 @@ import lombok.EqualsAndHashCode;
  * @author xushifei
  * @since 2021-12-18
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 @ApiModel(value = "客户端基本信息", description = "新增客户端基本信息")
 public class AddClientReq extends BaseAddReq {
 

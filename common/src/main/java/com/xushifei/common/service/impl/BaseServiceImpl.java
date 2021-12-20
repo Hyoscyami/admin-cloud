@@ -2,6 +2,7 @@ package com.xushifei.common.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.xushifei.common.dto.BaseAddReq;
+import com.xushifei.common.entity.BaseEntity;
 import com.xushifei.common.enums.ApiCodeEnum;
 import com.xushifei.common.exception.BusinessException;
 import com.xushifei.common.service.BaseService;
@@ -17,15 +18,16 @@ import java.util.List;
  * @author xushifei
  * @since 2021/12/18
  */
-public abstract class BaseServiceImpl<M extends IService<T>, T> implements BaseService<T> {
+public abstract class BaseServiceImpl<M extends IService<T>, T extends BaseEntity>
+    implements BaseService<T> {
   @Autowired protected M manager;
   /**
-   * 保存入参检验
+   * 新增入参检验
    *
    * @param req
    * @param <A>
    */
-  protected <A> void checkSave(A req) {}
+  protected <A extends BaseAddReq> void checkAdd(A req) {}
 
   /**
    * 请求转实体
@@ -33,16 +35,35 @@ public abstract class BaseServiceImpl<M extends IService<T>, T> implements BaseS
    * @param <A>
    * @return
    */
-  protected <A extends BaseAddReq> T convertToEntity(A req) {
+  protected <A extends BaseAddReq> T convertAddReqToEntity(A req) {
     throw new BusinessException(ApiCodeEnum.SYSTEM_ERROR.getCode(), "请子类重写新增时请求转换成实体接口");
   }
+
+  /**
+   * 保存实体
+   *
+   * @param entity
+   */
+  protected void defaultSave(T entity) {
+    // 入库保存
+    manager.save(entity);
+  }
+
   /**
    * 保存
    *
    * @param req
    * @return
    */
-  public <A extends BaseAddReq> void save(A req) {}
+  @Override
+  public <A extends BaseAddReq> void save(A req) {
+    // 入参校验
+    this.checkAdd(req);
+    // 入参转实体
+    T entity = this.convertAddReqToEntity(req);
+    // 入库保存
+    this.defaultSave(entity);
+  }
 
   /**
    * 批量保存

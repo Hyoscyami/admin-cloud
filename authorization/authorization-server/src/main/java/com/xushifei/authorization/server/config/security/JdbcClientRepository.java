@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class JdbcClientRepository implements RegisteredClientRepository {
   private final ClientService clientService;
-  private final IClientManager IClientManager;
+  private final IClientManager clientManager;
   /**
    * Saves the registered client.
    *
@@ -88,7 +88,7 @@ public class JdbcClientRepository implements RegisteredClientRepository {
    */
   @Override
   public RegisteredClient findById(String id) {
-    return this.convertToRegisteredClient(IClientManager.getById(id));
+    return this.convertToRegisteredClient(clientManager.getById(id));
   }
 
   /**
@@ -191,7 +191,7 @@ public class JdbcClientRepository implements RegisteredClientRepository {
    */
   @Override
   public RegisteredClient findByClientId(String clientId) {
-    Client client = IClientManager.lambdaQuery().eq(Client::getClientId, clientId).one();
+    Client client = clientManager.lambdaQuery().eq(Client::getClientId, clientId).one();
     return this.convertToRegisteredClient(client);
   }
 }

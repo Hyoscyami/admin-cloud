@@ -9,10 +9,12 @@ import com.xushifei.authorization.server.service.ClientService;
 import com.xushifei.authorization.server.manager.IClientManager;
 import com.xushifei.authorization.server.manager.ScopeSupport;
 import com.xushifei.authorization.server.manager.impl.ScopeGroupSupport;
+import com.xushifei.common.dto.BaseAddReq;
 import com.xushifei.common.service.impl.BaseServiceImpl;
 import com.xushifei.common.utils.AssertUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -57,14 +59,11 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientManager, Client>
         scopeGroups.stream().map(ScopeGroup::getId).collect(Collectors.toList()));
   }
 
-  /**
-   * 新增
-   *
-   * @param req
-   * @return
-   */
   @Override
-  public void add(AddClientReq req) {
-    this.save(req);
+  protected Client convertAddReqToEntity(BaseAddReq req) {
+    AddClientReq addReq = (AddClientReq) req;
+    Client client = new Client();
+    BeanUtils.copyProperties(addReq, client);
+    return client;
   }
 }

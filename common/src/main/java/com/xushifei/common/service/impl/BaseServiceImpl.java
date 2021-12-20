@@ -25,17 +25,16 @@ public abstract class BaseServiceImpl<M extends IService<T>, T extends BaseEntit
    * 新增入参检验
    *
    * @param req
-   * @param <A>
    */
-  protected <A extends BaseAddReq> void checkAdd(A req) {}
+  protected void checkAdd(BaseAddReq req) {}
 
   /**
    * 请求转实体
    *
-   * @param <A>
+   * @param req
    * @return
    */
-  protected <A extends BaseAddReq> T convertAddReqToEntity(A req) {
+  protected T convertAddReqToEntity(BaseAddReq req) {
     throw new BusinessException(ApiCodeEnum.SYSTEM_ERROR.getCode(), "请子类重写新增时请求转换成实体接口");
   }
 
@@ -56,7 +55,7 @@ public abstract class BaseServiceImpl<M extends IService<T>, T extends BaseEntit
    * @return
    */
   @Override
-  public <A extends BaseAddReq> void save(A req) {
+  public void save(BaseAddReq req) {
     // 入参校验
     this.checkAdd(req);
     // 入参转实体

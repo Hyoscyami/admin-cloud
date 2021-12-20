@@ -20,7 +20,7 @@ public interface BaseService<T extends BaseEntity> {
    * @param req
    * @return
    */
-  <A extends BaseAddReq> void save(A req);
+  void save(BaseAddReq req);
   /**
    * 批量保存
    *

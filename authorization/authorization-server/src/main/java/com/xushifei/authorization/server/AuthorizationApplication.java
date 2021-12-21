@@ -1,11 +1,14 @@
 package com.xushifei.authorization.server;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import springfox.documentation.oas.annotations.EnableOpenApi;
 
-@EnableOpenApi
 @SpringBootApplication(scanBasePackages = "com.xushifei")
+@MapperScan({
+  "com.baomidou.mybatisplus.samples.quickstart.mapper",
+  "com.xushifei.authorization.server.mapper"
+})
 public class AuthorizationApplication {
 
   public static void main(String[] args) {

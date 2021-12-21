@@ -6,8 +6,7 @@ import com.xushifei.authorization.server.entity.Scope;
 import com.xushifei.authorization.server.entity.ScopeGroup;
 import com.xushifei.authorization.server.manager.impl.ClientManager;
 import com.xushifei.authorization.server.service.ClientService;
-import com.xushifei.authorization.server.manager.IClientManager;
-import com.xushifei.authorization.server.manager.ScopeSupport;
+import com.xushifei.authorization.server.manager.IScopeManager;
 import com.xushifei.authorization.server.manager.impl.ScopeGroupSupport;
 import com.xushifei.common.dto.BaseAddReq;
 import com.xushifei.common.service.impl.BaseServiceImpl;
@@ -34,7 +33,7 @@ import java.util.stream.Collectors;
 public class ClientServiceImpl extends BaseServiceImpl<ClientManager, Client>
     implements ClientService {
   private final ScopeGroupSupport scopeGroupSupport;
-  private final ScopeSupport scopeSupport;
+  private final IScopeManager scopeManager;
 
   /**
    * 根据客户端ID查询权限列表
@@ -49,18 +48,18 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientManager, Client>
     AssertUtils.notNull(client, "clientId不存在");
     // 超管客户端，返回全部权限
     if (client.getAdmin()) {
-      return scopeSupport.list();
+      return scopeManager.list();
     }
     List<ScopeGroup> scopeGroups = scopeGroupSupport.listByClientId(clientId);
     if (CollectionUtils.isEmpty(scopeGroups)) {
       return Collections.emptyList();
     }
-    return scopeSupport.listByGroupIds(
+    return scopeManager.listByGroupIds(
         scopeGroups.stream().map(ScopeGroup::getId).collect(Collectors.toList()));
   }
 
   @Override
-  protected Client convertAddReqToEntity(BaseAddReq req) {
+  public Client convertAddReqToEntity(BaseAddReq req) {
     AddClientReq addReq = (AddClientReq) req;
     Client client = new Client();
     BeanUtils.copyProperties(addReq, client);

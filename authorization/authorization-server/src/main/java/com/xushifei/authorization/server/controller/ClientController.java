@@ -6,8 +6,6 @@ import com.xushifei.authorization.server.service.ClientService;
 import com.xushifei.authorization.server.vo.ClientVO;
 import com.xushifei.common.dto.ApiResponse;
 import com.xushifei.common.utils.ResponseUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +23,6 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/api/client")
-@Api(tags = "客户端基本信息")
 @RequiredArgsConstructor
 public class ClientController {
   private final ClientService clientService;
@@ -36,7 +33,6 @@ public class ClientController {
    * @param req
    * @return
    */
-  @ApiOperation("新增客户端基本信息")
   @PostMapping("/add")
   public ApiResponse<ClientVO> add(@Valid @RequestBody AddClientReq req) {
     clientService.save(req);

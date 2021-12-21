@@ -29,7 +29,7 @@
         <module>core</module>
         <module>admin-server</module>
         <module>developer-platform</module>
-        <module>authorization-server</module>
+        <module>authorization</module>
         <module>config-server</module>
         <module>gateway</module>
         <module>register</module>

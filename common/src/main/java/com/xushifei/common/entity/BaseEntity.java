@@ -1,5 +1,8 @@
 package com.xushifei.common.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -20,7 +23,7 @@ public class BaseEntity {
   /** id */
   protected Long id;
   /** 是否被删除，1：被删除，0：未删除 */
-  protected Boolean deleted;
+  @TableLogic protected Boolean deleted;
   /** 名称 */
   protected String name;
   /** 类型 */
@@ -32,6 +35,7 @@ public class BaseEntity {
   /** 创建人名称 */
   protected String creatorName;
   /** 修改人名称 */
+  @TableField(fill = FieldFill.UPDATE)
   protected String modifierName;
   /** 创建时间 */
   @JsonDeserialize(using = LocalDateTimeDeserializer.class)
@@ -41,12 +45,14 @@ public class BaseEntity {
   /** 更新时间 */
   @JsonDeserialize(using = LocalDateTimeDeserializer.class)
   @JsonSerialize(using = LocalDateTimeSerializer.class)
+  @TableField(fill = FieldFill.UPDATE)
   protected LocalDateTime modifyTime;
 
   /** 创建人id */
   protected Long creatorId;
 
   /** 更新人id */
+  @TableField(fill = FieldFill.UPDATE)
   protected Long modifierId;
   /** 编码 */
   protected String code;

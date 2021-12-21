@@ -1,8 +1,9 @@
 package com.xushifei.authorization.server.manager.impl;
 
-import com.xushifei.authorization.server.entity.ScopeGroup;
-import com.xushifei.authorization.server.mapper.ScopeGroupMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.xushifei.authorization.server.entity.ScopeGroup;
+import com.xushifei.authorization.server.manager.IScopeGroupManager;
+import com.xushifei.authorization.server.mapper.ScopeGroupMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +15,8 @@ import java.util.List;
  * @since 2021-12-15
  */
 @Service
-public class ScopeGroupSupport extends ServiceImpl<ScopeGroupMapper, ScopeGroup>
-    implements com.xushifei.authorization.server.manager.ScopeGroupSupport {
+public class ScopeGroupManager extends ServiceImpl<ScopeGroupMapper, ScopeGroup>
+    implements IScopeGroupManager {
   /**
    * 根据clientId查询分组
    *

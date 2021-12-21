@@ -7,5 +7,6 @@ package com.xushifei.common.dto;
  * @since 2021/12/18
  */
 public class BaseUpdateReq {
+  /** id */
   protected Long id;
 }

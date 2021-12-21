@@ -12,6 +12,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum CodeTemplateEnum {
+  /** manager模板 */
+  MANAGER("I%sManager"),
+  MANAGER_IMPL("%sManagerImpl"),
   /** 新增DTO类的模板名称 */
   ADD_DTO_CLASS_NAME("Add%sReq"),
   UPDATE_DTO_CLASS_NAME("Update%sReq"),

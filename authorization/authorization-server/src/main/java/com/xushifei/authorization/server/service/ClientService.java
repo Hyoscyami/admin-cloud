@@ -1,9 +1,7 @@
 package com.xushifei.authorization.server.service;
 
-import com.xushifei.authorization.server.dto.add.AddClientReq;
 import com.xushifei.authorization.server.entity.Client;
 import com.xushifei.authorization.server.entity.Scope;
-import com.xushifei.authorization.server.vo.ClientVO;
 import com.xushifei.common.service.BaseService;
 
 import java.util.List;

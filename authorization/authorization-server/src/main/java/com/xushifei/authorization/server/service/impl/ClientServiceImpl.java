@@ -1,19 +1,16 @@
 package com.xushifei.authorization.server.service.impl;
 
-import com.xushifei.authorization.server.dto.add.AddClientReq;
 import com.xushifei.authorization.server.entity.Client;
 import com.xushifei.authorization.server.entity.Scope;
 import com.xushifei.authorization.server.entity.ScopeGroup;
-import com.xushifei.authorization.server.manager.impl.ClientManager;
-import com.xushifei.authorization.server.service.ClientService;
 import com.xushifei.authorization.server.manager.IScopeManager;
-import com.xushifei.authorization.server.manager.impl.ScopeGroupSupport;
-import com.xushifei.common.dto.BaseAddReq;
+import com.xushifei.authorization.server.manager.impl.ClientManager;
+import com.xushifei.authorization.server.manager.impl.ScopeGroupManager;
+import com.xushifei.authorization.server.service.ClientService;
 import com.xushifei.common.service.impl.BaseServiceImpl;
 import com.xushifei.common.utils.AssertUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -32,7 +29,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ClientServiceImpl extends BaseServiceImpl<ClientManager, Client>
     implements ClientService {
-  private final ScopeGroupSupport scopeGroupSupport;
+  private final ScopeGroupManager scopeGroupSupport;
   private final IScopeManager scopeManager;
 
   /**
@@ -56,13 +53,5 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientManager, Client>
     }
     return scopeManager.listByGroupIds(
         scopeGroups.stream().map(ScopeGroup::getId).collect(Collectors.toList()));
-  }
-
-  @Override
-  public Client convertAddReqToEntity(BaseAddReq req) {
-    AddClientReq addReq = (AddClientReq) req;
-    Client client = new Client();
-    BeanUtils.copyProperties(addReq, client);
-    return client;
   }
 }

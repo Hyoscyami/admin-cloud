@@ -47,7 +47,7 @@ public class CodeGeneratorUtils {
 
   public static void main(String[] args) {
     GeneratorCodeConfig config = getDefaultGenerator("authorization.server", "authorization");
-    config.setTableName("client");
+    // config.setTableName("client");
     generateCode(config);
   }
 
@@ -92,8 +92,10 @@ public class CodeGeneratorUtils {
     // service配置
     builder
         .serviceBuilder()
-        .convertServiceFileName((entityName -> entityName + "Support"))
-        .convertServiceImplFileName((entityName -> entityName + "Support"));
+        .convertServiceFileName(
+            (entityName -> String.format(CodeTemplateEnum.MANAGER.getValue(), entityName)))
+        .convertServiceImplFileName(
+            (entityName -> String.format(CodeTemplateEnum.MANAGER_IMPL.getValue(), entityName)));
     // mapper配置
     builder.mapperBuilder().enableBaseResultMap().enableBaseColumnList();
     builder.build();

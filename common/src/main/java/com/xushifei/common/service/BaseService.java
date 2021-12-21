@@ -1,7 +1,11 @@
 package com.xushifei.common.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xushifei.common.dto.BaseAddReq;
+import com.xushifei.common.dto.BaseQueryReq;
+import com.xushifei.common.dto.BaseUpdateReq;
 import com.xushifei.common.entity.BaseEntity;
+import com.xushifei.common.vo.BaseVO;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -13,7 +17,7 @@ import java.util.List;
  * @author xushifei
  * @since 2021/12/18
  */
-public interface BaseService<T extends BaseEntity> {
+public interface BaseService<T> {
   /**
    * 保存
    *
@@ -21,22 +25,6 @@ public interface BaseService<T extends BaseEntity> {
    * @return
    */
   void save(BaseAddReq req);
-  /**
-   * 批量保存
-   *
-   * @param entityList
-   * @param batchSize
-   * @return
-   */
-  boolean saveBatch(Collection<T> entityList, int batchSize);
-
-  /**
-   * 批量保存
-   *
-   * @param entityList
-   * @return
-   */
-  boolean saveBatch(Collection<T> entityList);
 
   /**
    * 删除
@@ -44,7 +32,7 @@ public interface BaseService<T extends BaseEntity> {
    * @param id
    * @return
    */
-  boolean removeById(Serializable id);
+  void removeById(Serializable id);
 
   /**
    * 删除
@@ -52,31 +40,15 @@ public interface BaseService<T extends BaseEntity> {
    * @param idList
    * @return
    */
-  boolean removeByIds(Collection<? extends Serializable> idList);
+  void removeByIds(Collection<? extends Serializable> idList);
 
   /**
    * 更新
    *
-   * @param entity
+   * @param req
    * @return
    */
-  boolean updateById(T entity);
-
-  /**
-   * 批量更新
-   *
-   * @param entityList
-   * @return
-   */
-  boolean updateBatchById(Collection<T> entityList);
-
-  /**
-   * 批量更新
-   *
-   * @param entityList
-   * @param batchSize
-   */
-  boolean updateBatchById(Collection<T> entityList, int batchSize);
+  void updateById(BaseUpdateReq req);
 
   /**
    * 详情
@@ -84,13 +56,13 @@ public interface BaseService<T extends BaseEntity> {
    * @param id
    * @return
    */
-  T getById(Serializable id);
+  BaseVO getVOById(Serializable id);
 
   /**
-   * 批量根据ID查询
+   * 分页
    *
-   * @param idList
+   * @param req
    * @return
    */
-  List<T> listByIds(Collection<? extends Serializable> idList);
+  Page<BaseVO> page(BaseQueryReq req);
 }

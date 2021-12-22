@@ -232,8 +232,8 @@ public class CodeGeneratorUtils {
       PackageConfig.Builder builder, final GeneratorCodeConfig generatorCodeConfig) {
     builder
         .moduleName(generatorCodeConfig.getModuleName())
-        .service("support")
-        .serviceImpl("support.impl")
+        .service("manager")
+        .serviceImpl("manager.impl")
         .pathInfo(
             Collections.singletonMap(
                 OutputFile.mapperXml, generatorCodeConfig.getXmlOutPutFilePath()))

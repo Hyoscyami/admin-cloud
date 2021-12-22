@@ -6,8 +6,8 @@ import ${pkg};
 <#if entityLombokModel>
 import lombok.Data;
 </#if>
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 /**
  * <p>
  * ${table.comment!}
@@ -19,8 +19,13 @@ import io.swagger.annotations.ApiModelProperty;
 <#if entityLombokModel>
 @Data
 </#if>
-@ApiModel(value = "${table.comment!}", description = "新增${table.comment!}")
+@Schema(name = "${table.comment!}", description = "新增${table.comment!}")
+<#if addTemplateDto.superClassCompleteName??>
+@EqualsAndHashCode(callSuper = true)
+public class ${addTemplateDto.className} extends ${addTemplateDto.superClassSimpleName}{
+<#else>
 public class ${addTemplateDto.className} {
+</#if>
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>
     <#if addTemplateDto.ignoreColumns?seq_contains(field.propertyName)>
@@ -34,7 +39,7 @@ public class ${addTemplateDto.className} {
      * ${field.comment}
      */
     </#if>
-    @ApiModelProperty(value = "${field.comment!}")
+    @Schema(description = "${field.comment!}")
     private ${field.propertyType} ${field.propertyName};
     </#if>
 </#list>

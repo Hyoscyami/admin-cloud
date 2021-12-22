@@ -10,8 +10,7 @@ import lombok.Data;
 import ${voTemplate.superClassCompleteName};
 import lombok.EqualsAndHashCode;
 </#if>
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 /**
  * <p>
  * ${table.comment!}
@@ -23,7 +22,7 @@ import io.swagger.annotations.ApiModelProperty;
 <#if entityLombokModel>
 @Data
 </#if>
-@ApiModel(value = "${table.comment!}", description = "${table.comment!}展示层")
+@Schema(name = "${table.comment!}", description = "${table.comment!}展示层")
 <#if voTemplate.superClassCompleteName??>
 @EqualsAndHashCode(callSuper = true)
 public class ${voTemplate.className} extends ${voTemplate.superClassSimpleName}{
@@ -43,7 +42,7 @@ public class ${voTemplate.className} {
      * ${field.comment}
      */
     </#if>
-    @ApiModelProperty(value = "${field.comment!}")
+    @Schema(description = "${field.comment!}")
     private ${field.propertyType} ${field.propertyName};
     </#if>
 </#list>

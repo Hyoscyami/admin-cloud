@@ -92,6 +92,8 @@ public abstract class BaseServiceImpl<M extends IService<T>, T extends BaseEntit
     T entity = this.checkRemove(id);
     // 删除预处理
     this.preRemove(entity);
+    // 逻辑删除
+    manager.removeById(entity);
   }
 
   /**
@@ -202,7 +204,8 @@ public abstract class BaseServiceImpl<M extends IService<T>, T extends BaseEntit
    */
   @Override
   public Page<BaseVO> page(BaseQueryReq req) {
-    req.calculateOffset();
+    // 分页预处理
+    this.prePage(req);
     Long count = this.countVO(req);
     if (count == 0) {
       return PageUtils.emptyDataPage();
@@ -213,6 +216,14 @@ public abstract class BaseServiceImpl<M extends IService<T>, T extends BaseEntit
     return page;
   }
 
+  /**
+   * 分页预处理
+   *
+   * @param req
+   */
+  protected void prePage(BaseQueryReq req) {
+    req.calculateOffset();
+  }
   /**
    * vo列表
    *

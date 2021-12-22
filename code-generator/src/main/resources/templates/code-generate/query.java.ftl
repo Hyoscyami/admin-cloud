@@ -10,8 +10,8 @@ import lombok.Data;
 import ${queryTemplateDto.superClassCompleteName};
 import lombok.EqualsAndHashCode;
 </#if>
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 /**
  * <p>
  * ${table.comment!}
@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiModelProperty;
 <#if entityLombokModel>
 @Data
 </#if>
-@ApiModel(value = "${table.comment!}", description = "查询${table.comment!}")
+@Schema(name = "${table.comment!}", description = "查询${table.comment!}")
 <#if queryTemplateDto.superClassCompleteName??>
 @EqualsAndHashCode(callSuper = true)
 public class ${queryTemplateDto.className} extends ${queryTemplateDto.superClassSimpleName}{
@@ -43,7 +43,7 @@ public class ${queryTemplateDto.className} {
      * ${field.comment}
      */
     </#if>
-    @ApiModelProperty(value = "${field.comment!}")
+    @Schema(description = "${field.comment!}")
     private ${field.propertyType} ${field.propertyName};
     </#if>
 </#list>

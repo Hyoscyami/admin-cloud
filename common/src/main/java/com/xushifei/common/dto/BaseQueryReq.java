@@ -27,6 +27,8 @@ public class BaseQueryReq {
   protected List<Integer> status;
   /** 名称 */
   protected String name;
+  /** 租户id */
+  protected Long tenantId;
   /**
    * 需要分页
    *

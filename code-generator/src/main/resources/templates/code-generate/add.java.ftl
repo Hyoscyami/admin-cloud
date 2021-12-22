@@ -1,13 +1,12 @@
 package ${package.Entity};
 
-<#list table.importPackages as pkg>
-import ${pkg};
-</#list>
 <#if entityLombokModel>
 import lombok.Data;
 </#if>
-import io.swagger.v3.oas.annotations.media.Schema;
-
+<#if addTemplateDto.superClassCompleteName??>
+import ${addTemplateDto.superClassCompleteName};
+import lombok.EqualsAndHashCode;
+</#if>
 /**
  * <p>
  * ${table.comment!}
@@ -19,7 +18,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 <#if entityLombokModel>
 @Data
 </#if>
-@Schema(name = "${table.comment!}", description = "新增${table.comment!}")
 <#if addTemplateDto.superClassCompleteName??>
 @EqualsAndHashCode(callSuper = true)
 public class ${addTemplateDto.className} extends ${addTemplateDto.superClassSimpleName}{
@@ -39,7 +37,6 @@ public class ${addTemplateDto.className} {
      * ${field.comment}
      */
     </#if>
-    @Schema(description = "${field.comment!}")
     private ${field.propertyType} ${field.propertyName};
     </#if>
 </#list>

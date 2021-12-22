@@ -6,7 +6,4 @@ package com.xushifei.common.dto;
  * @author xushifei
  * @since 2021/12/18
  */
-public class BaseUpdateReq {
-  /** id */
-  protected Long id;
-}
+public class BaseUpdateReq {}

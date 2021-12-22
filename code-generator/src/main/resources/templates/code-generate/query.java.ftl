@@ -1,8 +1,5 @@
 package ${package.Entity};
 
-<#list table.importPackages as pkg>
-import ${pkg};
-</#list>
 <#if entityLombokModel>
 import lombok.Data;
 </#if>
@@ -10,7 +7,6 @@ import lombok.Data;
 import ${queryTemplateDto.superClassCompleteName};
 import lombok.EqualsAndHashCode;
 </#if>
-import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * <p>
@@ -23,7 +19,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 <#if entityLombokModel>
 @Data
 </#if>
-@Schema(name = "${table.comment!}", description = "查询${table.comment!}")
 <#if queryTemplateDto.superClassCompleteName??>
 @EqualsAndHashCode(callSuper = true)
 public class ${queryTemplateDto.className} extends ${queryTemplateDto.superClassSimpleName}{
@@ -43,7 +38,6 @@ public class ${queryTemplateDto.className} {
      * ${field.comment}
      */
     </#if>
-    @Schema(description = "${field.comment!}")
     private ${field.propertyType} ${field.propertyName};
     </#if>
 </#list>

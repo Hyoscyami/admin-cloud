@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.querys.MySqlQuery;
 import com.baomidou.mybatisplus.generator.keywords.MySqlKeyWordsHandler;
+import com.xushifei.common.dto.BaseAddReq;
+import com.xushifei.common.dto.BaseUpdateReq;
 import com.xushifei.common.entity.BaseEntity;
 import com.xushifei.common.dto.BaseQueryReq;
 import com.xushifei.common.vo.BaseVO;
@@ -47,7 +49,7 @@ public class CodeGeneratorUtils {
 
   public static void main(String[] args) {
     GeneratorCodeConfig config = getDefaultGenerator("authorization.server", "authorization");
-    // config.setTableName("client");
+    config.setTableName("client");
     generateCode(config);
   }
 
@@ -171,6 +173,7 @@ public class CodeGeneratorUtils {
         Arrays.asList(
             "id",
             "name",
+            "tenantId",
             "createTime",
             "modifyTime",
             "creatorId",
@@ -189,6 +192,7 @@ public class CodeGeneratorUtils {
     CodeTemplateDTO dto = new CodeTemplateDTO();
     dto.setIgnoreColumns(
         Arrays.asList(
+            "tenantId",
             "deleted",
             "createTime",
             "modifyTime",
@@ -197,6 +201,8 @@ public class CodeGeneratorUtils {
             "creatorName",
             "modifierName"));
     dto.setClassName(String.format(CodeTemplateEnum.UPDATE_DTO_CLASS_NAME.getValue(), entityName));
+    dto.setSuperClassSimpleName(BaseUpdateReq.class.getSimpleName());
+    dto.setSuperClassCompleteName(BaseUpdateReq.class.getName());
     return dto;
   }
   /**
@@ -210,6 +216,7 @@ public class CodeGeneratorUtils {
     dto.setIgnoreColumns(
         Arrays.asList(
             "id",
+            "tenantId",
             "deleted",
             "createTime",
             "modifyTime",
@@ -218,6 +225,8 @@ public class CodeGeneratorUtils {
             "creatorName",
             "modifierName"));
     dto.setClassName(String.format(CodeTemplateEnum.ADD_DTO_CLASS_NAME.getValue(), entityName));
+    dto.setSuperClassSimpleName(BaseAddReq.class.getSimpleName());
+    dto.setSuperClassCompleteName(BaseAddReq.class.getName());
     return dto;
   }
 
@@ -289,7 +298,7 @@ public class CodeGeneratorUtils {
     generatorCodeConfig.setDriverName("com.mysql.cj.jdbc.Driver");
     generatorCodeConfig.setDataSourceUrl(String.format(DATA_SOURCE_URL, databaseName));
     generatorCodeConfig.setDataSourceUserName("root");
-    generatorCodeConfig.setDataSourcePassword("");
+    generatorCodeConfig.setDataSourcePassword("Root@123");
     generatorCodeConfig.setModuleName("");
     generatorCodeConfig.setParentPackageName("com.xushifei." + packageName);
     return generatorCodeConfig;

@@ -16,6 +16,14 @@ import org.springframework.context.annotation.Configuration;
 public class SwaggerProperties {
   /** 是否开启swagger */
   private Boolean enable;
-  /** controller base package */
-  private String controller;
+  /** 标题 */
+  private String title;
+  /** 描述 */
+  private String description;
+  /** 版本 */
+  private String version = "1.0";
+  /** 许可协议名称 */
+  private String licenseName = "Apache 2.0";
+  /** 许可协议地址 */
+  private String licenseUrl = "https://www.apache.org/";
 }

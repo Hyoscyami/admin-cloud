@@ -60,7 +60,4 @@ public class QueryClientReq extends BaseQueryReq {
 
   /** 编码 */
   private String code;
-
-  /** 是否有效，1：有效，0：无效 */
-  private Integer status;
 }

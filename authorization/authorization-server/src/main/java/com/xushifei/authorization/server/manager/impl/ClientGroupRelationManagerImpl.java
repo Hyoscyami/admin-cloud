@@ -2,7 +2,7 @@ package com.xushifei.authorization.server.manager.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xushifei.authorization.server.entity.ClientGroupRelation;
-import com.xushifei.authorization.server.manager.IClientGroupRelationManager;
+import com.xushifei.authorization.server.manager.ClientGroupRelationManager;
 import com.xushifei.authorization.server.mapper.ClientGroupRelationMapper;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +13,6 @@ import org.springframework.stereotype.Service;
  * @since 2021-12-15
  */
 @Service
-public class ClientGroupRelationManager
+public class ClientGroupRelationManagerImpl
     extends ServiceImpl<ClientGroupRelationMapper, ClientGroupRelation>
-    implements IClientGroupRelationManager {}
+    implements ClientGroupRelationManager {}

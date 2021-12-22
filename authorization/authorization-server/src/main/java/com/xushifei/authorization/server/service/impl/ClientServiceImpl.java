@@ -3,14 +3,19 @@ package com.xushifei.authorization.server.service.impl;
 import com.xushifei.authorization.server.entity.Client;
 import com.xushifei.authorization.server.entity.Scope;
 import com.xushifei.authorization.server.entity.ScopeGroup;
-import com.xushifei.authorization.server.manager.IScopeManager;
-import com.xushifei.authorization.server.manager.impl.ClientManager;
-import com.xushifei.authorization.server.manager.impl.ScopeGroupManager;
+import com.xushifei.authorization.server.manager.ClientManager;
+import com.xushifei.authorization.server.manager.ScopeManager;
+import com.xushifei.authorization.server.manager.impl.ScopeGroupManagerImpl;
 import com.xushifei.authorization.server.service.ClientService;
+import com.xushifei.authorization.server.vo.ClientVO;
+import com.xushifei.common.dto.BaseAddReq;
+import com.xushifei.common.dto.BaseUpdateReq;
 import com.xushifei.common.service.impl.BaseServiceImpl;
 import com.xushifei.common.utils.AssertUtils;
+import com.xushifei.common.vo.BaseVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -29,8 +34,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ClientServiceImpl extends BaseServiceImpl<ClientManager, Client>
     implements ClientService {
-  private final ScopeGroupManager scopeGroupSupport;
-  private final IScopeManager scopeManager;
+  private final ScopeGroupManagerImpl scopeGroupSupport;
+  private final ScopeManager scopeManager;
 
   /**
    * 根据客户端ID查询权限列表
@@ -53,5 +58,74 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientManager, Client>
     }
     return scopeManager.listByGroupIds(
         scopeGroups.stream().map(ScopeGroup::getId).collect(Collectors.toList()));
+  }
+
+  /**
+   * 新增请求转实体
+   *
+   * @param req
+   * @return
+   */
+  @Override
+  public Client convertAddReqToEntity(BaseAddReq req) {
+    Client client = new Client();
+    BeanUtils.copyProperties(req, client);
+    return client;
+  }
+
+  /**
+   * 更新请求转entity
+   *
+   * @param req
+   * @return
+   */
+  @Override
+  protected Client convertUpdateReqToEntity(BaseUpdateReq req) {
+    Client client = new Client();
+    BeanUtils.copyProperties(req, client);
+    return client;
+  }
+
+  /**
+   * entity转VO
+   *
+   * @param entity
+   * @return
+   */
+  @Override
+  protected BaseVO convertEntityToVO(Client entity) {
+    ClientVO vo = new ClientVO();
+    BeanUtils.copyProperties(entity, vo);
+    return vo;
+  }
+
+  /**
+   * 入库预处理
+   *
+   * @param entity
+   */
+  @Override
+  protected void preSave(Client entity) {
+    entity.assignCreateInfo();
+  }
+
+  /**
+   * 删除预处理
+   *
+   * @param entity
+   */
+  @Override
+  protected void preRemove(Client entity) {
+    entity.assignDelInfo();
+  }
+
+  /**
+   * 更新预处理
+   *
+   * @param entity
+   */
+  @Override
+  protected void preUpdate(Client entity) {
+    entity.assignModifyInfo();
   }
 }

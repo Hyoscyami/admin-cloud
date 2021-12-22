@@ -11,7 +11,7 @@ import java.util.List;
  * @author xushifei
  * @since 2021-12-15
  */
-public interface IScopeManager extends IService<Scope> {
+public interface ScopeManager extends IService<Scope> {
   /**
    * 根据权限组ID查询权限列表
    *

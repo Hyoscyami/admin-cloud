@@ -62,20 +62,19 @@ public class BaseEntity {
   protected String note;
 
   /** 新增时初始化信息 */
-  protected void assignCreateInfo() {
+  public void assignCreateInfo() {
     this.deleted = false;
     this.status = StatusEnum.STATUS_ENABLE.getValue();
     this.createTime = LocalDateTime.now();
   }
 
   /** 更新时初始化信息 */
-  protected void assignModifyInfo() {
+  public void assignModifyInfo() {
     this.modifyTime = LocalDateTime.now();
   }
 
   /** 删除时初始化信息 */
-  protected void assignDelInfo() {
+  public void assignDelInfo() {
     this.modifyTime = LocalDateTime.now();
-    this.deleted = true;
   }
 }

@@ -1,7 +1,7 @@
 package com.xushifei.authorization.server.manager.impl;
 
 import com.xushifei.authorization.server.entity.ScopeGroupRelation;
-import com.xushifei.authorization.server.manager.IScopeGroupRelationManager;
+import com.xushifei.authorization.server.manager.ScopeGroupRelationManager;
 import com.xushifei.authorization.server.mapper.ScopeGroupRelationMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -13,6 +13,6 @@ import org.springframework.stereotype.Service;
  * @since 2021-12-15
  */
 @Service
-public class ScopeGroupRelationManager
+public class ScopeGroupRelationManagerImpl
     extends ServiceImpl<ScopeGroupRelationMapper, ScopeGroupRelation>
-    implements IScopeGroupRelationManager {}
+    implements ScopeGroupRelationManager {}

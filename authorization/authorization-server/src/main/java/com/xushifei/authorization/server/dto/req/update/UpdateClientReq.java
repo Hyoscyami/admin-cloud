@@ -1,12 +1,8 @@
 package com.xushifei.authorization.server.dto.req.update;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.xushifei.common.dto.BaseUpdateReq;
-import com.xushifei.common.entity.BaseEntity;
-import java.time.LocalDateTime;
 import lombok.Data;
+import com.xushifei.common.dto.BaseUpdateReq;
 import lombok.EqualsAndHashCode;
-
 import javax.validation.constraints.NotNull;
 /**
  * 客户端基本信息
@@ -17,6 +13,13 @@ import javax.validation.constraints.NotNull;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class UpdateClientReq extends BaseUpdateReq {
+  /** 主键 */
+  @NotNull(message = "id不能为空")
+  private Long id;
+  /** 排序，默认为1 */
+  private Integer sort;
+  /** 备注 */
+  private String note;
   /** 客户端id */
   private String clientId;
   /** 客户端秘钥 */
@@ -54,6 +57,4 @@ public class UpdateClientReq extends BaseUpdateReq {
   private String code;
   /** 是否有效，1：有效，0：无效 */
   private Integer status;
-  /** 租户id */
-  private Long tenantId;
 }

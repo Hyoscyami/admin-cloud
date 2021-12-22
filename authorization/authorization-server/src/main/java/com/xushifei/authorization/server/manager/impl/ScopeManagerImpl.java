@@ -1,9 +1,9 @@
 package com.xushifei.authorization.server.manager.impl;
 
-import com.xushifei.authorization.server.entity.Scope;
-import com.xushifei.authorization.server.manager.IScopeManager;
-import com.xushifei.authorization.server.mapper.ScopeMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.xushifei.authorization.server.entity.Scope;
+import com.xushifei.authorization.server.manager.ScopeManager;
+import com.xushifei.authorization.server.mapper.ScopeMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2021-12-15
  */
 @Service
-public class ScopeManager extends ServiceImpl<ScopeMapper, Scope> implements IScopeManager {
+public class ScopeManagerImpl extends ServiceImpl<ScopeMapper, Scope> implements ScopeManager {
   /**
    * 根据权限组ID查询权限列表
    *

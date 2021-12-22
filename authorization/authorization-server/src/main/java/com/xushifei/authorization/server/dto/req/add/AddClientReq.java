@@ -1,8 +1,5 @@
 package com.xushifei.authorization.server.dto.req.add;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.xushifei.common.entity.BaseEntity;
-import java.time.LocalDateTime;
 import lombok.Data;
 import com.xushifei.common.dto.BaseAddReq;
 import lombok.EqualsAndHashCode;
@@ -68,7 +65,4 @@ public class AddClientReq extends BaseAddReq {
 
   /** 是否有效，1：有效，0：无效 */
   private Integer status;
-
-  /** 租户id */
-  private Long tenantId;
 }

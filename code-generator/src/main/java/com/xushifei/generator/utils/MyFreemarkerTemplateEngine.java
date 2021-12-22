@@ -98,13 +98,15 @@ public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
   private void createVO(TableInfo tableInfo, Map<String, Object> objectMap) {
     String className =
         String.format(CodeTemplateEnum.VO_CLASS_NAME.getValue(), tableInfo.getEntityName());
-    String fileName =
-        objectMap.get(CodeTemplateEnum.BASE_OUT_PUT_FILE_PATH.getValue())
-            + File.separator
-            + "vo"
-            + File.separator
-            + className
-            + ".java";
+    // 生成目录
+    String filePath =
+        String.format(
+            CodeTemplateEnum.VO_FILE_PATH.getValue(),
+            objectMap.get(CodeTemplateEnum.BASE_OUT_PUT_FILE_PATH.getValue()),
+            File.separator,
+            File.separator);
+    // 全路径，包含文件名称
+    String fileName = String.format(CodeTemplateEnum.FILE_NAME.getValue(), filePath, className);
     this.outputFile(new File(fileName), objectMap, CodeTemplateEnum.VO_TEMPLATE_PATH.getValue());
   }
   /**
@@ -116,15 +118,16 @@ public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
   private void createQueryDTO(TableInfo tableInfo, Map<String, Object> objectMap) {
     String className =
         String.format(CodeTemplateEnum.QUERY_DTO_CLASS_NAME.getValue(), tableInfo.getEntityName());
-    String fileName =
-        objectMap.get(CodeTemplateEnum.BASE_OUT_PUT_FILE_PATH.getValue())
-            + File.separator
-            + "dto"
-            + File.separator
-            + "query"
-            + File.separator
-            + className
-            + ".java";
+    // 生成目录
+    String filePath =
+        String.format(
+            CodeTemplateEnum.QUERY_FILE_PATH.getValue(),
+            objectMap.get(CodeTemplateEnum.BASE_OUT_PUT_FILE_PATH.getValue()),
+            File.separator,
+            File.separator,
+            File.separator);
+    // 全路径，包含文件名称
+    String fileName = String.format(CodeTemplateEnum.FILE_NAME.getValue(), filePath, className);
     this.outputFile(
         new File(fileName), objectMap, CodeTemplateEnum.QUERY_DTO_TEMPLATE_PATH.getValue());
   }
@@ -138,15 +141,16 @@ public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
   private void createAddDTO(TableInfo tableInfo, Map<String, Object> objectMap) {
     String className =
         String.format(CodeTemplateEnum.ADD_DTO_CLASS_NAME.getValue(), tableInfo.getEntityName());
-    String fileName =
-        objectMap.get(CodeTemplateEnum.BASE_OUT_PUT_FILE_PATH.getValue())
-            + File.separator
-            + "dto"
-            + File.separator
-            + "add"
-            + File.separator
-            + className
-            + ".java";
+    // 生成目录
+    String filePath =
+        String.format(
+            CodeTemplateEnum.ADD_FILE_PATH.getValue(),
+            objectMap.get(CodeTemplateEnum.BASE_OUT_PUT_FILE_PATH.getValue()),
+            File.separator,
+            File.separator,
+            File.separator);
+    // 全路径，包含文件名称
+    String fileName = String.format(CodeTemplateEnum.FILE_NAME.getValue(), filePath, className);
     this.outputFile(
         new File(fileName), objectMap, CodeTemplateEnum.ADD_DTO_TEMPLATE_PATH.getValue());
   }
@@ -159,15 +163,16 @@ public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
   private void createUpdateDTO(TableInfo tableInfo, Map<String, Object> objectMap) {
     String className =
         String.format(CodeTemplateEnum.UPDATE_DTO_CLASS_NAME.getValue(), tableInfo.getEntityName());
-    String fileName =
-        objectMap.get(CodeTemplateEnum.BASE_OUT_PUT_FILE_PATH.getValue())
-            + File.separator
-            + "dto"
-            + File.separator
-            + "update"
-            + File.separator
-            + className
-            + ".java";
+    // 生成目录
+    String filePath =
+        String.format(
+            CodeTemplateEnum.UPDATE_FILE_PATH.getValue(),
+            objectMap.get(CodeTemplateEnum.BASE_OUT_PUT_FILE_PATH.getValue()),
+            File.separator,
+            File.separator,
+            File.separator);
+    // 全路径，包含文件名称
+    String fileName = String.format(CodeTemplateEnum.FILE_NAME.getValue(), filePath, className);
     this.outputFile(
         new File(fileName), objectMap, CodeTemplateEnum.UPDATE_DTO_TEMPLATE_PATH.getValue());
   }

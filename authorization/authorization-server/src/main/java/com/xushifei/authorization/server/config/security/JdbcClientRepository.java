@@ -3,7 +3,7 @@ package com.xushifei.authorization.server.config.security;
 import com.xushifei.authorization.server.entity.Client;
 import com.xushifei.authorization.server.entity.Scope;
 import com.xushifei.authorization.server.service.ClientService;
-import com.xushifei.authorization.server.manager.IClientManager;
+import com.xushifei.authorization.server.manager.ClientManager;
 import com.xushifei.common.enums.ApiCodeEnum;
 import com.xushifei.common.exception.BusinessException;
 import com.xushifei.common.utils.ConditionUtils;
@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class JdbcClientRepository implements RegisteredClientRepository {
   private final ClientService clientService;
-  private final IClientManager clientManager;
+  private final ClientManager clientManager;
   /**
    * Saves the registered client.
    *

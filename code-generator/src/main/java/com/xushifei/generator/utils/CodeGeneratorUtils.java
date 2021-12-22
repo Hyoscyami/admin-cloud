@@ -11,7 +11,8 @@ import com.xushifei.common.entity.BaseEntity;
 import com.xushifei.common.dto.BaseQueryReq;
 import com.xushifei.common.vo.BaseVO;
 import com.xushifei.generator.config.GeneratorCodeConfig;
-import com.xushifei.generator.dto.CodeTemplateDTO;
+import com.xushifei.generator.dto.BaseCodeTemplateDTO;
+import com.xushifei.generator.dto.ControllerTemplateDTO;
 import com.xushifei.generator.enums.CodeTemplateEnum;
 import org.springframework.util.StringUtils;
 
@@ -124,10 +125,13 @@ public class CodeGeneratorUtils {
     builder
         .beforeOutputFile(
             ((tableInfo, objectMap) -> {
-              objectMap.put("addTemplateDto", getAddTemplateDTO(tableInfo.getEntityName()));
-              objectMap.put("updateTemplateDto", getUpdateTemplateDTO(tableInfo.getEntityName()));
-              objectMap.put("queryTemplateDto", getQueryTemplateDTO(tableInfo.getEntityName()));
+              objectMap.put("addTemplateDTO", getAddTemplateDTO(tableInfo.getEntityName()));
+              objectMap.put("updateTemplateDTO", getUpdateTemplateDTO(tableInfo.getEntityName()));
+              objectMap.put("queryTemplateDTO", getQueryTemplateDTO(tableInfo.getEntityName()));
               objectMap.put("voTemplate", getVOTemplate(tableInfo.getEntityName()));
+              objectMap.put(
+                  "controllerDTO",
+                  getControllerTemplate(tableInfo.getEntityName(), generatorCodeConfig));
               objectMap.put(
                   "baseOutPutFilePath",
                   generatorCodeConfig.getClassOutPutFilePath()
@@ -144,13 +148,49 @@ public class CodeGeneratorUtils {
   }
 
   /**
+   * 获取controller代码生成模板
+   *
+   * @param entityName
+   * @return
+   */
+  private static ControllerTemplateDTO getControllerTemplate(
+      final String entityName, GeneratorCodeConfig generatorCodeConfig) {
+    ControllerTemplateDTO dto = new ControllerTemplateDTO();
+    String serviceCompleteName =
+        String.format(
+            CodeTemplateEnum.IMPORT_SERVICE_PATH.getValue(),
+            generatorCodeConfig.getParentPackageName(),
+            entityName);
+    dto.setServiceClassCompleteName(serviceCompleteName);
+    String addReqCompleteName =
+        String.format(
+            CodeTemplateEnum.IMPORT_ADD_PATH.getValue(),
+            generatorCodeConfig.getParentPackageName(),
+            entityName);
+    dto.setAddReqCompleteName(addReqCompleteName);
+    String updateReqCompleteName =
+        String.format(
+            CodeTemplateEnum.IMPORT_UPDATE_PATH.getValue(),
+            generatorCodeConfig.getParentPackageName(),
+            entityName);
+    dto.setAddReqCompleteName(updateReqCompleteName);
+    String queryReqCompleteName =
+        String.format(
+            CodeTemplateEnum.IMPORT_QUERY_PATH.getValue(),
+            generatorCodeConfig.getParentPackageName(),
+            entityName);
+    dto.setAddReqCompleteName(queryReqCompleteName);
+    return dto;
+  }
+
+  /**
    * 获取vo代码生成模板
    *
    * @param entityName
    * @return
    */
-  private static CodeTemplateDTO getVOTemplate(final String entityName) {
-    CodeTemplateDTO dto = new CodeTemplateDTO();
+  private static BaseCodeTemplateDTO getVOTemplate(final String entityName) {
+    BaseCodeTemplateDTO dto = new BaseCodeTemplateDTO();
     dto.setSuperClassCompleteName(BaseVO.class.getName());
     dto.setSuperClassSimpleName(BaseVO.class.getSimpleName());
     dto.setClassName(String.format(CodeTemplateEnum.VO_CLASS_NAME.getValue(), entityName));
@@ -164,8 +204,8 @@ public class CodeGeneratorUtils {
    * @param entityName
    * @return
    */
-  private static CodeTemplateDTO getQueryTemplateDTO(final String entityName) {
-    CodeTemplateDTO dto = new CodeTemplateDTO();
+  private static BaseCodeTemplateDTO getQueryTemplateDTO(final String entityName) {
+    BaseCodeTemplateDTO dto = new BaseCodeTemplateDTO();
     dto.setSuperClassCompleteName(BaseQueryReq.class.getName());
     dto.setSuperClassSimpleName(BaseQueryReq.class.getSimpleName());
     dto.setClassName(String.format(CodeTemplateEnum.QUERY_DTO_CLASS_NAME.getValue(), entityName));
@@ -188,8 +228,8 @@ public class CodeGeneratorUtils {
    * @param entityName
    * @return
    */
-  private static CodeTemplateDTO getUpdateTemplateDTO(final String entityName) {
-    CodeTemplateDTO dto = new CodeTemplateDTO();
+  private static BaseCodeTemplateDTO getUpdateTemplateDTO(final String entityName) {
+    BaseCodeTemplateDTO dto = new BaseCodeTemplateDTO();
     dto.setIgnoreColumns(
         Arrays.asList(
             "tenantId",
@@ -211,8 +251,8 @@ public class CodeGeneratorUtils {
    * @param entityName
    * @return
    */
-  private static CodeTemplateDTO getAddTemplateDTO(final String entityName) {
-    CodeTemplateDTO dto = new CodeTemplateDTO();
+  private static BaseCodeTemplateDTO getAddTemplateDTO(final String entityName) {
+    BaseCodeTemplateDTO dto = new BaseCodeTemplateDTO();
     dto.setIgnoreColumns(
         Arrays.asList(
             "id",

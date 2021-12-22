@@ -11,7 +11,7 @@ import java.util.List;
  * @author xushifei
  * @since 2021-12-15
  */
-public interface IScopeGroupManager extends IService<ScopeGroup> {
+public interface ScopeGroupManager extends IService<ScopeGroup> {
   /**
    * 根据clientId查询分组
    *

@@ -3,8 +3,8 @@ package ${package.Entity};
 <#if entityLombokModel>
 import lombok.Data;
 </#if>
-<#if addTemplateDto.superClassCompleteName??>
-import ${addTemplateDto.superClassCompleteName};
+<#if addTemplateDTO.superClassCompleteName??>
+import ${addTemplateDTO.superClassCompleteName};
 import lombok.EqualsAndHashCode;
 </#if>
 /**
@@ -18,15 +18,15 @@ import lombok.EqualsAndHashCode;
 <#if entityLombokModel>
 @Data
 </#if>
-<#if addTemplateDto.superClassCompleteName??>
+<#if addTemplateDTO.superClassCompleteName??>
 @EqualsAndHashCode(callSuper = true)
-public class ${addTemplateDto.className} extends ${addTemplateDto.superClassSimpleName}{
+public class ${addTemplateDTO.className} extends ${addTemplateDTO.superClassSimpleName}{
 <#else>
-public class ${addTemplateDto.className} {
+public class ${addTemplateDTO.className} {
 </#if>
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>
-    <#if addTemplateDto.ignoreColumns?seq_contains(field.propertyName)>
+    <#if addTemplateDTO.ignoreColumns?seq_contains(field.propertyName)>
     <#else>
     <#if field.keyFlag>
         <#assign keyPropertyName="${field.propertyName}"/>

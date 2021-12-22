@@ -9,4 +9,4 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author xushifei
  * @since 2021-12-15
  */
-public interface IScopeGroupRelationManager extends IService<ScopeGroupRelation> {}
+public interface ScopeGroupRelationManager extends IService<ScopeGroupRelation> {}

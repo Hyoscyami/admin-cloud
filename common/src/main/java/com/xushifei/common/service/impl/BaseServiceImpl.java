@@ -20,7 +20,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 公共父类
+ * 公共父类 不知道这么抽象会不会很沙雕，感觉有点不习惯，为了更方便的生成crud代码，子类service更清爽，试下这种沙雕设计，不合适再删了
  *
  * @author xushifei
  * @since 2021/12/18
@@ -41,16 +41,14 @@ public abstract class BaseServiceImpl<M extends IService<T>, T extends BaseEntit
    * @param req
    * @return
    */
-  protected T convertAddReqToEntity(BaseAddReq req) {
-    throw new BusinessException(ApiCodeEnum.SYSTEM_ERROR.getCode(), "请子类重写新增时请求转换成实体接口");
-  }
+  protected abstract T convertAddReqToEntity(BaseAddReq req);
 
   /**
    * 入库预处理
    *
    * @param entity
    */
-  protected void preSave(T entity) {}
+  protected abstract void preSave(T entity);
 
   /**
    * 保存实体
@@ -110,7 +108,7 @@ public abstract class BaseServiceImpl<M extends IService<T>, T extends BaseEntit
    *
    * @param entity
    */
-  protected void preRemove(T entity) {}
+  protected abstract void preRemove(T entity);
 
   /**
    * 删除
@@ -155,7 +153,7 @@ public abstract class BaseServiceImpl<M extends IService<T>, T extends BaseEntit
    *
    * @param entity
    */
-  protected void preUpdate(T entity) {}
+  protected abstract void preUpdate(T entity);
 
   /**
    * 更新请求转entity
@@ -163,9 +161,7 @@ public abstract class BaseServiceImpl<M extends IService<T>, T extends BaseEntit
    * @param req
    * @return
    */
-  protected T convertUpdateReqToEntity(BaseUpdateReq req) {
-    throw new BusinessException(ApiCodeEnum.SYSTEM_ERROR.getCode(), "请子类重写更新时请求转换成实体接口");
-  }
+  protected abstract T convertUpdateReqToEntity(BaseUpdateReq req);
 
   /**
    * 校验是否能更新
@@ -183,7 +179,7 @@ public abstract class BaseServiceImpl<M extends IService<T>, T extends BaseEntit
   @Override
   public BaseVO getVOById(Serializable id) {
     T entity = manager.getById(id);
-    return null;
+    return this.convertEntityToVO(entity);
   }
 
   /**
@@ -192,9 +188,7 @@ public abstract class BaseServiceImpl<M extends IService<T>, T extends BaseEntit
    * @param entity
    * @return
    */
-  protected BaseVO convertEntityToVO(T entity) {
-    throw new BusinessException(ApiCodeEnum.SYSTEM_ERROR.getCode(), "请子类重写详情时请求转换成实体接口");
-  }
+  protected abstract BaseVO convertEntityToVO(T entity);
 
   /**
    * 分页

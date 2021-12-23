@@ -5,13 +5,9 @@ import ${controllerDTO.serviceClassCompleteName!};
 import ${controllerDTO.addReqCompleteName!};
 import ${controllerDTO.updateReqCompleteName!};
 import ${controllerDTO.queryReqCompleteName!};
-import com.xushifei.authorization.server.dto.req.add.AddClientReq;
-import com.xushifei.authorization.server.dto.req.query.QueryClientReq;
-import com.xushifei.authorization.server.dto.req.update.UpdateClientReq;
-import com.xushifei.authorization.server.service.ClientService;
-import com.xushifei.common.dto.ApiResponse;
-import com.xushifei.common.utils.ResponseUtils;
-import com.xushifei.common.vo.BaseVO;
+import ${controllerDTO.responseCompleteName!};
+import ${controllerDTO.responseUtilCompleteName!};
+import ${controllerDTO.baseVOCompleteName!};
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 <#if restControllerStyle>
@@ -39,13 +35,13 @@ import ${superControllerClassPackage};
 <#if kotlin>
 class ${table.controllerName}<#if superControllerClass??> : ${superControllerClass}()</#if>
 <#else>
-    <#if superControllerClass??>
+<#if superControllerClass??>
 public class ${table.controllerName} extends ${superControllerClass} {
-    <#else>
+<#else>
 @RequiredArgsConstructor
 public class ${table.controllerName} {
-    </#if>
-    private final ${controllerDTO.serviceClassName} ${controllerDTO.serviceName};
+</#if>
+  private final ${controllerDTO.serviceClassName} ${controllerDTO.serviceName};
 
   /**
    * 分页查询

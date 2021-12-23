@@ -5,10 +5,12 @@ import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.querys.MySqlQuery;
 import com.baomidou.mybatisplus.generator.keywords.MySqlKeyWordsHandler;
+import com.xushifei.common.dto.ApiResponse;
 import com.xushifei.common.dto.BaseAddReq;
 import com.xushifei.common.dto.BaseUpdateReq;
 import com.xushifei.common.entity.BaseEntity;
 import com.xushifei.common.dto.BaseQueryReq;
+import com.xushifei.common.utils.ResponseUtils;
 import com.xushifei.common.vo.BaseVO;
 import com.xushifei.generator.config.GeneratorCodeConfig;
 import com.xushifei.generator.dto.BaseCodeTemplateDTO;
@@ -125,15 +127,23 @@ public class CodeGeneratorUtils {
     builder
         .beforeOutputFile(
             ((tableInfo, objectMap) -> {
-              objectMap.put("addTemplateDTO", getAddTemplateDTO(tableInfo.getEntityName()));
-              objectMap.put("updateTemplateDTO", getUpdateTemplateDTO(tableInfo.getEntityName()));
-              objectMap.put("queryTemplateDTO", getQueryTemplateDTO(tableInfo.getEntityName()));
-              objectMap.put("voTemplate", getVOTemplate(tableInfo.getEntityName()));
+              objectMap.put(
+                  "addTemplateDTO",
+                  getAddTemplateDTO(tableInfo.getEntityName(), generatorCodeConfig));
+              objectMap.put(
+                  "updateTemplateDTO",
+                  getUpdateTemplateDTO(tableInfo.getEntityName(), generatorCodeConfig));
+              objectMap.put(
+                  "queryTemplateDTO",
+                  getQueryTemplateDTO(tableInfo.getEntityName(), generatorCodeConfig));
+              objectMap.put(
+                  "voTemplateDTO", getVOTemplate(tableInfo.getEntityName(), generatorCodeConfig));
               objectMap.put(
                   "controllerDTO",
                   getControllerTemplate(tableInfo.getEntityName(), generatorCodeConfig));
+              objectMap.put("basePackageName", generatorCodeConfig.getParentPackageName());
               objectMap.put(
-                  "baseOutPutFilePath",
+                  CodeTemplateEnum.BASE_OUT_PUT_FILE_PATH.getValue(),
                   generatorCodeConfig.getClassOutPutFilePath()
                       + File.separator
                       + generatorCodeConfig
@@ -156,30 +166,46 @@ public class CodeGeneratorUtils {
   private static ControllerTemplateDTO getControllerTemplate(
       final String entityName, GeneratorCodeConfig generatorCodeConfig) {
     ControllerTemplateDTO dto = new ControllerTemplateDTO();
+    // service
     String serviceCompleteName =
         String.format(
             CodeTemplateEnum.IMPORT_SERVICE_PATH.getValue(),
             generatorCodeConfig.getParentPackageName(),
             entityName);
     dto.setServiceClassCompleteName(serviceCompleteName);
+    dto.setServiceClassName(
+        String.format(CodeTemplateEnum.SERVICE_CLASS_NAME.getValue(), entityName));
+    dto.setServiceName(StringUtils.uncapitalize(dto.getServiceClassName()));
+    // add req
     String addReqCompleteName =
         String.format(
             CodeTemplateEnum.IMPORT_ADD_PATH.getValue(),
             generatorCodeConfig.getParentPackageName(),
             entityName);
     dto.setAddReqCompleteName(addReqCompleteName);
+    dto.setAddReqSimpleName(
+        String.format(CodeTemplateEnum.ADD_DTO_CLASS_NAME.getValue(), entityName));
+    // update req
     String updateReqCompleteName =
         String.format(
             CodeTemplateEnum.IMPORT_UPDATE_PATH.getValue(),
             generatorCodeConfig.getParentPackageName(),
             entityName);
-    dto.setAddReqCompleteName(updateReqCompleteName);
+    dto.setUpdateReqCompleteName(updateReqCompleteName);
+    dto.setUpdateReqSimpleName(
+        String.format(CodeTemplateEnum.UPDATE_DTO_CLASS_NAME.getValue(), entityName));
+    // query req
     String queryReqCompleteName =
         String.format(
             CodeTemplateEnum.IMPORT_QUERY_PATH.getValue(),
             generatorCodeConfig.getParentPackageName(),
             entityName);
-    dto.setAddReqCompleteName(queryReqCompleteName);
+    dto.setQueryReqCompleteName(queryReqCompleteName);
+    dto.setQueryReqSimpleName(
+        String.format(CodeTemplateEnum.QUERY_DTO_CLASS_NAME.getValue(), entityName));
+    dto.setResponseUtilCompleteName(ResponseUtils.class.getName());
+    dto.setResponseCompleteName(ApiResponse.class.getName());
+    dto.setBaseVOCompleteName(BaseVO.class.getName());
     return dto;
   }
 
@@ -187,14 +213,20 @@ public class CodeGeneratorUtils {
    * 获取vo代码生成模板
    *
    * @param entityName
+   * @param generatorCodeConfig
    * @return
    */
-  private static BaseCodeTemplateDTO getVOTemplate(final String entityName) {
+  private static BaseCodeTemplateDTO getVOTemplate(
+      final String entityName, GeneratorCodeConfig generatorCodeConfig) {
     BaseCodeTemplateDTO dto = new BaseCodeTemplateDTO();
     dto.setSuperClassCompleteName(BaseVO.class.getName());
     dto.setSuperClassSimpleName(BaseVO.class.getSimpleName());
     dto.setClassName(String.format(CodeTemplateEnum.VO_CLASS_NAME.getValue(), entityName));
     dto.setIgnoreColumns(BASE_COLUMNS);
+    dto.setPackageName(
+        String.format(
+            CodeTemplateEnum.PACKAGE_VO_PATH.getValue(),
+            generatorCodeConfig.getParentPackageName()));
     return dto;
   }
 
@@ -202,9 +234,11 @@ public class CodeGeneratorUtils {
    * 初始化查询DTO
    *
    * @param entityName
+   * @param generatorCodeConfig
    * @return
    */
-  private static BaseCodeTemplateDTO getQueryTemplateDTO(final String entityName) {
+  private static BaseCodeTemplateDTO getQueryTemplateDTO(
+      final String entityName, GeneratorCodeConfig generatorCodeConfig) {
     BaseCodeTemplateDTO dto = new BaseCodeTemplateDTO();
     dto.setSuperClassCompleteName(BaseQueryReq.class.getName());
     dto.setSuperClassSimpleName(BaseQueryReq.class.getSimpleName());
@@ -212,6 +246,7 @@ public class CodeGeneratorUtils {
     dto.setIgnoreColumns(
         Arrays.asList(
             "id",
+            "status",
             "name",
             "tenantId",
             "createTime",
@@ -220,15 +255,21 @@ public class CodeGeneratorUtils {
             "modifierId",
             "creatorName",
             "modifierName"));
+    dto.setPackageName(
+        String.format(
+            CodeTemplateEnum.PACKAGE_QUERY_PATH.getValue(),
+            generatorCodeConfig.getParentPackageName()));
     return dto;
   }
   /**
    * 初始化更新DTO
    *
    * @param entityName
+   * @param generatorCodeConfig
    * @return
    */
-  private static BaseCodeTemplateDTO getUpdateTemplateDTO(final String entityName) {
+  private static BaseCodeTemplateDTO getUpdateTemplateDTO(
+      final String entityName, GeneratorCodeConfig generatorCodeConfig) {
     BaseCodeTemplateDTO dto = new BaseCodeTemplateDTO();
     dto.setIgnoreColumns(
         Arrays.asList(
@@ -243,15 +284,21 @@ public class CodeGeneratorUtils {
     dto.setClassName(String.format(CodeTemplateEnum.UPDATE_DTO_CLASS_NAME.getValue(), entityName));
     dto.setSuperClassSimpleName(BaseUpdateReq.class.getSimpleName());
     dto.setSuperClassCompleteName(BaseUpdateReq.class.getName());
+    dto.setPackageName(
+        String.format(
+            CodeTemplateEnum.PACKAGE_UPDATE_PATH.getValue(),
+            generatorCodeConfig.getParentPackageName()));
     return dto;
   }
   /**
    * 初始化新增DTO
    *
    * @param entityName
+   * @param generatorCodeConfig
    * @return
    */
-  private static BaseCodeTemplateDTO getAddTemplateDTO(final String entityName) {
+  private static BaseCodeTemplateDTO getAddTemplateDTO(
+      final String entityName, GeneratorCodeConfig generatorCodeConfig) {
     BaseCodeTemplateDTO dto = new BaseCodeTemplateDTO();
     dto.setIgnoreColumns(
         Arrays.asList(
@@ -267,6 +314,10 @@ public class CodeGeneratorUtils {
     dto.setClassName(String.format(CodeTemplateEnum.ADD_DTO_CLASS_NAME.getValue(), entityName));
     dto.setSuperClassSimpleName(BaseAddReq.class.getSimpleName());
     dto.setSuperClassCompleteName(BaseAddReq.class.getName());
+    dto.setPackageName(
+        String.format(
+            CodeTemplateEnum.PACKAGE_ADD_PATH.getValue(),
+            generatorCodeConfig.getParentPackageName()));
     return dto;
   }
 

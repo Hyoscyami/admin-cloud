@@ -1,10 +1,10 @@
-package ${package.Entity};
+package ${voTemplateDTO.packageName};
 
 <#if entityLombokModel>
 import lombok.Data;
 </#if>
-<#if voTemplate.superClassCompleteName??>
-import ${voTemplate.superClassCompleteName};
+<#if voTemplateDTO.superClassCompleteName??>
+import ${voTemplateDTO.superClassCompleteName};
 import lombok.EqualsAndHashCode;
 </#if>
 /**
@@ -18,15 +18,15 @@ import lombok.EqualsAndHashCode;
 <#if entityLombokModel>
 @Data
 </#if>
-<#if voTemplate.superClassCompleteName??>
+<#if voTemplateDTO.superClassCompleteName??>
 @EqualsAndHashCode(callSuper = true)
-public class ${voTemplate.className} extends ${voTemplate.superClassSimpleName}{
+public class ${voTemplateDTO.className} extends ${voTemplateDTO.superClassSimpleName}{
 <#else>
-public class ${voTemplate.className} {
+public class ${voTemplateDTO.className} {
 </#if>
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>
-    <#if voTemplate.ignoreColumns?seq_contains(field.propertyName)>
+    <#if voTemplateDTO.ignoreColumns?seq_contains(field.propertyName)>
     <#else>
     <#if field.keyFlag>
         <#assign keyPropertyName="${field.propertyName}"/>

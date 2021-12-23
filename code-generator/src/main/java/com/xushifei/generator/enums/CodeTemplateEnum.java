@@ -21,11 +21,17 @@ public enum CodeTemplateEnum {
   IMPORT_QUERY_PATH("%s.dto.req.query.Query%sReq"),
   IMPORT_UPDATE_PATH("%s.dto.req.update.Update%sReq"),
   IMPORT_SERVICE_PATH("%s.service.%sService"),
+  PACKAGE_SERVICE("%s.service"),
+  PACKAGE_ADD_PATH("%s.dto.req.add"),
+  PACKAGE_QUERY_PATH("%s.dto.req.query"),
+  PACKAGE_UPDATE_PATH("%s.dto.req.update"),
+  PACKAGE_VO_PATH("%s.vo"),
   /** 新增DTO类的模板名称 */
   ADD_DTO_CLASS_NAME("Add%sReq"),
   UPDATE_DTO_CLASS_NAME("Update%sReq"),
   QUERY_DTO_CLASS_NAME("Query%sReq"),
   VO_CLASS_NAME("%sVO"),
+  SERVICE_CLASS_NAME("%sService"),
   /** 生成类文件路径 */
   BASE_OUT_PUT_FILE_PATH("baseOutPutFilePath"),
   VO_FILE_PATH("%s%svo%s"),

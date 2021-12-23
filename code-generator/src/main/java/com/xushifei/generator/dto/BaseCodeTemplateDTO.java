@@ -20,4 +20,6 @@ public class BaseCodeTemplateDTO {
   private String className;
   /** 忽略字段 */
   private List<String> ignoreColumns;
+  /** package的包名 */
+  private String packageName;
 }

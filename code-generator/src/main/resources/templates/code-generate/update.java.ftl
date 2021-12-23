@@ -1,4 +1,4 @@
-package ${package.Entity};
+package ${updateTemplateDTO.packageName};
 
 <#if entityLombokModel>
 import lombok.Data;

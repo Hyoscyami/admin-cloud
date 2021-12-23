@@ -28,4 +28,10 @@ public class ControllerTemplateDTO {
   private String queryReqCompleteName;
   /** 查询请求，入参使用 */
   private String queryReqSimpleName;
+  /** 返回工具类完整路径，import使用 */
+  private String responseUtilCompleteName;
+  /** 基础响应类完整路径,import使用 */
+  private String responseCompleteName;
+  /** 基础VO完整路径，import使用 */
+  private String baseVOCompleteName;
 }

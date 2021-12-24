@@ -27,19 +27,19 @@ CREATE TABLE `client` (
   `client_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '客户端id',
   `client_secret` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '客户端秘钥',
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '客户端名称',
-  `redirect_uri` varchar(120) COLLATE utf8mb4_general_ci NOT NULL COMMENT '重定向地址',
+  `redirect_uri` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '重定向地址',
   `is_admin` bit(1) DEFAULT b'0' COMMENT '是否为超管权限',
   `authentication_method` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '客户端认证方式：client_secret_basic(http basic认证),client_secret_post(post提交认证),client_secret_jwt(jwt认证),private_key_jwt(私钥jwt认证),none(不认证),多个的情况以","分割',
-  `authorization_grant_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '授权方式：authorization_code(授权码),refresh_token,client_credentials(客户端授权),password(密码授权),jwt_bearer',
+  `authorization_grant_type` varchar(62) COLLATE utf8mb4_general_ci NOT NULL COMMENT '授权方式：authorization_code(授权码),refresh_token,client_credentials(客户端授权),password(密码授权),jwt_bearer',
   `is_require_proof_key` bit(1) DEFAULT b'0' COMMENT '是否校验key，0：否，1：是，默认否',
   `is_authorization_consent` bit(1) DEFAULT b'0' COMMENT '是否自定义授权页面，0：否，1：是，默认否',
   `access_token_time_to_live` int DEFAULT '5' COMMENT 'access_token存活时间，单位为分钟，默认5分钟',
   `is_reuse_refresh_tokens` bit(1) DEFAULT b'1' COMMENT '返回access_token时是否重用refresh_token，0：否，1：是，默认1',
   `refresh_token_time_to_live` int DEFAULT '60' COMMENT 'refresh_token存活时间，单位为分钟，默认60分钟',
   `signature_algorithm` char(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '签名算法，RS256，RS384,RS512,ES256,ES384,ES512,PS256,PS384,PS512',
-  `type` tinyint unsigned DEFAULT NULL COMMENT '类型',
+  `type` tinyint unsigned DEFAULT NULL COMMENT '类型，1：系统预设，2：普通客户端',
   `code` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '编码',
-  `deleted` bit(1) NOT NULL COMMENT '是否被删除，1：被删除，0：未删除',
+  `deleted` bit(1) DEFAULT b'0' COMMENT '是否被删除，1：被删除，0：未删除',
   `sort` int DEFAULT '1' COMMENT '排序，默认为1',
   `status` tinyint unsigned NOT NULL COMMENT '是否有效，1：有效，0：无效',
   `note` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
@@ -61,6 +61,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
+INSERT INTO `client` VALUES (1,'admin','123456','超管客户端','http://127.0.0.1:8080/login/oauth2/code/admin-oidc,http://127.0.0.1:8080/authorized',_binary '','client_secret_basic','authorization_code,refresh_token,client_credentials',_binary '',_binary '\0',5,_binary '',60,'RS256',1,NULL,_binary '\0',1,1,NULL,1,'2021-12-24 15:20:23',1,'admin',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -78,7 +79,7 @@ CREATE TABLE `client_group_relation` (
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '名称',
   `type` tinyint unsigned DEFAULT NULL COMMENT '类型',
   `code` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '编码',
-  `deleted` bit(1) NOT NULL COMMENT '是否被删除，1：被删除，0：未删除',
+  `deleted` bit(1) DEFAULT b'0' COMMENT '是否被删除，1：被删除，0：未删除',
   `sort` int DEFAULT '1' COMMENT '排序，默认为1',
   `status` tinyint unsigned NOT NULL COMMENT '是否有效，1：有效，0：无效',
   `note` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
@@ -116,7 +117,7 @@ CREATE TABLE `scope` (
   `type` tinyint unsigned DEFAULT NULL COMMENT '类型，1：oidc类型，2：自定义类型',
   `value` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '值',
   `code` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '编码',
-  `deleted` bit(1) NOT NULL COMMENT '是否被删除，1：被删除，0：未删除',
+  `deleted` bit(1) DEFAULT b'0' COMMENT '是否被删除，1：被删除，0：未删除',
   `sort` int DEFAULT '1' COMMENT '排序，默认为1',
   `status` tinyint unsigned NOT NULL COMMENT '是否有效，1：有效，0：无效',
   `note` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
@@ -137,6 +138,7 @@ CREATE TABLE `scope` (
 
 LOCK TABLES `scope` WRITE;
 /*!40000 ALTER TABLE `scope` DISABLE KEYS */;
+INSERT INTO `scope` VALUES (1,0,'openid',1,'openid',NULL,_binary '\0',1,1,NULL,1,'2021-12-24 15:23:57',1,'admin',NULL,NULL,NULL),(2,0,'基本信息',1,'profile',NULL,_binary '\0',1,1,NULL,1,'2021-12-24 15:24:15',1,'admin','2021-12-24 15:28:21',NULL,NULL),(3,0,'邮箱',1,'email',NULL,_binary '\0',1,1,NULL,1,'2021-12-24 15:24:26',1,'admin','2021-12-24 15:27:17',NULL,NULL),(4,0,'地址',1,'address',NULL,_binary '\0',1,1,NULL,1,'2021-12-24 15:24:34',1,'admin','2021-12-24 15:27:17',NULL,NULL),(5,0,'手机号',1,'phone',NULL,_binary '\0',1,1,NULL,1,'2021-12-24 15:24:43',1,'admin','2021-12-24 15:28:21',NULL,NULL);
 /*!40000 ALTER TABLE `scope` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -152,7 +154,7 @@ CREATE TABLE `scope_group` (
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '名称',
   `type` tinyint unsigned DEFAULT NULL COMMENT '类型',
   `code` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '编码',
-  `deleted` bit(1) NOT NULL COMMENT '是否被删除，1：被删除，0：未删除',
+  `deleted` bit(1) DEFAULT b'0' COMMENT '是否被删除，1：被删除，0：未删除',
   `sort` int DEFAULT '1' COMMENT '排序，默认为1',
   `status` tinyint unsigned NOT NULL COMMENT '是否有效，1：有效，0：无效',
   `note` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
@@ -190,7 +192,7 @@ CREATE TABLE `scope_group_relation` (
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '名称',
   `type` tinyint unsigned DEFAULT NULL COMMENT '类型',
   `code` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '编码',
-  `deleted` bit(1) NOT NULL COMMENT '是否被删除，1：被删除，0：未删除',
+  `deleted` bit(1) DEFAULT b'0' COMMENT '是否被删除，1：被删除，0：未删除',
   `sort` int DEFAULT '1' COMMENT '排序，默认为1',
   `status` tinyint unsigned NOT NULL COMMENT '是否有效，1：有效，0：无效',
   `note` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
@@ -223,4 +225,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-15 23:21:37
+-- Dump completed on 2021-12-24 15:33:33

@@ -3,6 +3,7 @@ package com.xushifei.generator.utils;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
+import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.querys.MySqlQuery;
 import com.baomidou.mybatisplus.generator.keywords.MySqlKeyWordsHandler;
 import com.xushifei.common.dto.ApiResponse;
@@ -130,29 +131,7 @@ public class CodeGeneratorUtils {
     builder
         .beforeOutputFile(
             ((tableInfo, objectMap) -> {
-              objectMap.put(
-                  "addTemplateDTO",
-                  getAddTemplateDTO(tableInfo.getEntityName(), generatorCodeConfig));
-              objectMap.put(
-                  "updateTemplateDTO",
-                  getUpdateTemplateDTO(tableInfo.getEntityName(), generatorCodeConfig));
-              objectMap.put(
-                  "queryTemplateDTO",
-                  getQueryTemplateDTO(tableInfo.getEntityName(), generatorCodeConfig));
-              objectMap.put(
-                  "voTemplateDTO", getVOTemplate(tableInfo.getEntityName(), generatorCodeConfig));
-              objectMap.put(
-                  "controllerDTO",
-                  getControllerTemplate(tableInfo.getEntityName(), generatorCodeConfig));
-              objectMap.put("serviceTemplateDTO", getServiceTemplateDTO());
-              objectMap.put("basePackageName", generatorCodeConfig.getParentPackageName());
-              objectMap.put(
-                  CodeTemplateEnum.BASE_OUT_PUT_FILE_PATH.getValue(),
-                  generatorCodeConfig.getClassOutPutFilePath()
-                      + File.separator
-                      + generatorCodeConfig
-                          .getParentPackageName()
-                          .replaceAll("\\.", Matcher.quoteReplacement(File.separator)));
+              beforeOutputFile(tableInfo, objectMap, generatorCodeConfig);
             }))
         .customMap(Collections.singletonMap("ignoreColumns", BASE_COLUMNS))
         // 占个坑位，随便填的，会跑自定义生成文件就行
@@ -161,6 +140,34 @@ public class CodeGeneratorUtils {
         .build();
   }
 
+  /**
+   * 生成文件前处理
+   *
+   * @param tableInfo
+   * @param objectMap
+   * @param generatorCodeConfig
+   */
+  private static void beforeOutputFile(
+      TableInfo tableInfo, Map<String, Object> objectMap, GeneratorCodeConfig generatorCodeConfig) {
+    objectMap.put(
+        "addTemplateDTO", getAddTemplateDTO(tableInfo.getEntityName(), generatorCodeConfig));
+    objectMap.put(
+        "updateTemplateDTO", getUpdateTemplateDTO(tableInfo.getEntityName(), generatorCodeConfig));
+    objectMap.put(
+        "queryTemplateDTO", getQueryTemplateDTO(tableInfo.getEntityName(), generatorCodeConfig));
+    objectMap.put("voTemplateDTO", getVOTemplate(tableInfo.getEntityName(), generatorCodeConfig));
+    objectMap.put(
+        "controllerDTO", getControllerTemplate(tableInfo.getEntityName(), generatorCodeConfig));
+    objectMap.put("serviceTemplateDTO", getServiceTemplateDTO());
+    objectMap.put("basePackageName", generatorCodeConfig.getParentPackageName());
+    objectMap.put(
+        CodeTemplateEnum.BASE_OUT_PUT_FILE_PATH.getValue(),
+        generatorCodeConfig.getClassOutPutFilePath()
+            + File.separator
+            + generatorCodeConfig
+                .getParentPackageName()
+                .replaceAll("\\.", Matcher.quoteReplacement(File.separator)));
+  }
   /**
    * 获取service代码生成模板
    *

@@ -28,7 +28,7 @@ public class SwaggerConfig {
   private final SwaggerProperties properties;
 
   @Bean
-  public OpenAPI openAPI() {
+  public OpenAPI openApi() {
     Info info = new Info();
     info.setTitle(properties.getTitle());
     info.setDescription(properties.getDescription());

@@ -3,7 +3,7 @@ package ${basePackageName}.service.impl;
 import ${package.Entity}.${entity};
 import ${basePackageName}.manager.${entity}Manager;
 import ${basePackageName}.service.${entity}Service;
-import ${voTemplateDTO.packageName}.ClientVO;
+import ${voTemplateDTO.packageName}.${entity}VO;
 import ${addTemplateDTO.superClassCompleteName};
 import ${updateTemplateDTO.superClassCompleteName};
 import ${serviceTemplateDTO.baseServiceImplCompleteName};
@@ -58,7 +58,7 @@ public class ${entity}ServiceImpl extends BaseServiceImpl<${entity}Manager, ${en
    * @return
    */
   @Override
-  protected BaseVO convertEntityToVO(Client entity) {
+  protected BaseVO convertEntityToVO(${entity} entity) {
     ${entity}VO vo = new ${entity}VO();
     BeanUtils.copyProperties(entity, vo);
     return vo;

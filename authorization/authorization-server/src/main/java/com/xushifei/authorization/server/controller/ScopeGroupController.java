@@ -1,5 +1,8 @@
 package com.xushifei.authorization.server.controller;
 
+import com.xushifei.common.dto.ApiResponse;
+import com.xushifei.common.utils.ResponseUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -12,4 +15,5 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/scope-group")
-public class ScopeGroupController {}
+public class ScopeGroupController {
+}

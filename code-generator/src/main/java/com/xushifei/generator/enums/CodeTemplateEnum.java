@@ -32,9 +32,12 @@ public enum CodeTemplateEnum {
   QUERY_DTO_CLASS_NAME("Query%sReq"),
   VO_CLASS_NAME("%sVO"),
   SERVICE_CLASS_NAME("%sService"),
+  SERVICE_IMPL_CLASS_NAME("%sServiceImpl"),
   /** 生成类文件路径 */
   BASE_OUT_PUT_FILE_PATH("baseOutPutFilePath"),
   VO_FILE_PATH("%s%svo%s"),
+  SERVICE_FILE_PATH("%s%sservice%s"),
+  SERVICE_IMPL_FILE_PATH("%s%sservice%simpl%s"),
   QUERY_FILE_PATH("%s%sdto%squery%s"),
   ADD_FILE_PATH("%s%sdto%sadd%s"),
   UPDATE_FILE_PATH("%s%sdto%supdate%s"),
@@ -44,6 +47,8 @@ public enum CodeTemplateEnum {
   ADD_DTO_TEMPLATE_PATH("/templates/code-generate/add.java.ftl"),
   UPDATE_DTO_TEMPLATE_PATH("/templates/code-generate/update.java.ftl"),
   QUERY_DTO_TEMPLATE_PATH("/templates/code-generate/query.java.ftl"),
+  SERVICE_TEMPLATE_PATH("/templates/code-generate/service.java.ftl"),
+  SERVICE_IMPL_TEMPLATE_PATH("/templates/code-generate/service.impl.java.ftl"),
   VO_TEMPLATE_PATH("/templates/code-generate/vo.java.ftl");
   private final String value;
 }

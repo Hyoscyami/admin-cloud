@@ -1,21 +1,17 @@
-package ${package.Service}.impl;
+package ${basePackageName}.service.impl;
 
 import ${package.Entity}.${entity};
-import com.xushifei.authorization.server.manager.ClientManager;
-import com.xushifei.authorization.server.service.ClientService;
-import com.xushifei.authorization.server.vo.ClientVO;
-import com.xushifei.common.dto.BaseAddReq;
-import com.xushifei.common.dto.BaseUpdateReq;
-import com.xushifei.common.service.impl.BaseServiceImpl;
-import com.xushifei.common.vo.BaseVO;
+import ${basePackageName}.manager.${entity}Manager;
+import ${basePackageName}.service.${entity}Service;
+import ${voTemplateDTO.packageName}.ClientVO;
+import ${addTemplateDTO.superClassCompleteName};
+import ${updateTemplateDTO.superClassCompleteName};
+import ${serviceTemplateDTO.baseServiceImplCompleteName};
+import ${voTemplateDTO.superClassCompleteName};
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * ${table.comment!}业务类
@@ -26,8 +22,8 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class ClientServiceImpl extends BaseServiceImpl<ClientManager, Client>
-    implements ClientService {
+public class ${entity}ServiceImpl extends BaseServiceImpl<${entity}Manager, ${entity}>
+    implements ${entity}Service {
 
   /**
    * 新增请求转实体
@@ -36,8 +32,8 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientManager, Client>
    * @return
    */
   @Override
-  public Client convertAddReqToEntity(BaseAddReq req) {
-    Client client = new Client();
+  public ${entity} convertAddReqToEntity(BaseAddReq req) {
+    ${entity} client = new ${entity}();
     BeanUtils.copyProperties(req, client);
     return client;
   }
@@ -49,8 +45,8 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientManager, Client>
    * @return
    */
   @Override
-  protected Client convertUpdateReqToEntity(BaseUpdateReq req) {
-    Client client = new Client();
+  protected ${entity} convertUpdateReqToEntity(BaseUpdateReq req) {
+    ${entity} client = new ${entity}();
     BeanUtils.copyProperties(req, client);
     return client;
   }
@@ -63,7 +59,7 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientManager, Client>
    */
   @Override
   protected BaseVO convertEntityToVO(Client entity) {
-    ClientVO vo = new ClientVO();
+    ${entity}VO vo = new ${entity}VO();
     BeanUtils.copyProperties(entity, vo);
     return vo;
   }
@@ -74,7 +70,7 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientManager, Client>
    * @param entity
    */
   @Override
-  protected void preSave(Client entity) {
+  protected void preSave(${entity} entity) {
     entity.assignCreateInfo();
   }
 
@@ -84,7 +80,7 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientManager, Client>
    * @param entity
    */
   @Override
-  protected void preRemove(Client entity) {
+  protected void preRemove(${entity} entity) {
     entity.assignDelInfo();
   }
 
@@ -94,7 +90,7 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientManager, Client>
    * @param entity
    */
   @Override
-  protected void preUpdate(Client entity) {
+  protected void preUpdate(${entity} entity) {
     entity.assignModifyInfo();
   }
 }

@@ -6,4 +6,4 @@ package com.xushifei.common.dto;
  * @author xushifei
  * @since 2021/12/18
  */
-public abstract class BaseUpdateReq {}
+public class BaseUpdateReq {}

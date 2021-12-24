@@ -86,9 +86,57 @@ public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
           this.createQueryDTO(tableInfo, objectMap);
           // vo模板
           this.createVO(tableInfo, objectMap);
+          // 创建service
+          this.createService(tableInfo, objectMap);
+          // 创建serviceImpl
+          this.createServiceImpl(tableInfo, objectMap);
         });
   }
 
+  /**
+   * 创建serviceImpl
+   *
+   * @param tableInfo
+   * @param objectMap
+   */
+  private void createServiceImpl(TableInfo tableInfo, Map<String, Object> objectMap) {
+    String className =
+        String.format(
+            CodeTemplateEnum.SERVICE_IMPL_CLASS_NAME.getValue(), tableInfo.getEntityName());
+    // 生成目录
+    String filePath =
+        String.format(
+            CodeTemplateEnum.SERVICE_IMPL_FILE_PATH.getValue(),
+            objectMap.get(CodeTemplateEnum.BASE_OUT_PUT_FILE_PATH.getValue()),
+            File.separator,
+            File.separator,
+            File.separator);
+    // 全路径，包含文件名称
+    String fileName = String.format(CodeTemplateEnum.FILE_NAME.getValue(), filePath, className);
+    this.outputFile(
+        new File(fileName), objectMap, CodeTemplateEnum.SERVICE_IMPL_TEMPLATE_PATH.getValue());
+  }
+  /**
+   * 创建service
+   *
+   * @param tableInfo
+   * @param objectMap
+   */
+  private void createService(TableInfo tableInfo, Map<String, Object> objectMap) {
+    String className =
+        String.format(CodeTemplateEnum.SERVICE_CLASS_NAME.getValue(), tableInfo.getEntityName());
+    // 生成目录
+    String filePath =
+        String.format(
+            CodeTemplateEnum.SERVICE_FILE_PATH.getValue(),
+            objectMap.get(CodeTemplateEnum.BASE_OUT_PUT_FILE_PATH.getValue()),
+            File.separator,
+            File.separator);
+    // 全路径，包含文件名称
+    String fileName = String.format(CodeTemplateEnum.FILE_NAME.getValue(), filePath, className);
+    this.outputFile(
+        new File(fileName), objectMap, CodeTemplateEnum.SERVICE_TEMPLATE_PATH.getValue());
+  }
   /**
    * VO模板
    *

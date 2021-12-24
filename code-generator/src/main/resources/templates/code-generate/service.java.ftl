@@ -1,4 +1,4 @@
-package ${package.Service};
+package ${basePackageName}.service;
 
 import ${package.Entity}.${entity};
 import ${serviceTemplateDTO.baseServiceCompleteName};

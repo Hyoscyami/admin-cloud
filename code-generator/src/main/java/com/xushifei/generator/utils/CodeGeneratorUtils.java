@@ -10,11 +10,14 @@ import com.xushifei.common.dto.BaseAddReq;
 import com.xushifei.common.dto.BaseUpdateReq;
 import com.xushifei.common.entity.BaseEntity;
 import com.xushifei.common.dto.BaseQueryReq;
+import com.xushifei.common.service.BaseService;
+import com.xushifei.common.service.impl.BaseServiceImpl;
 import com.xushifei.common.utils.ResponseUtils;
 import com.xushifei.common.vo.BaseVO;
 import com.xushifei.generator.config.GeneratorCodeConfig;
 import com.xushifei.generator.dto.BaseCodeTemplateDTO;
 import com.xushifei.generator.dto.ControllerTemplateDTO;
+import com.xushifei.generator.dto.ServiceTemplateDTO;
 import com.xushifei.generator.enums.CodeTemplateEnum;
 import org.springframework.util.StringUtils;
 
@@ -141,6 +144,7 @@ public class CodeGeneratorUtils {
               objectMap.put(
                   "controllerDTO",
                   getControllerTemplate(tableInfo.getEntityName(), generatorCodeConfig));
+              objectMap.put("serviceTemplateDTO", getServiceTemplateDTO());
               objectMap.put("basePackageName", generatorCodeConfig.getParentPackageName());
               objectMap.put(
                   CodeTemplateEnum.BASE_OUT_PUT_FILE_PATH.getValue(),
@@ -157,6 +161,17 @@ public class CodeGeneratorUtils {
         .build();
   }
 
+  /**
+   * 获取service代码生成模板
+   *
+   * @return
+   */
+  private static ServiceTemplateDTO getServiceTemplateDTO() {
+    ServiceTemplateDTO dto = new ServiceTemplateDTO();
+    dto.setBaseServiceCompleteName(BaseService.class.getName());
+    dto.setBaseServiceImplCompleteName(BaseServiceImpl.class.getName());
+    return dto;
+  }
   /**
    * 获取controller代码生成模板
    *

@@ -12,4 +12,6 @@ import lombok.Data;
 public class ServiceTemplateDTO {
   /** import base service */
   private String baseServiceCompleteName;
+  /** import base service impl */
+  private String baseServiceImplCompleteName;
 }

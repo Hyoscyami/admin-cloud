@@ -23,10 +23,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
    */
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    return User.withDefaultPasswordEncoder()
-        .username("user1")
-        .password("password")
-        .roles("USER")
-        .build();
+    return User.withDefaultPasswordEncoder().username("1").password("1").roles("USER").build();
   }
 }

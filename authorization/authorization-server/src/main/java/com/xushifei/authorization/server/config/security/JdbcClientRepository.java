@@ -88,9 +88,23 @@ public class JdbcClientRepository implements RegisteredClientRepository {
    */
   @Override
   public RegisteredClient findById(String id) {
+    log.info("findById:{}", id);
     return this.convertToRegisteredClient(clientManager.getById(id));
   }
 
+  /**
+   * Returns the registered client identified by the provided {@code clientId}, or {@code null} if
+   * not found.
+   *
+   * @param clientId the client identifier
+   * @return the {@link RegisteredClient} if found, otherwise {@code null}
+   */
+  @Override
+  public RegisteredClient findByClientId(String clientId) {
+    log.info("findByClientId:{}", clientId);
+    Client client = clientManager.lambdaQuery().eq(Client::getClientId, clientId).one();
+    return this.convertToRegisteredClient(client);
+  }
   /**
    * 转授权服务格式
    *
@@ -107,7 +121,9 @@ public class JdbcClientRepository implements RegisteredClientRepository {
     StringUtils.commaDelimitedListToSet(client.getAuthorizationGrantType()).stream()
         .map(this::getGrantTypeByValue)
         .forEach(builder::authorizationGrantType);
-    builder.redirectUri(client.getRedirectUri());
+    builder.redirectUris(
+        redirectUris ->
+            redirectUris.addAll(StringUtils.commaDelimitedListToSet(client.getRedirectUri())));
     List<String> scopeValues =
         clientService.listScopesByClientId(client.getId()).stream()
             .map(Scope::getValue)
@@ -181,17 +197,5 @@ public class JdbcClientRepository implements RegisteredClientRepository {
       return ClientAuthenticationMethod.NONE;
     }
     throw new BusinessException(ApiCodeEnum.PARAM_ERROR.getCode(), "暂不支持该认证方式");
-  }
-  /**
-   * Returns the registered client identified by the provided {@code clientId}, or {@code null} if
-   * not found.
-   *
-   * @param clientId the client identifier
-   * @return the {@link RegisteredClient} if found, otherwise {@code null}
-   */
-  @Override
-  public RegisteredClient findByClientId(String clientId) {
-    Client client = clientManager.lambdaQuery().eq(Client::getClientId, clientId).one();
-    return this.convertToRegisteredClient(client);
   }
 }

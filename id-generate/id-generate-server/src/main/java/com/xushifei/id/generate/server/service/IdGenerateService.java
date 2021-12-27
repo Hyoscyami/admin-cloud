@@ -10,14 +10,14 @@ import java.util.List;
  * @author xushifei
  * @date 2021/12/13
  */
-public interface IdGenerateService {
+public interface IdGenerateService<T> {
   /**
    * 获取单个唯一id
    *
    * @param req
    * @return
    */
-  Long getId(BaseIdAllocReq req);
+  Long getId(T req);
 
   /**
    * 批量获取唯一id
@@ -25,5 +25,5 @@ public interface IdGenerateService {
    * @param req
    * @return
    */
-  List<Long> listId(BaseIdAllocReq req);
+  List<Long> listId(T req);
 }

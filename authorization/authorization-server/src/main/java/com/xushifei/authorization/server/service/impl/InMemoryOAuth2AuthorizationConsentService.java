@@ -3,6 +3,7 @@ package com.xushifei.authorization.server.service.impl;
 import org.springframework.lang.Nullable;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsent;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsentService;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.util.*;

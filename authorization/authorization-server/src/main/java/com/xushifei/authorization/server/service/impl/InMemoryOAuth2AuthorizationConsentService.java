@@ -13,7 +13,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author xushifei
  * @date 2021/12/6
  */
-@Service
 public class InMemoryOAuth2AuthorizationConsentService
     implements OAuth2AuthorizationConsentService {
   private final Map<Integer, OAuth2AuthorizationConsent> authorizationConsents =

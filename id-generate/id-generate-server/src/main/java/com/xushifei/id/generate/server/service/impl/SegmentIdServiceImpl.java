@@ -1,6 +1,7 @@
 package com.xushifei.id.generate.server.service.impl;
 
 import com.xushifei.id.generate.beans.dto.req.BaseIdAllocReq;
+import com.xushifei.id.generate.beans.dto.req.SegmentIdReq;
 import com.xushifei.id.generate.server.service.IdGenerateService;
 import com.xushifei.id.generate.server.support.ISegmentAllocSupport;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 @Service("segmentIdService")
 @RequiredArgsConstructor
-public class SegmentIdServiceImpl implements IdGenerateService {
+public class SegmentIdServiceImpl implements IdGenerateService<SegmentIdReq> {
   private final ISegmentAllocSupport segmentAllocSupport;
   /**
    * 获取单个唯一id
@@ -26,7 +27,7 @@ public class SegmentIdServiceImpl implements IdGenerateService {
    * @return
    */
   @Override
-  public Long getId(BaseIdAllocReq req) {
+  public Long getId(SegmentIdReq req) {
     return 1L;
   }
 
@@ -37,7 +38,7 @@ public class SegmentIdServiceImpl implements IdGenerateService {
    * @return
    */
   @Override
-  public List<Long> listId(BaseIdAllocReq req) {
+  public List<Long> listId(SegmentIdReq req) {
     return null;
   }
 }

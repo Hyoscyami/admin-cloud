@@ -3,6 +3,7 @@ package com.xushifei.authorization.server.service.impl;
 import org.springframework.lang.Nullable;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsent;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsentService;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.util.*;
@@ -12,6 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author xushifei
  * @date 2021/12/6
  */
+@Service
 public class InMemoryOAuth2AuthorizationConsentService
     implements OAuth2AuthorizationConsentService {
   private final Map<Integer, OAuth2AuthorizationConsent> authorizationConsents =

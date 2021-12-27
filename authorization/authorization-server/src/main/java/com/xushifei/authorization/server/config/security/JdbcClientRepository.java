@@ -151,9 +151,6 @@ public class JdbcClientRepository implements RegisteredClientRepository {
     if (Objects.equals(AuthorizationGrantType.AUTHORIZATION_CODE.getValue(), value)) {
       return AuthorizationGrantType.AUTHORIZATION_CODE;
     }
-    if (Objects.equals(AuthorizationGrantType.IMPLICIT.getValue(), value)) {
-      return AuthorizationGrantType.IMPLICIT;
-    }
     if (Objects.equals(AuthorizationGrantType.REFRESH_TOKEN.getValue(), value)) {
       return AuthorizationGrantType.REFRESH_TOKEN;
     }
@@ -175,14 +172,8 @@ public class JdbcClientRepository implements RegisteredClientRepository {
    * @return
    */
   private ClientAuthenticationMethod getAuthenticationMethodByValue(final String value) {
-    if (Objects.equals(ClientAuthenticationMethod.BASIC.getValue(), value)) {
-      return ClientAuthenticationMethod.BASIC;
-    }
     if (Objects.equals(ClientAuthenticationMethod.CLIENT_SECRET_BASIC.getValue(), value)) {
       return ClientAuthenticationMethod.CLIENT_SECRET_BASIC;
-    }
-    if (Objects.equals(ClientAuthenticationMethod.POST.getValue(), value)) {
-      return ClientAuthenticationMethod.POST;
     }
     if (Objects.equals(ClientAuthenticationMethod.CLIENT_SECRET_POST.getValue(), value)) {
       return ClientAuthenticationMethod.CLIENT_SECRET_POST;

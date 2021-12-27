@@ -61,7 +61,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` VALUES (1,'admin','123456','超管客户端','http://127.0.0.1:8080/login/oauth2/code/admin-oidc,http://127.0.0.1:8080/authorized',_binary '','client_secret_basic','authorization_code,refresh_token,client_credentials',_binary '',_binary '\0',5,_binary '',60,'RS256',1,NULL,_binary '\0',1,1,NULL,1,'2021-12-24 15:20:23',1,'admin',NULL,NULL,NULL);
+INSERT INTO `client` VALUES (1,'admin','123456','超管客户端','http://127.0.0.1:8080/login/oauth2/code/admin-oidc,http://127.0.0.1:8080/authorized',_binary '','client_secret_basic','authorization_code,refresh_token,client_credentials',_binary '\0',_binary '\0',5,_binary '',60,'RS256',1,NULL,_binary '\0',1,1,NULL,1,'2021-12-24 15:20:23',1,'admin','2021-12-27 11:22:06',NULL,NULL);
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -225,4 +225,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-24 15:33:33
+-- Dump completed on 2021-12-27 16:59:41

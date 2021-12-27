@@ -15,7 +15,7 @@ public class HelloController {
   @Autowired private IdManager idManager;
 
   @GetMapping("/")
-  public Long hello() {
-    return idManager.getSnowflakeId();
+  public String hello() {
+    return "hello";
   }
 }

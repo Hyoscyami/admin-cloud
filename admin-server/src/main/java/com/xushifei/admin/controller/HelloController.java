@@ -1,6 +1,5 @@
 package com.xushifei.admin.controller;
 
-import com.xushifei.id.generate.beans.dto.req.SnowflakeIdReq;
 import com.xushifei.id.generate.manager.IdManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

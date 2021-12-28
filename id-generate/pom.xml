@@ -6,7 +6,6 @@
         <groupId>com.xushifei</groupId>
         <artifactId>admin-cloud</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <artifactId>id-generate</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -28,13 +27,5 @@
             <artifactId>common</artifactId>
         </dependency>
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

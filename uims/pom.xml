@@ -6,7 +6,6 @@
         <groupId>com.xushifei</groupId>
         <artifactId>admin-cloud</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <artifactId>uims</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -22,13 +21,5 @@
         <module>uims-biz-client</module>
         <module>uims-server</module>
     </modules>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

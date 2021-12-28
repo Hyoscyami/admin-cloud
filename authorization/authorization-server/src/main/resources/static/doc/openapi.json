@@ -1,0 +1,866 @@
+{
+  "components": {
+    "schemas": {
+      "_api_client_addrequest": {
+        "properties": {
+          "clientId": {
+            "format": "string",
+            "description": "客户端id",
+            "type": "string"
+          },
+          "clientSecret": {
+            "format": "string",
+            "description": "客户端秘钥",
+            "type": "string"
+          },
+          "name": {
+            "format": "string",
+            "description": "客户端名称",
+            "type": "string"
+          },
+          "redirectUri": {
+            "format": "string",
+            "description": "重定向地址",
+            "type": "string"
+          },
+          "admin": {
+            "format": "boolean",
+            "description": "是否为超管权限",
+            "type": "boolean"
+          },
+          "authenticationMethod": {
+            "format": "string",
+            "description": "客户端认证方式：client_secret_basic(http\u003cbr\u003ebasic认证),client_secret_post(post提交认证),client_secret_jwt(jwt认证),private_key_jwt(私钥jwt认证),none(不认证),多个的情况以\",\"分割",
+            "type": "string"
+          },
+          "authorizationGrantType": {
+            "format": "string",
+            "description": "授权方式：authorization_code(授权码),refresh_token,client_credentials(客户端授权),password(密码授权),jwt_bearer",
+            "type": "string"
+          },
+          "requireProofKey": {
+            "format": "boolean",
+            "description": "是否校验key，0：否，1：是，默认否",
+            "type": "boolean"
+          },
+          "authorizationConsent": {
+            "format": "boolean",
+            "description": "是否自定义授权页面，0：否，1：是，默认否",
+            "type": "boolean"
+          },
+          "accessTokenTimeToLive": {
+            "format": "int32",
+            "description": "access_token存活时间，单位为分钟，默认5分钟",
+            "type": "integer"
+          },
+          "reuseRefreshTokens": {
+            "format": "boolean",
+            "description": "返回access_token时是否重用refresh_token，0：否，1：是，默认1",
+            "type": "boolean"
+          },
+          "refreshTokenTimeToLive": {
+            "format": "int32",
+            "description": "refresh_token存活时间，单位为分钟，默认60分钟",
+            "type": "integer"
+          },
+          "signatureAlgorithm": {
+            "format": "string",
+            "description": "签名算法，RS256，RS384,RS512,ES256,ES384,ES512,PS256,PS384,PS512",
+            "type": "string"
+          },
+          "type": {
+            "format": "int32",
+            "description": "类型",
+            "type": "integer"
+          },
+          "code": {
+            "format": "string",
+            "description": "编码",
+            "type": "string"
+          },
+          "status": {
+            "format": "int32",
+            "description": "是否有效，1：有效，0：无效",
+            "type": "integer"
+          }
+        }
+      },
+      "_api_client_deleteresponse": {
+        "properties": {
+          "code": {
+            "format": "string",
+            "description": "No comments found.",
+            "type": "string"
+          },
+          "msg": {
+            "format": "string",
+            "description": "No comments found.",
+            "type": "string"
+          },
+          "data": {
+            "description": "No comments found.(object)",
+            "type": "object",
+            "properties": {
+              "any object": {
+                "description": "any object.(object)",
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "_api_client_addresponse": {
+        "properties": {
+          "code": {
+            "format": "string",
+            "description": "No comments found.",
+            "type": "string"
+          },
+          "msg": {
+            "format": "string",
+            "description": "No comments found.",
+            "type": "string"
+          },
+          "data": {
+            "description": "No comments found.(object)",
+            "type": "object",
+            "properties": {
+              "any object": {
+                "description": "any object.(object)",
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "_api_client_deleterequest": {},
+      "_api_client_listrequest": {
+        "properties": {
+          "page": {
+            "format": "int32",
+            "description": "No comments found.",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int32",
+            "description": "No comments found.",
+            "type": "integer"
+          },
+          "offset": {
+            "format": "int32",
+            "description": "No comments found.",
+            "type": "integer"
+          },
+          "codes": {
+            "description": "No comments found.",
+            "type": "array",
+            "items": {}
+          },
+          "types": {
+            "description": "No comments found.",
+            "type": "array",
+            "items": {}
+          },
+          "status": {
+            "description": "No comments found.",
+            "type": "array",
+            "items": {}
+          },
+          "name": {
+            "format": "string",
+            "description": "No comments found.",
+            "type": "string"
+          },
+          "tenantId": {
+            "format": "int64",
+            "description": "No comments found.",
+            "type": "integer"
+          },
+          "clientId": {
+            "format": "string",
+            "description": "客户端id",
+            "type": "string"
+          },
+          "clientSecret": {
+            "format": "string",
+            "description": "客户端秘钥",
+            "type": "string"
+          },
+          "redirectUri": {
+            "format": "string",
+            "description": "重定向地址",
+            "type": "string"
+          },
+          "admin": {
+            "format": "boolean",
+            "description": "是否为超管权限",
+            "type": "boolean"
+          },
+          "authenticationMethod": {
+            "format": "string",
+            "description": "客户端认证方式：client_secret_basic(http\u003cbr\u003ebasic认证),client_secret_post(post提交认证),client_secret_jwt(jwt认证),private_key_jwt(私钥jwt认证),none(不认证),多个的情况以\",\"分割",
+            "type": "string"
+          },
+          "authorizationGrantType": {
+            "format": "string",
+            "description": "授权方式：authorization_code(授权码),refresh_token,client_credentials(客户端授权),password(密码授权),jwt_bearer",
+            "type": "string"
+          },
+          "requireProofKey": {
+            "format": "boolean",
+            "description": "是否校验key，0：否，1：是，默认否",
+            "type": "boolean"
+          },
+          "authorizationConsent": {
+            "format": "boolean",
+            "description": "是否自定义授权页面，0：否，1：是，默认否",
+            "type": "boolean"
+          },
+          "accessTokenTimeToLive": {
+            "format": "int32",
+            "description": "access_token存活时间，单位为分钟，默认5分钟",
+            "type": "integer"
+          },
+          "reuseRefreshTokens": {
+            "format": "boolean",
+            "description": "返回access_token时是否重用refresh_token，0：否，1：是，默认1",
+            "type": "boolean"
+          },
+          "refreshTokenTimeToLive": {
+            "format": "int32",
+            "description": "refresh_token存活时间，单位为分钟，默认60分钟",
+            "type": "integer"
+          },
+          "signatureAlgorithm": {
+            "format": "string",
+            "description": "签名算法，RS256，RS384,RS512,ES256,ES384,ES512,PS256,PS384,PS512",
+            "type": "string"
+          },
+          "type": {
+            "format": "int32",
+            "description": "类型",
+            "type": "integer"
+          },
+          "code": {
+            "format": "string",
+            "description": "编码",
+            "type": "string"
+          }
+        }
+      },
+      "_api_client_getDetailrequest": {},
+      "_api_client_getDetailresponse": {
+        "properties": {
+          "code": {
+            "format": "string",
+            "description": "No comments found.",
+            "type": "string"
+          },
+          "msg": {
+            "format": "string",
+            "description": "No comments found.",
+            "type": "string"
+          },
+          "data": {
+            "description": "No comments found.(object)",
+            "type": "object",
+            "properties": {
+              "any object": {
+                "description": "any object.(object)",
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "_api_client_updaterequest": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "description": "主键",
+            "type": "integer"
+          },
+          "sort": {
+            "format": "int32",
+            "description": "排序，默认为1",
+            "type": "integer"
+          },
+          "note": {
+            "format": "string",
+            "description": "备注",
+            "type": "string"
+          },
+          "clientId": {
+            "format": "string",
+            "description": "客户端id",
+            "type": "string"
+          },
+          "clientSecret": {
+            "format": "string",
+            "description": "客户端秘钥",
+            "type": "string"
+          },
+          "name": {
+            "format": "string",
+            "description": "客户端名称",
+            "type": "string"
+          },
+          "redirectUri": {
+            "format": "string",
+            "description": "重定向地址",
+            "type": "string"
+          },
+          "admin": {
+            "format": "boolean",
+            "description": "是否为超管权限",
+            "type": "boolean"
+          },
+          "authenticationMethod": {
+            "format": "string",
+            "description": "客户端认证方式：client_secret_basic(http\u003cbr\u003ebasic认证),client_secret_post(post提交认证),client_secret_jwt(jwt认证),private_key_jwt(私钥jwt认证),none(不认证),多个的情况以\",\"分割",
+            "type": "string"
+          },
+          "authorizationGrantType": {
+            "format": "string",
+            "description": "授权方式：authorization_code(授权码),refresh_token,client_credentials(客户端授权),password(密码授权),jwt_bearer",
+            "type": "string"
+          },
+          "requireProofKey": {
+            "format": "boolean",
+            "description": "是否校验key，0：否，1：是，默认否",
+            "type": "boolean"
+          },
+          "authorizationConsent": {
+            "format": "boolean",
+            "description": "是否自定义授权页面，0：否，1：是，默认否",
+            "type": "boolean"
+          },
+          "accessTokenTimeToLive": {
+            "format": "int32",
+            "description": "access_token存活时间，单位为分钟，默认5分钟",
+            "type": "integer"
+          },
+          "reuseRefreshTokens": {
+            "format": "boolean",
+            "description": "返回access_token时是否重用refresh_token，0：否，1：是，默认1",
+            "type": "boolean"
+          },
+          "refreshTokenTimeToLive": {
+            "format": "int32",
+            "description": "refresh_token存活时间，单位为分钟，默认60分钟",
+            "type": "integer"
+          },
+          "signatureAlgorithm": {
+            "format": "string",
+            "description": "签名算法，RS256，RS384,RS512,ES256,ES384,ES512,PS256,PS384,PS512",
+            "type": "string"
+          },
+          "type": {
+            "format": "int32",
+            "description": "类型",
+            "type": "integer"
+          },
+          "code": {
+            "format": "string",
+            "description": "编码",
+            "type": "string"
+          },
+          "status": {
+            "format": "int32",
+            "description": "是否有效，1：有效，0：无效",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "_api_client_updateresponse": {
+        "properties": {
+          "code": {
+            "format": "string",
+            "description": "No comments found.",
+            "type": "string"
+          },
+          "msg": {
+            "format": "string",
+            "description": "No comments found.",
+            "type": "string"
+          },
+          "data": {
+            "description": "No comments found.(object)",
+            "type": "object",
+            "properties": {
+              "any object": {
+                "description": "any object.(object)",
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "_api_client_listresponse": {
+        "properties": {
+          "code": {
+            "format": "string",
+            "description": "No comments found.",
+            "type": "string"
+          },
+          "msg": {
+            "format": "string",
+            "description": "No comments found.",
+            "type": "string"
+          },
+          "data": {
+            "description": "No comments found.(object)",
+            "type": "object",
+            "properties": {
+              "size": {
+                "format": "int64",
+                "description": "No comments found.",
+                "type": "integer"
+              },
+              "current": {
+                "format": "int64",
+                "description": "No comments found.",
+                "type": "integer"
+              },
+              "records": {
+                "description": "No comments found.",
+                "type": "array",
+                "items": {
+                  "properties": {
+                    "id": {
+                      "format": "int64",
+                      "description": "No comments found.",
+                      "type": "integer"
+                    },
+                    "name": {
+                      "format": "string",
+                      "description": "No comments found.",
+                      "type": "string"
+                    },
+                    "type": {
+                      "format": "int32",
+                      "description": "No comments found.",
+                      "type": "integer"
+                    },
+                    "status": {
+                      "format": "int32",
+                      "description": "No comments found.",
+                      "type": "integer"
+                    },
+                    "sort": {
+                      "format": "int32",
+                      "description": "No comments found.",
+                      "type": "integer"
+                    },
+                    "createTime": {
+                      "format": "string",
+                      "description": "No comments found.",
+                      "type": "string"
+                    },
+                    "modifyTime": {
+                      "format": "string",
+                      "description": "No comments found.",
+                      "type": "string"
+                    },
+                    "creatorName": {
+                      "format": "string",
+                      "description": "No comments found.",
+                      "type": "string"
+                    },
+                    "modifierName": {
+                      "format": "string",
+                      "description": "No comments found.",
+                      "type": "string"
+                    },
+                    "code": {
+                      "format": "string",
+                      "description": "No comments found.",
+                      "type": "string"
+                    },
+                    "tenantId": {
+                      "format": "int64",
+                      "description": "No comments found.",
+                      "type": "integer"
+                    },
+                    "note": {
+                      "format": "string",
+                      "description": "No comments found.",
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "pages": {
+                "format": "int64",
+                "description": "No comments found.",
+                "type": "integer"
+              },
+              "total": {
+                "format": "int64",
+                "description": "No comments found.",
+                "type": "integer"
+              },
+              "orders": {
+                "description": "No comments found.",
+                "type": "array",
+                "items": {
+                  "properties": {
+                    "id": {
+                      "format": "int64",
+                      "description": "No comments found.",
+                      "type": "integer"
+                    },
+                    "name": {
+                      "format": "string",
+                      "description": "No comments found.",
+                      "type": "string"
+                    },
+                    "type": {
+                      "format": "int32",
+                      "description": "No comments found.",
+                      "type": "integer"
+                    },
+                    "status": {
+                      "format": "int32",
+                      "description": "No comments found.",
+                      "type": "integer"
+                    },
+                    "sort": {
+                      "format": "int32",
+                      "description": "No comments found.",
+                      "type": "integer"
+                    },
+                    "createTime": {
+                      "format": "string",
+                      "description": "No comments found.",
+                      "type": "string"
+                    },
+                    "modifyTime": {
+                      "format": "string",
+                      "description": "No comments found.",
+                      "type": "string"
+                    },
+                    "creatorName": {
+                      "format": "string",
+                      "description": "No comments found.",
+                      "type": "string"
+                    },
+                    "modifierName": {
+                      "format": "string",
+                      "description": "No comments found.",
+                      "type": "string"
+                    },
+                    "code": {
+                      "format": "string",
+                      "description": "No comments found.",
+                      "type": "string"
+                    },
+                    "tenantId": {
+                      "format": "int64",
+                      "description": "No comments found.",
+                      "type": "integer"
+                    },
+                    "note": {
+                      "format": "string",
+                      "description": "No comments found.",
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "optimizeCountSql": {
+                "format": "boolean",
+                "description": "No comments found.",
+                "type": "boolean"
+              },
+              "searchCount": {
+                "format": "boolean",
+                "description": "No comments found.",
+                "type": "boolean"
+              },
+              "optimizeJoinOfCountSql": {
+                "format": "boolean",
+                "description": "No comments found.",
+                "type": "boolean"
+              },
+              "countId": {
+                "format": "string",
+                "description": "No comments found.",
+                "type": "string"
+              },
+              "maxLimit": {
+                "format": "int64",
+                "description": "No comments found.",
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": ""
+    }
+  ],
+  "openapi": "3.0.3",
+  "paths": {
+    "/api/client/add": {
+      "post": {
+        "summary": "新增客户端基本信息",
+        "deprecated": false,
+        "description": "新增客户端基本信息",
+        "tags": [
+          "客户端基本信息 前端控制器"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json; charset\u003dutf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/_api_client_addrequest"
+              },
+              "examples": {
+                "json": {
+                  "summary": "test data",
+                  "value": "{\n  \"clientId\": \"59\",\n  \"clientSecret\": \"a8daxy\",\n  \"name\": \"ida.hills\",\n  \"redirectUri\": \"npgzjt\",\n  \"admin\": true,\n  \"authenticationMethod\": \"0pwf08\",\n  \"authorizationGrantType\": \"ecw7eg\",\n  \"requireProofKey\": true,\n  \"authorizationConsent\": true,\n  \"accessTokenTimeToLive\": 329,\n  \"reuseRefreshTokens\": true,\n  \"refreshTokenTimeToLive\": 928,\n  \"signatureAlgorithm\": \"tgxz80\",\n  \"type\": 444,\n  \"code\": \"40611\",\n  \"status\": 834\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/_api_client_addresponse"
+                },
+                "examples": {
+                  "json": {
+                    "summary": "test data",
+                    "value": "{\n  \"code\": \"40611\",\n  \"msg\": \"5v9vw3\",\n  \"data\": {}\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "47d3e6d21b7cb51bcb8379fb53882e0b",
+        "parameters": []
+      }
+    },
+    "/api/client/getDetail": {
+      "post": {
+        "summary": "获取客户端基本信息",
+        "deprecated": false,
+        "description": "获取客户端基本信息",
+        "tags": [
+          "客户端基本信息 前端控制器"
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded;charset\u003dutf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/_api_client_getDetailrequest"
+              },
+              "examples": {
+                "json": {
+                  "summary": "test data",
+                  "value": "curl -X POST -i /api/client/getDetail --data \u0027id\u003d34\u0027"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/_api_client_getDetailresponse"
+                },
+                "examples": {
+                  "json": {
+                    "summary": "test data",
+                    "value": "{\n  \"code\": \"40611\",\n  \"msg\": \"e2ybep\",\n  \"data\": {}\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "0f2d4651028ac4edbfb8e13e81ef1b73",
+        "parameters": [
+          {
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            },
+            "in": "query",
+            "description": "客户端id",
+            "required": true,
+            "example": "876",
+            "name": "id"
+          }
+        ]
+      }
+    },
+    "/api/client/list": {
+      "post": {
+        "summary": "分页查询",
+        "deprecated": false,
+        "description": "分页查询",
+        "tags": [
+          "客户端基本信息 前端控制器"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json; charset\u003dutf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/_api_client_listrequest"
+              },
+              "examples": {
+                "json": {
+                  "summary": "test data",
+                  "value": "{\n  \"page\": 1,\n  \"size\": 10,\n  \"offset\": 1,\n  \"codes\": [\n    {\n      \"object\": \"any object\"\n    }\n  ],\n  \"types\": [\n    {\n      \"object\": \"any object\"\n    }\n  ],\n  \"status\": [\n    {\n      \"object\": \"any object\"\n    }\n  ],\n  \"name\": \"ida.hills\",\n  \"tenantId\": 166,\n  \"clientId\": \"59\",\n  \"clientSecret\": \"lmk1f7\",\n  \"redirectUri\": \"v467km\",\n  \"admin\": true,\n  \"authenticationMethod\": \"1ex18w\",\n  \"authorizationGrantType\": \"qzte8y\",\n  \"requireProofKey\": true,\n  \"authorizationConsent\": true,\n  \"accessTokenTimeToLive\": 686,\n  \"reuseRefreshTokens\": true,\n  \"refreshTokenTimeToLive\": 151,\n  \"signatureAlgorithm\": \"1d2cre\",\n  \"type\": 662,\n  \"code\": \"40611\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/_api_client_listresponse"
+                },
+                "examples": {
+                  "json": {
+                    "summary": "test data",
+                    "value": "{\n  \"code\": \"40611\",\n  \"msg\": \"c78yl6\",\n  \"data\": {\n    \"size\": 939,\n    \"current\": 60,\n    \"records\": [\n      {\n        \"id\": 753,\n        \"name\": \"ida.hills\",\n        \"type\": 436,\n        \"status\": 840,\n        \"sort\": 521,\n        \"createTime\": \"2021-12-28 17:43:31\",\n        \"modifyTime\": \"2021-12-28 17:43:31\",\n        \"creatorName\": \"ida.hills\",\n        \"modifierName\": \"ida.hills\",\n        \"code\": \"40611\",\n        \"tenantId\": 412,\n        \"note\": \"mkmowo\"\n      }\n    ],\n    \"pages\": 170,\n    \"total\": 100,\n    \"orders\": [\n      {\n        \"id\": 58,\n        \"name\": \"ida.hills\",\n        \"type\": 776,\n        \"status\": 406,\n        \"sort\": 941,\n        \"createTime\": \"2021-12-28 17:43:31\",\n        \"modifyTime\": \"2021-12-28 17:43:31\",\n        \"creatorName\": \"ida.hills\",\n        \"modifierName\": \"ida.hills\",\n        \"code\": \"40611\",\n        \"tenantId\": 118,\n        \"note\": \"p5wrmn\"\n      }\n    ],\n    \"optimizeCountSql\": true,\n    \"searchCount\": true,\n    \"optimizeJoinOfCountSql\": true,\n    \"countId\": \"59\",\n    \"maxLimit\": 385\n  }\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "35625b5bad109ffd5f237e04064534b3",
+        "parameters": []
+      }
+    },
+    "/api/client/delete": {
+      "post": {
+        "summary": "删除客户端基本信息",
+        "deprecated": false,
+        "description": "删除客户端基本信息",
+        "tags": [
+          "客户端基本信息 前端控制器"
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded;charset\u003dutf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/_api_client_deleterequest"
+              },
+              "examples": {
+                "json": {
+                  "summary": "test data",
+                  "value": "curl -X POST -i /api/client/delete --data \u0027id\u003d532\u0027"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/_api_client_deleteresponse"
+                },
+                "examples": {
+                  "json": {
+                    "summary": "test data",
+                    "value": "{\n  \"code\": \"40611\",\n  \"msg\": \"uq4ico\",\n  \"data\": {}\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "6068282c96cd41e37c1adba7c53b2d83",
+        "parameters": [
+          {
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            },
+            "in": "query",
+            "description": "客户端id",
+            "required": true,
+            "example": "848",
+            "name": "id"
+          }
+        ]
+      }
+    },
+    "/api/client/update": {
+      "post": {
+        "summary": "更新客户端基本信息",
+        "deprecated": false,
+        "description": "更新客户端基本信息",
+        "tags": [
+          "客户端基本信息 前端控制器"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json; charset\u003dutf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/_api_client_updaterequest"
+              },
+              "examples": {
+                "json": {
+                  "summary": "test data",
+                  "value": "{\n  \"id\": 564,\n  \"sort\": 459,\n  \"note\": \"vnrzbm\",\n  \"clientId\": \"59\",\n  \"clientSecret\": \"vd4s7x\",\n  \"name\": \"ida.hills\",\n  \"redirectUri\": \"tzwrse\",\n  \"admin\": true,\n  \"authenticationMethod\": \"rahvd7\",\n  \"authorizationGrantType\": \"gqcl2c\",\n  \"requireProofKey\": true,\n  \"authorizationConsent\": true,\n  \"accessTokenTimeToLive\": 773,\n  \"reuseRefreshTokens\": true,\n  \"refreshTokenTimeToLive\": 419,\n  \"signatureAlgorithm\": \"tqjbik\",\n  \"type\": 286,\n  \"code\": \"40611\",\n  \"status\": 124\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/_api_client_updateresponse"
+                },
+                "examples": {
+                  "json": {
+                    "summary": "test data",
+                    "value": "{\n  \"code\": \"40611\",\n  \"msg\": \"9x0p4p\",\n  \"data\": {}\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "947527bd85add65f0b79a0a7e74c46db",
+        "parameters": []
+      }
+    }
+  },
+  "info": {
+    "title": "授权服务",
+    "version": "1.0.0"
+  }
+}

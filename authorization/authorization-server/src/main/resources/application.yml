@@ -30,3 +30,9 @@ logging:
     org.springframework.web: INFO
     org.springframework.security: INFO
     org.springframework.security.oauth2: INFO
+swagger:
+  enable: true
+springdoc:
+  swagger-ui:
+    operations-sorter: method
+    url: /doc/openapi.json

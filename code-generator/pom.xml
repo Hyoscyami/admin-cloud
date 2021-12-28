@@ -6,7 +6,6 @@
         <groupId>com.xushifei</groupId>
         <artifactId>admin-cloud</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <artifactId>code-generator</artifactId>
     <version>0.0.1-SNAPSHOT</version>

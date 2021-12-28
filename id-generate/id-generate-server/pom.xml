@@ -6,7 +6,6 @@
         <groupId>com.xushifei</groupId>
         <artifactId>id-generate</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <artifactId>id-generate-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>

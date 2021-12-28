@@ -6,7 +6,6 @@
         <groupId>com.xushifei</groupId>
         <artifactId>developer-platform</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <artifactId>developer-platform-auth-client</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -29,8 +28,8 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

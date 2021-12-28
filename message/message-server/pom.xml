@@ -6,7 +6,6 @@
         <groupId>com.xushifei</groupId>
         <artifactId>message</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <artifactId>message-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>

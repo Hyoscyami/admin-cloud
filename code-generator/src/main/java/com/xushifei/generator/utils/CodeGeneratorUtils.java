@@ -7,8 +7,6 @@ import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.querys.MySqlQuery;
 import com.baomidou.mybatisplus.generator.keywords.MySqlKeyWordsHandler;
 import com.xushifei.common.dto.ApiResponse;
-import com.xushifei.common.dto.BaseAddReq;
-import com.xushifei.common.dto.BaseUpdateReq;
 import com.xushifei.common.entity.BaseEntity;
 import com.xushifei.common.dto.BaseQueryReq;
 import com.xushifei.common.service.BaseService;
@@ -304,8 +302,6 @@ public class CodeGeneratorUtils {
             "creatorName",
             "modifierName"));
     dto.setClassName(String.format(CodeTemplateEnum.UPDATE_DTO_CLASS_NAME.getValue(), entityName));
-    dto.setSuperClassSimpleName(BaseUpdateReq.class.getSimpleName());
-    dto.setSuperClassCompleteName(BaseUpdateReq.class.getName());
     dto.setPackageName(
         String.format(
             CodeTemplateEnum.PACKAGE_UPDATE_PATH.getValue(),
@@ -334,8 +330,6 @@ public class CodeGeneratorUtils {
             "creatorName",
             "modifierName"));
     dto.setClassName(String.format(CodeTemplateEnum.ADD_DTO_CLASS_NAME.getValue(), entityName));
-    dto.setSuperClassSimpleName(BaseAddReq.class.getSimpleName());
-    dto.setSuperClassCompleteName(BaseAddReq.class.getName());
     dto.setPackageName(
         String.format(
             CodeTemplateEnum.PACKAGE_ADD_PATH.getValue(),

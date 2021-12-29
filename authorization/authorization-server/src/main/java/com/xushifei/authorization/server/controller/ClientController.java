@@ -5,6 +5,7 @@ import com.xushifei.authorization.server.dto.req.add.AddClientReq;
 import com.xushifei.authorization.server.dto.req.query.QueryClientReq;
 import com.xushifei.authorization.server.dto.req.update.UpdateClientReq;
 import com.xushifei.authorization.server.service.ClientService;
+import com.xushifei.authorization.server.vo.ClientVO;
 import com.xushifei.common.dto.ApiResponse;
 import com.xushifei.common.utils.ResponseUtils;
 import com.xushifei.common.vo.BaseVO;
@@ -32,7 +33,7 @@ public class ClientController {
    * @return
    */
   @PostMapping("/list")
-  public ApiResponse<Page<BaseVO>> page(@Valid @RequestBody QueryClientReq req) {
+  public ApiResponse<Page<ClientVO>> page(@Valid @RequestBody QueryClientReq req) {
     return ResponseUtils.success(clientService.page(req));
   }
   /**
@@ -43,7 +44,7 @@ public class ClientController {
    */
   @PostMapping("/add")
   public ApiResponse<Object> add(@Valid @RequestBody AddClientReq req) {
-    clientService.save(req);
+    clientService.add(req);
     return ResponseUtils.success();
   }
 
@@ -67,7 +68,7 @@ public class ClientController {
    */
   @PostMapping("/update")
   public ApiResponse<Object> update(@Valid @RequestBody UpdateClientReq req) {
-    clientService.updateById(req);
+    clientService.update(req);
     return ResponseUtils.success();
   }
 

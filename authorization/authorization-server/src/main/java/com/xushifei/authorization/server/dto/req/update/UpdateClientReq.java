@@ -1,8 +1,6 @@
 package com.xushifei.authorization.server.dto.req.update;
 
 import lombok.Data;
-import com.xushifei.common.dto.BaseUpdateReq;
-import lombok.EqualsAndHashCode;
 import javax.validation.constraints.NotNull;
 /**
  * 客户端基本信息
@@ -11,8 +9,7 @@ import javax.validation.constraints.NotNull;
  * @since 2021-12-22
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class UpdateClientReq extends BaseUpdateReq {
+public class UpdateClientReq {
   /** 主键 */
   @NotNull(message = "id不能为空")
   private Long id;

@@ -4,10 +4,9 @@ import ${package.Entity}.${entity};
 import ${basePackageName}.manager.${entity}Manager;
 import ${basePackageName}.service.${entity}Service;
 import ${voTemplateDTO.packageName}.${entity}VO;
-import ${addTemplateDTO.superClassCompleteName};
-import ${updateTemplateDTO.superClassCompleteName};
-import ${serviceTemplateDTO.baseServiceImplCompleteName};
-import ${voTemplateDTO.superClassCompleteName};
+import ${basePackageName}.dto.req.add.Add${entity}Req;
+import ${basePackageName}.dto.req.query.Query${entity}Req;
+import ${basePackageName}.dto.req.update.Update${entity}Req;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -22,7 +21,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class ${entity}ServiceImpl extends BaseServiceImpl<${entity}Manager, ${entity}>
+public class ${entity}ServiceImpl extends BaseServiceImpl<${entity}Manager, Add${entity}Req, Update${entity}Req, Query${entity}Req, ${entity}VO, ${entity}>
     implements ${entity}Service {
 
   /**
@@ -32,7 +31,7 @@ public class ${entity}ServiceImpl extends BaseServiceImpl<${entity}Manager, ${en
    * @return
    */
   @Override
-  public ${entity} convertAddReqToEntity(BaseAddReq req) {
+  public ${entity} convertAddReqToEntity(Add${entity}Req req) {
     ${entity} client = new ${entity}();
     BeanUtils.copyProperties(req, client);
     return client;
@@ -45,7 +44,7 @@ public class ${entity}ServiceImpl extends BaseServiceImpl<${entity}Manager, ${en
    * @return
    */
   @Override
-  protected ${entity} convertUpdateReqToEntity(BaseUpdateReq req) {
+  protected ${entity} convertUpdateReqToEntity(Update${entity}Req req) {
     ${entity} client = new ${entity}();
     BeanUtils.copyProperties(req, client);
     return client;
@@ -58,7 +57,7 @@ public class ${entity}ServiceImpl extends BaseServiceImpl<${entity}Manager, ${en
    * @return
    */
   @Override
-  protected BaseVO convertEntityToVO(${entity} entity) {
+  protected ${entity}VO convertEntityToVO(${entity} entity) {
     ${entity}VO vo = new ${entity}VO();
     BeanUtils.copyProperties(entity, vo);
     return vo;

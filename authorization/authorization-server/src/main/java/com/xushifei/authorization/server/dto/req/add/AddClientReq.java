@@ -1,7 +1,6 @@
 package com.xushifei.authorization.server.dto.req.add;
 
 import lombok.Data;
-import com.xushifei.common.dto.BaseAddReq;
 import lombok.EqualsAndHashCode;
 /**
  * 客户端基本信息
@@ -10,8 +9,7 @@ import lombok.EqualsAndHashCode;
  * @since 2021-12-22
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class AddClientReq extends BaseAddReq {
+public class AddClientReq {
 
   /** 客户端id */
   private String clientId;

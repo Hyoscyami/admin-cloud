@@ -53,8 +53,8 @@ public class CodeGeneratorUtils {
           "modifierName");
 
   public static void main(String[] args) {
-    GeneratorCodeConfig config = getDefaultGenerator("authorization.server", "authorization");
-    config.setTableName("client");
+    GeneratorCodeConfig config = getDefaultGenerator("uims.server", "uims");
+    // config.setTableName("client_scope_relation");
     generateCode(config);
   }
 

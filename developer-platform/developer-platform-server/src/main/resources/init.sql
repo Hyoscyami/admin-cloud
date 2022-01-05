@@ -67,7 +67,7 @@ UNLOCK TABLES;
 -- Table structure for table `client_group_relation`
 --
 
-DROP TABLE IF EXISTS `client_group_relation`;
+DROP TABLE IF EXISTS client_scope_relation;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `client_group_relation` (
@@ -96,9 +96,9 @@ CREATE TABLE `client_group_relation` (
 -- Dumping data for table `client_group_relation`
 --
 
-LOCK TABLES `client_group_relation` WRITE;
-/*!40000 ALTER TABLE `client_group_relation` DISABLE KEYS */;
-/*!40000 ALTER TABLE `client_group_relation` ENABLE KEYS */;
+LOCK TABLES client_scope_relation WRITE;
+/*!40000 ALTER TABLE client_scope_relation DISABLE KEYS */;
+/*!40000 ALTER TABLE client_scope_relation ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

@@ -4,11 +4,11 @@ import com.xushifei.authorization.server.dto.req.add.AddClientReq;
 import com.xushifei.authorization.server.dto.req.query.QueryClientReq;
 import com.xushifei.authorization.server.dto.req.update.UpdateClientReq;
 import com.xushifei.authorization.server.entity.Client;
+import com.xushifei.authorization.server.entity.ClientScopeRelation;
 import com.xushifei.authorization.server.entity.Scope;
-import com.xushifei.authorization.server.entity.ScopeGroup;
 import com.xushifei.authorization.server.manager.ClientManager;
+import com.xushifei.authorization.server.manager.ClientScopeRelationManager;
 import com.xushifei.authorization.server.manager.ScopeManager;
-import com.xushifei.authorization.server.manager.impl.ScopeGroupManagerImpl;
 import com.xushifei.authorization.server.service.ClientService;
 import com.xushifei.authorization.server.vo.ClientVO;
 import com.xushifei.common.service.impl.BaseServiceImpl;
@@ -36,7 +36,7 @@ public class ClientServiceImpl
     extends BaseServiceImpl<
         ClientManager, AddClientReq, UpdateClientReq, QueryClientReq, ClientVO, Client>
     implements ClientService {
-  private final ScopeGroupManagerImpl scopeGroupSupport;
+  private final ClientScopeRelationManager clientScopeRelationManager;
   private final ScopeManager scopeManager;
 
   /**
@@ -54,12 +54,19 @@ public class ClientServiceImpl
     if (client.getAdmin()) {
       return scopeManager.list();
     }
-    List<ScopeGroup> scopeGroups = scopeGroupSupport.listByClientId(clientId);
-    if (CollectionUtils.isEmpty(scopeGroups)) {
+    // 根据客户端权限关联表查询客户端权限列表
+    List<Long> scopeIds =
+        clientScopeRelationManager
+            .lambdaQuery()
+            .eq(ClientScopeRelation::getClientId, client)
+            .list()
+            .stream()
+            .map(ClientScopeRelation::getScopeId)
+            .collect(Collectors.toList());
+    if (CollectionUtils.isEmpty(scopeIds)) {
       return Collections.emptyList();
     }
-    return scopeManager.listByGroupIds(
-        scopeGroups.stream().map(ScopeGroup::getId).collect(Collectors.toList()));
+    return scopeManager.listByIds(scopeIds);
   }
 
   /**

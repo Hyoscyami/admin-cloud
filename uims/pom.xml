@@ -17,6 +17,7 @@
     </properties>
 
     <modules>
+        <module>uims-beans</module>
         <module>uims-auth-client</module>
         <module>uims-biz-client</module>
         <module>uims-server</module>

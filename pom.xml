@@ -37,6 +37,7 @@
         <module>code-generator</module>
         <module>file</module>
         <module>message</module>
+        <module>support</module>
         <module>job</module>
         <module>uims</module>
         <module>label</module>

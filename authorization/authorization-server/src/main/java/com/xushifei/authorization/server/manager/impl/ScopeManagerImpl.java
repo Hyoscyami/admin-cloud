@@ -15,15 +15,4 @@ import java.util.List;
  * @since 2021-12-15
  */
 @Service
-public class ScopeManagerImpl extends ServiceImpl<ScopeMapper, Scope> implements ScopeManager {
-  /**
-   * 根据权限组ID查询权限列表
-   *
-   * @param groupIds
-   * @return
-   */
-  @Override
-  public List<Scope> listByGroupIds(List<Long> groupIds) {
-    return this.baseMapper.listByGroupIds(groupIds);
-  }
-}
+public class ScopeManagerImpl extends ServiceImpl<ScopeMapper, Scope> implements ScopeManager {}

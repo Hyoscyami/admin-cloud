@@ -42,9 +42,9 @@ public class ClientController {
    * @param req 新增客户端基本信息请求
    * @return
    */
-  @PostMapping("/add")
-  public ApiResponse<Object> add(@Valid @RequestBody AddClientReq req) {
-    clientService.add(req);
+  @PostMapping("/save")
+  public ApiResponse<Object> save(@Valid @RequestBody AddClientReq req) {
+    clientService.save(req);
     return ResponseUtils.success();
   }
 

@@ -32,9 +32,9 @@ public class ${entity}ServiceImpl extends BaseServiceImpl<${entity}Manager, Add$
    */
   @Override
   public ${entity} convertAddReqToEntity(Add${entity}Req req) {
-    ${entity} client = new ${entity}();
-    BeanUtils.copyProperties(req, client);
-    return client;
+    ${entity} entity = new ${entity}();
+    BeanUtils.copyProperties(req, entity);
+    return entity;
   }
 
   /**
@@ -45,9 +45,9 @@ public class ${entity}ServiceImpl extends BaseServiceImpl<${entity}Manager, Add$
    */
   @Override
   protected ${entity} convertUpdateReqToEntity(Update${entity}Req req) {
-    ${entity} client = new ${entity}();
-    BeanUtils.copyProperties(req, client);
-    return client;
+    ${entity} entity = new ${entity}();
+    BeanUtils.copyProperties(req, entity);
+    return entity;
   }
 
   /**
@@ -70,7 +70,7 @@ public class ${entity}ServiceImpl extends BaseServiceImpl<${entity}Manager, Add$
    */
   @Override
   protected void preSave(${entity} entity) {
-    entity.assignCreateInfo();
+    super.preSave(entity);
   }
 
   /**
@@ -80,7 +80,7 @@ public class ${entity}ServiceImpl extends BaseServiceImpl<${entity}Manager, Add$
    */
   @Override
   protected void preRemove(${entity} entity) {
-    entity.assignDelInfo();
+    super.preRemove();
   }
 
   /**
@@ -90,6 +90,6 @@ public class ${entity}ServiceImpl extends BaseServiceImpl<${entity}Manager, Add$
    */
   @Override
   protected void preUpdate(${entity} entity) {
-    entity.assignModifyInfo();
+    super.preUpdate();
   }
 }

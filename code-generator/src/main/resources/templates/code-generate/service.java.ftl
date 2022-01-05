@@ -12,6 +12,6 @@ import ${basePackageName}.dto.req.update.Update${entity}Req;
  * @author ${author}
  * @since ${date}
  */
-public interface ${entity}Service extends BaseService<Add${entity}Req, Update${entity}Req, Query${entity}Req, ${entity}VO, ${entity}> {
+public interface ${entity}Service extends BaseService<Add${entity}Req, Update${entity}Req, Query${entity}Req, ${entity}VO> {
 
 }

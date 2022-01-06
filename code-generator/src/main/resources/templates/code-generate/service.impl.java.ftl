@@ -4,9 +4,10 @@ import ${package.Entity}.${entity};
 import ${basePackageName}.manager.${entity}Manager;
 import ${basePackageName}.service.${entity}Service;
 import ${voTemplateDTO.packageName}.${entity}VO;
-import ${basePackageName}.dto.req.add.Add${entity}Req;
-import ${basePackageName}.dto.req.query.Query${entity}Req;
-import ${basePackageName}.dto.req.update.Update${entity}Req;
+import ${controllerDTO.addReqCompleteName!};
+import ${controllerDTO.updateReqCompleteName!};
+import ${controllerDTO.queryReqCompleteName!};
+import ${serviceTemplateDTO.baseServiceImplCompleteName};
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -80,7 +81,7 @@ public class ${entity}ServiceImpl extends BaseServiceImpl<${entity}Manager, Add$
    */
   @Override
   protected void preRemove(${entity} entity) {
-    super.preRemove();
+    super.preRemove(entity);
   }
 
   /**
@@ -90,6 +91,6 @@ public class ${entity}ServiceImpl extends BaseServiceImpl<${entity}Manager, Add$
    */
   @Override
   protected void preUpdate(${entity} entity) {
-    super.preUpdate();
+    super.preUpdate(entity);
   }
 }

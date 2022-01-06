@@ -7,9 +7,10 @@ import ${controllerDTO.updateReqCompleteName!};
 import ${controllerDTO.queryReqCompleteName!};
 import ${controllerDTO.responseCompleteName!};
 import ${controllerDTO.responseUtilCompleteName!};
-import ${controllerDTO.baseVOCompleteName!};
+import ${voTemplateDTO.packageName}.${entity}VO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
 <#if restControllerStyle>
 import org.springframework.web.bind.annotation.RestController;
 <#else>
@@ -50,7 +51,7 @@ public class ${table.controllerName} {
    * @return
    */
   @PostMapping("/list")
-  public ApiResponse<Page<BaseVO>> page(@Valid @RequestBody ${controllerDTO.queryReqSimpleName} req) {
+  public ApiResponse<Page<${entity}VO>> page(@Valid @RequestBody ${controllerDTO.queryReqSimpleName} req) {
     return ResponseUtils.success(${controllerDTO.serviceName}.page(req));
   }
   /**
@@ -85,7 +86,7 @@ public class ${table.controllerName} {
    */
   @PostMapping("/update")
   public ApiResponse<Object> update(@Valid @RequestBody ${controllerDTO.updateReqSimpleName} req) {
-    ${controllerDTO.serviceName}.updateById(req);
+    ${controllerDTO.serviceName}.update(req);
     return ResponseUtils.success();
   }
 

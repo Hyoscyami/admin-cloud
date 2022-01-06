@@ -17,9 +17,9 @@ public enum CodeTemplateEnum {
   MANAGER_IMPL("%sManagerImpl"),
   /** 文件路径，包含文件名称 */
   FILE_NAME("%s%s.java"),
-  IMPORT_ADD_PATH("%s.dto.req.add.Add%sReq"),
-  IMPORT_QUERY_PATH("%s.dto.req.query.Query%sReq"),
-  IMPORT_UPDATE_PATH("%s.dto.req.update.Update%sReq"),
+  IMPORT_ADD_PATH("%s.dto.add.Add%sReq"),
+  IMPORT_QUERY_PATH("%s.dto.query.Query%sReq"),
+  IMPORT_UPDATE_PATH("%s.dto.update.Update%sReq"),
   IMPORT_SERVICE_PATH("%s.service.%sService"),
   PACKAGE_SERVICE("%s.service"),
   PACKAGE_ADD_PATH("%s.dto.req.add"),

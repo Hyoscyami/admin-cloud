@@ -1,11 +1,10 @@
 package ${basePackageName}.service;
 
-import ${package.Entity}.${entity};
 import ${serviceTemplateDTO.baseServiceCompleteName};
 import ${voTemplateDTO.packageName}.${entity}VO;
-import ${basePackageName}.dto.req.add.Add${entity}Req;
-import ${basePackageName}.dto.req.query.Query${entity}Req;
-import ${basePackageName}.dto.req.update.Update${entity}Req;
+import ${controllerDTO.addReqCompleteName!};
+import ${controllerDTO.updateReqCompleteName!};
+import ${controllerDTO.queryReqCompleteName!};
 /**
  * ${table.comment!}业务类
  *

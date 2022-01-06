@@ -82,7 +82,7 @@ CREATE TABLE `account_role_relation` (
   `modifier_id` bigint unsigned DEFAULT NULL COMMENT '更新人id',
   `modifier_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '修改人名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='账号权限关联';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='账号角色关联';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,6 +92,50 @@ CREATE TABLE `account_role_relation` (
 LOCK TABLES `account_role_relation` WRITE;
 /*!40000 ALTER TABLE `account_role_relation` DISABLE KEYS */;
 /*!40000 ALTER TABLE `account_role_relation` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `address`
+--
+
+DROP TABLE IF EXISTS `address`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `address` (
+  `id` bigint unsigned NOT NULL COMMENT '主键',
+  `province_id` bigint unsigned DEFAULT NULL COMMENT '省份id，即support.administrative_code.id',
+  `city_id` bigint unsigned DEFAULT NULL COMMENT '城市id，即support.administrative_code.id',
+  `area_id` bigint unsigned DEFAULT NULL COMMENT '区县id，即support.administrative_code.id',
+  `street_id` bigint unsigned DEFAULT NULL COMMENT '街道id，即support.administrative_code.id',
+  `village_id` bigint unsigned DEFAULT NULL COMMENT '村级id，即support.administrative_code.id',
+  `detail` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '详细地址',
+  `longitude` double DEFAULT NULL COMMENT '经度',
+  `latitude` double DEFAULT NULL COMMENT '纬度',
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '名称',
+  `type` tinyint unsigned DEFAULT NULL COMMENT '类型',
+  `code` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '编码',
+  `deleted` bit(1) DEFAULT b'0' COMMENT '是否被删除，1：被删除，0：未删除',
+  `sort` int DEFAULT '1' COMMENT '排序，默认为1',
+  `status` tinyint unsigned NOT NULL COMMENT '是否有效，1：有效，0：无效',
+  `note` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
+  `tenant_id` bigint unsigned DEFAULT NULL COMMENT '租户id',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `creator_id` bigint unsigned NOT NULL COMMENT '创建人id',
+  `creator_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人名称',
+  `modify_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `modifier_id` bigint unsigned DEFAULT NULL COMMENT '更新人id',
+  `modifier_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '修改人名称',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='地址';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `address`
+--
+
+LOCK TABLES `address` WRITE;
+/*!40000 ALTER TABLE `address` DISABLE KEYS */;
+/*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -325,6 +369,42 @@ LOCK TABLES `role_permission_relation` WRITE;
 /*!40000 ALTER TABLE `role_permission_relation` DISABLE KEYS */;
 /*!40000 ALTER TABLE `role_permission_relation` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `tenant`
+--
+
+DROP TABLE IF EXISTS `tenant`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tenant` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '名称',
+  `type` tinyint unsigned DEFAULT NULL COMMENT '类型',
+  `code` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '编码',
+  `deleted` bit(1) DEFAULT b'0' COMMENT '是否被删除，1：被删除，0：未删除',
+  `sort` int DEFAULT '1' COMMENT '排序，默认为1',
+  `status` tinyint unsigned NOT NULL COMMENT '是否有效，1：有效，0：无效',
+  `note` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
+  `tenant_id` bigint unsigned DEFAULT NULL COMMENT '租户id',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `creator_id` bigint unsigned NOT NULL COMMENT '创建人id',
+  `creator_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人名称',
+  `modify_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `modifier_id` bigint unsigned DEFAULT NULL COMMENT '更新人id',
+  `modifier_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '修改人名称',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='租户列表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tenant`
+--
+
+LOCK TABLES `tenant` WRITE;
+/*!40000 ALTER TABLE `tenant` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tenant` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -335,4 +415,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-27 16:58:49
+-- Dump completed on 2022-01-06 18:04:07

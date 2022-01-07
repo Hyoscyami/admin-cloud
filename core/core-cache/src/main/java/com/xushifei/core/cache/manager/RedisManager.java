@@ -14,24 +14,28 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 @RequiredArgsConstructor
-public class RedisManager {
+public class RedisManager implements CacheManager {
   private final RedissonClient redissonClient;
 
+  @Override
   public void set(String key, Object value, long timeout, TimeUnit timeUnit) {
     RBucket<Object> bucket = this.redissonClient.getBucket(key);
     bucket.set(value, timeout, timeUnit);
   }
 
+  @Override
   public void set(String key, Object value) {
     RBucket<Object> bucket = this.redissonClient.getBucket(key);
     bucket.set(value);
   }
 
-  public <T> T get(String key, Class<T> clazz) {
+  @Override
+  public <T> T get(String key) {
     RBucket<T> bucket = this.redissonClient.getBucket(key);
     return bucket.get();
   }
 
+  @Override
   public boolean delete(String key) {
     RBucket<Object> bucket = this.redissonClient.getBucket(key);
     return bucket.delete();

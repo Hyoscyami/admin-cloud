@@ -24,6 +24,7 @@
     <modules>
         <module>core-web</module>
         <module>core-cache</module>
+        <module>core-mq</module>
     </modules>
 
 </project>

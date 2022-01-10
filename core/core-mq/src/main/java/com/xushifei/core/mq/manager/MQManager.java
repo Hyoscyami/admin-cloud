@@ -1,9 +1,17 @@
 package com.xushifei.core.mq.manager;
 
 /**
- * 消息队列常用操作
+ * MQ接口
  *
  * @author xushifei
- * @date 2022/1/7
+ * @date 2022/1/10
  */
-public interface MQManager {}
+public interface MQManager {
+  /**
+   * 发送消息
+   *
+   * @param destination
+   * @param message
+   */
+  void send(String destination, String message);
+}

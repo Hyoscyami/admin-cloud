@@ -34,6 +34,10 @@
             <artifactId>core-web</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.xushifei</groupId>
+            <artifactId>core-job</artifactId>
+        </dependency>
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>

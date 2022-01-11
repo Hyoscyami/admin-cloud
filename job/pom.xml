@@ -24,7 +24,6 @@
         <dependency>
             <groupId>com.xushifei</groupId>
             <artifactId>core-job</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <!-- freemarker-starter -->
         <dependency>

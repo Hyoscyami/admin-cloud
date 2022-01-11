@@ -13,8 +13,41 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
+        <xxl-job-core.version>2.3.0</xxl-job-core.version>
+        <mybatis-spring-boot-starter.version>2.2.1</mybatis-spring-boot-starter.version>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.xushifei</groupId>
+            <artifactId>core-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.xushifei</groupId>
+            <artifactId>core-job</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!-- freemarker-starter -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
 
+        <!-- mail-starter -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${mybatis-spring-boot-starter.version}</version>
+        </dependency>
+        <!-- starter-actuator -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>

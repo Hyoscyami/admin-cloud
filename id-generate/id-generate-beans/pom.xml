@@ -8,7 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>id-generate-beans</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${id-generate.version}</version>
     <name>id-generate-beans</name>
     <description>Demo project for Spring Boot</description>
     <properties>

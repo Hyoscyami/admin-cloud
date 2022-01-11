@@ -8,13 +8,28 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>support-client</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${support.version}</version>
     <name>support-client</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
     </properties>
-
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.xushifei</groupId>
+            <artifactId>support-beans</artifactId>
+            <version>${support.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>

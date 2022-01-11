@@ -3,10 +3,10 @@ package com.xushifei.support.server.service.impl;
 import com.xushifei.support.server.entity.AdministrativeCode;
 import com.xushifei.support.server.manager.AdministrativeCodeManager;
 import com.xushifei.support.server.service.AdministrativeCodeService;
-import com.xushifei.support.server.vo.AdministrativeCodeVO;
-import com.xushifei.support.server.dto.add.AddAdministrativeCodeReq;
-import com.xushifei.support.server.dto.update.UpdateAdministrativeCodeReq;
-import com.xushifei.support.server.dto.query.QueryAdministrativeCodeReq;
+import com.xushifei.support.beans.dto.resp.AdministrativeCodeResp;
+import com.xushifei.support.beans.dto.req.add.AddAdministrativeCodeReq;
+import com.xushifei.support.beans.dto.req.update.UpdateAdministrativeCodeReq;
+import com.xushifei.support.beans.dto.req.query.QueryAdministrativeCodeReq;
 import com.xushifei.common.service.impl.BaseServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,14 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class AdministrativeCodeServiceImpl extends BaseServiceImpl<AdministrativeCodeManager, AddAdministrativeCodeReq, UpdateAdministrativeCodeReq, QueryAdministrativeCodeReq, AdministrativeCodeVO, AdministrativeCode>
+public class AdministrativeCodeServiceImpl
+    extends BaseServiceImpl<
+        AdministrativeCodeManager,
+        AddAdministrativeCodeReq,
+        UpdateAdministrativeCodeReq,
+        QueryAdministrativeCodeReq,
+        AdministrativeCodeResp,
+        AdministrativeCode>
     implements AdministrativeCodeService {
 
   /**
@@ -58,8 +65,8 @@ public class AdministrativeCodeServiceImpl extends BaseServiceImpl<Administrativ
    * @return
    */
   @Override
-  protected AdministrativeCodeVO convertEntityToVO(AdministrativeCode entity) {
-    AdministrativeCodeVO vo = new AdministrativeCodeVO();
+  protected AdministrativeCodeResp convertEntityToVO(AdministrativeCode entity) {
+    AdministrativeCodeResp vo = new AdministrativeCodeResp();
     BeanUtils.copyProperties(entity, vo);
     return vo;
   }

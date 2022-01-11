@@ -8,7 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>support-server</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${support.version}</version>
     <name>support-server</name>
     <description>Demo project for Spring Boot</description>
     <properties>
@@ -18,6 +18,11 @@
         <dependency>
             <groupId>com.xushifei</groupId>
             <artifactId>core-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.xushifei</groupId>
+            <artifactId>support-beans</artifactId>
+            <version>${support.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

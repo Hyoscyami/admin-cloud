@@ -152,6 +152,7 @@ public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
             CodeTemplateEnum.VO_FILE_PATH.getValue(),
             objectMap.get(CodeTemplateEnum.BASE_OUT_PUT_FILE_PATH.getValue()),
             File.separator,
+            File.separator,
             File.separator);
     // 全路径，包含文件名称
     String fileName = String.format(CodeTemplateEnum.FILE_NAME.getValue(), filePath, className);
@@ -171,6 +172,7 @@ public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
         String.format(
             CodeTemplateEnum.QUERY_FILE_PATH.getValue(),
             objectMap.get(CodeTemplateEnum.BASE_OUT_PUT_FILE_PATH.getValue()),
+            File.separator,
             File.separator,
             File.separator,
             File.separator);
@@ -196,6 +198,7 @@ public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
             objectMap.get(CodeTemplateEnum.BASE_OUT_PUT_FILE_PATH.getValue()),
             File.separator,
             File.separator,
+            File.separator,
             File.separator);
     // 全路径，包含文件名称
     String fileName = String.format(CodeTemplateEnum.FILE_NAME.getValue(), filePath, className);
@@ -216,6 +219,7 @@ public class MyFreemarkerTemplateEngine extends AbstractTemplateEngine {
         String.format(
             CodeTemplateEnum.UPDATE_FILE_PATH.getValue(),
             objectMap.get(CodeTemplateEnum.BASE_OUT_PUT_FILE_PATH.getValue()),
+            File.separator,
             File.separator,
             File.separator,
             File.separator);

@@ -97,7 +97,7 @@ public class ${table.controllerName} {
    * @return
    */
   @PostMapping("/getDetail")
-  public ApiResponse<Object> getDetail(@RequestParam("id") Long id) {
+  public ApiResponse<${entity}VO> getDetail(@RequestParam("id") Long id) {
     return ResponseUtils.success(${controllerDTO.serviceName}.getVOById(id));
   }
 }

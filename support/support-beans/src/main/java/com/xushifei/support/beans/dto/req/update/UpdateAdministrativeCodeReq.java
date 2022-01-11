@@ -1,4 +1,4 @@
-package com.xushifei.support.server.dto.update;
+package com.xushifei.support.beans.dto.req.update;
 
 import lombok.Data;
 import javax.validation.constraints.NotNull;

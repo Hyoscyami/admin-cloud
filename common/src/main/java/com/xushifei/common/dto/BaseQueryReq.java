@@ -13,6 +13,8 @@ import java.util.Objects;
  */
 @Data
 public class BaseQueryReq {
+  /** id列表 */
+  protected List<Long> ids;
   /** 页码 */
   protected Integer page;
   /** 页大小 */

@@ -54,7 +54,7 @@ public class CodeGeneratorUtils {
 
   public static void main(String[] args) {
     GeneratorCodeConfig config = getDefaultGenerator("support.server", "support");
-    // config.setTableName("client_scope_relation");
+    config.setTableName("dict");
     generateCode(config);
   }
 

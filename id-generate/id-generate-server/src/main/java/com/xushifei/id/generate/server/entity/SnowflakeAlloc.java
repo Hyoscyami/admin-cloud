@@ -20,24 +20,14 @@ import lombok.Setter;
 public class SnowflakeAlloc extends BaseEntity {
 
     /**
-     * 主机名
+     * 服务名
      */
-    private String hostname;
-
-    /**
-     * 端口号
-     */
-    private Integer port;
+    private String serverName;
 
     /**
      * 雪花算法的机器id
      */
     private Integer workerId;
-
-    /**
-     * 服务名
-     */
-    private String serverName;
 
 
 }

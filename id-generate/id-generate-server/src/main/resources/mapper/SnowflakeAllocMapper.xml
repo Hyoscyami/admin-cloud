@@ -8,10 +8,8 @@
         <result column="deleted" property="deleted" />
         <result column="sort" property="sort" />
         <result column="note" property="note" />
-        <result column="hostname" property="hostname" />
-        <result column="port" property="port" />
-        <result column="worker_id" property="workerId" />
         <result column="server_name" property="serverName" />
+        <result column="worker_id" property="workerId" />
         <result column="name" property="name" />
         <result column="type" property="type" />
         <result column="code" property="code" />
@@ -31,7 +29,7 @@
         deleted,
         sort,
         note,
-        hostname, `port`, worker_id, server_name, `name`, `type`, `code`, `status`, tenant_id, create_time, creator_id, creator_name, modify_time, modifier_id, modifier_name
+        server_name, worker_id, `name`, `type`, `code`, `status`, tenant_id, create_time, creator_id, creator_name, modify_time, modifier_id, modifier_name
     </sql>
 
 </mapper>

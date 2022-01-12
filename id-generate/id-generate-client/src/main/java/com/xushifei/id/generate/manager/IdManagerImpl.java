@@ -22,12 +22,9 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class IdManagerImpl implements IdManager {
   private final IdClient idClient;
-  /** 当前调用服务的主机名 */
-  @Value("${eureka.instance.hostname}")
-  private String hostname;
-  /** 当前调用服务的端口 */
-  @Value("${server.port}")
-  private String serverPort;
+  /** 服务名 */
+  @Value("${spring.application.name}")
+  private String serverName;
   /**
    * 获取号段模式ID
    *
@@ -51,8 +48,7 @@ public class IdManagerImpl implements IdManager {
   @Override
   public Long getSnowflakeId() {
     SnowflakeIdReq req = new SnowflakeIdReq();
-    req.setHostName(this.hostname);
-    req.setServerPort(this.serverPort);
+    req.setServerName(this.serverName);
     ApiResponse<Long> response = idClient.getSnowflakeId(req);
     if (!Objects.equals(ApiCodeEnum.SUCCESS.getCode(), response.getCode())) {
       throw new BusinessException(ApiCodeEnum.SYSTEM_ERROR.getCode(), "获取雪花算法ID失败");

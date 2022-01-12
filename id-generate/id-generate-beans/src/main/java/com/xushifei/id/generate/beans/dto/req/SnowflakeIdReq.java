@@ -14,10 +14,7 @@ import javax.validation.constraints.NotBlank;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class SnowflakeIdReq extends BaseIdAllocReq {
-  /** 主机名 */
-  @NotBlank(message = "hostname不能为空")
-  private String hostName;
-  /** 服务端口 */
-  @NotBlank(message = "serverPort不能为空")
-  private String serverPort;
+  /** 服务名 */
+  @NotBlank(message = "serverName不能为空")
+  private String serverName;
 }

@@ -15,7 +15,4 @@ import java.util.List;
 public class EurekaApplicationResp {
   /** 服务名，即spring.application.name */
   private String name;
-  /** 实例列表 */
-  @JsonProperty("instance")
-  private List<EurekaInstanceResp> instanceList;
 }

@@ -6,7 +6,10 @@ import com.xushifei.id.generate.beans.dto.req.SegmentIdReq;
 import com.xushifei.id.generate.beans.dto.req.SnowflakeIdReq;
 import com.xushifei.id.generate.server.service.IdGenerateService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
@@ -20,8 +23,8 @@ import javax.validation.Valid;
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class IdGenerateController {
-  private final IdGenerateService segmentIdService;
-  private final IdGenerateService snowflakeIdService;
+  private final IdGenerateService<SegmentIdReq> segmentIdService;
+  private final IdGenerateService<SnowflakeIdReq> snowflakeIdService;
   /**
    * 获取单个号段模式id
    *

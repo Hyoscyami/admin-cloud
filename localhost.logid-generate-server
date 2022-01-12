@@ -136,3 +136,21 @@
 17:39:06.683 9605882 INFO   [AsyncResolver-bootstrap-executor-0]  c.n.discovery.shared.resolver.aws.ConfigClusterResolver.getClusterEndpoints:43 - Resolving eureka endpoints via configuration
 17:44:06.694 9905893 INFO   [AsyncResolver-bootstrap-executor-0]  c.n.discovery.shared.resolver.aws.ConfigClusterResolver.getClusterEndpoints:43 - Resolving eureka endpoints via configuration
 17:49:06.708 10205907 INFO   [AsyncResolver-bootstrap-executor-0]  c.n.discovery.shared.resolver.aws.ConfigClusterResolver.getClusterEndpoints:43 - Resolving eureka endpoints via configuration
+17:54:06.710 10505909 INFO   [AsyncResolver-bootstrap-executor-0]  c.n.discovery.shared.resolver.aws.ConfigClusterResolver.getClusterEndpoints:43 - Resolving eureka endpoints via configuration
+17:59:06.714 10805913 INFO   [AsyncResolver-bootstrap-executor-0]  c.n.discovery.shared.resolver.aws.ConfigClusterResolver.getClusterEndpoints:43 - Resolving eureka endpoints via configuration
+18:04:06.730 11105929 INFO   [AsyncResolver-bootstrap-executor-0]  c.n.discovery.shared.resolver.aws.ConfigClusterResolver.getClusterEndpoints:43 - Resolving eureka endpoints via configuration
+18:09:06.739 11405938 INFO   [AsyncResolver-bootstrap-executor-0]  c.n.discovery.shared.resolver.aws.ConfigClusterResolver.getClusterEndpoints:43 - Resolving eureka endpoints via configuration
+18:14:06.745 11705944 INFO   [AsyncResolver-bootstrap-executor-0]  c.n.discovery.shared.resolver.aws.ConfigClusterResolver.getClusterEndpoints:43 - Resolving eureka endpoints via configuration
+18:19:06.748 12005947 INFO   [AsyncResolver-bootstrap-executor-0]  c.n.discovery.shared.resolver.aws.ConfigClusterResolver.getClusterEndpoints:43 - Resolving eureka endpoints via configuration
+18:24:06.754 12305953 INFO   [AsyncResolver-bootstrap-executor-0]  c.n.discovery.shared.resolver.aws.ConfigClusterResolver.getClusterEndpoints:43 - Resolving eureka endpoints via configuration
+18:29:06.764 12605963 INFO   [AsyncResolver-bootstrap-executor-0]  c.n.discovery.shared.resolver.aws.ConfigClusterResolver.getClusterEndpoints:43 - Resolving eureka endpoints via configuration
+18:30:41.162 12700361 INFO   [SpringApplicationShutdownHook]  o.s.c.n.eureka.serviceregistry.EurekaServiceRegistry.deregister:62 - Unregistering application ID-GENERATE-SERVER with eureka with status DOWN
+18:30:41.163 12700362 INFO   [SpringApplicationShutdownHook]  com.netflix.discovery.DiscoveryClient.notify:1352 - Saw local status change event StatusChangeEvent [timestamp=1641983441163, current=DOWN, previous=UP]
+18:30:41.164 12700363 INFO   [DiscoveryClient-InstanceInfoReplicator-0]  com.netflix.discovery.DiscoveryClient.register:873 - DiscoveryClient_ID-GENERATE-SERVER/172.16.0.119:id-generate-server:8767: registering service...
+18:30:41.193 12700392 INFO   [DiscoveryClient-InstanceInfoReplicator-0]  com.netflix.discovery.DiscoveryClient.register:882 - DiscoveryClient_ID-GENERATE-SERVER/172.16.0.119:id-generate-server:8767 - registration status: 204
+18:30:41.305 12700504 INFO   [SpringApplicationShutdownHook]  com.alibaba.druid.pool.DruidDataSource.close:2071 - {dataSource-1} closing ...
+18:30:41.323 12700522 INFO   [SpringApplicationShutdownHook]  com.alibaba.druid.pool.DruidDataSource.close:2144 - {dataSource-1} closed
+18:30:41.323 12700522 INFO   [SpringApplicationShutdownHook]  com.netflix.discovery.DiscoveryClient.shutdown:935 - Shutting down DiscoveryClient ...
+18:30:44.332 12703531 INFO   [SpringApplicationShutdownHook]  com.netflix.discovery.DiscoveryClient.unregister:971 - Unregistering ...
+18:30:44.345 12703544 INFO   [SpringApplicationShutdownHook]  com.netflix.discovery.DiscoveryClient.unregister:973 - DiscoveryClient_ID-GENERATE-SERVER/172.16.0.119:id-generate-server:8767 - deregister  status: 200
+18:30:44.352 12703551 INFO   [SpringApplicationShutdownHook]  com.netflix.discovery.DiscoveryClient.shutdown:960 - Completed shut down of DiscoveryClient

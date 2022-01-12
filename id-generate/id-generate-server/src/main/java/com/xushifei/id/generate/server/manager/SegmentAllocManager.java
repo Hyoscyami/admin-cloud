@@ -1,4 +1,4 @@
-package com.xushifei.id.generate.server.support;
+package com.xushifei.id.generate.server.manager;
 
 import com.xushifei.id.generate.server.entity.SegmentAlloc;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author xushifei
  * @since 2021-12-10
  */
-public interface ISegmentAllocSupport extends IService<SegmentAlloc> {
+public interface SegmentAllocManager extends IService<SegmentAlloc> {
   /**
    * 更新最大id并返回当前业务标识对应的号段数据
    *

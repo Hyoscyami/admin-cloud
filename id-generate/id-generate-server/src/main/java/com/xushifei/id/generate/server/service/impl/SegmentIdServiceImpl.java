@@ -1,11 +1,9 @@
 package com.xushifei.id.generate.server.service.impl;
 
-import com.xushifei.id.generate.beans.dto.req.BaseIdAllocReq;
 import com.xushifei.id.generate.beans.dto.req.SegmentIdReq;
 import com.xushifei.id.generate.server.service.IdGenerateService;
-import com.xushifei.id.generate.server.support.ISegmentAllocSupport;
+import com.xushifei.id.generate.server.manager.SegmentAllocManager;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +17,7 @@ import java.util.List;
 @Service("segmentIdService")
 @RequiredArgsConstructor
 public class SegmentIdServiceImpl implements IdGenerateService<SegmentIdReq> {
-  private final ISegmentAllocSupport segmentAllocSupport;
+  private final SegmentAllocManager segmentAllocSupport;
   /**
    * 获取单个唯一id
    *

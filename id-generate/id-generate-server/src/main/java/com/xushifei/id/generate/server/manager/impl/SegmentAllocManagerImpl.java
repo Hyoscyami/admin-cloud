@@ -1,9 +1,8 @@
-package com.xushifei.id.generate.server.support.impl;
+package com.xushifei.id.generate.server.manager.impl;
 
-import com.xushifei.common.utils.AssertUtils;
 import com.xushifei.id.generate.server.entity.SegmentAlloc;
 import com.xushifei.id.generate.server.mapper.SegmentAllocMapper;
-import com.xushifei.id.generate.server.support.ISegmentAllocSupport;
+import com.xushifei.id.generate.server.manager.SegmentAllocManager;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,8 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2021-12-10
  */
 @Service
-public class SegmentAllocSupport extends ServiceImpl<SegmentAllocMapper, SegmentAlloc>
-    implements ISegmentAllocSupport {
+public class SegmentAllocManagerImpl extends ServiceImpl<SegmentAllocMapper, SegmentAlloc>
+    implements SegmentAllocManager {
   /**
    * 更新最大id并返回当前业务标识对应的号段数据
    *

@@ -8,22 +8,22 @@ spring:
       httpclient:
         connect-timeout: 1000
         response-timeout: 5s
-#      routes:
-#      - id: admin
-#        uri: lb://admin
-#        predicates:
-#        - Path=/api/admin/**
-#        filters:
-#          - StripPrefix=2
+      #      routes:
+      #      - id: admin
+      #        uri: lb://admin
+      #        predicates:
+      #        - Path=/api/admin/**
+      #        filters:
+      #          - StripPrefix=2
       discovery:
         locator:
-#          转小写，不转小写默认是大写服务名，会匹配不上
+          #          转小写，不转小写默认是大写服务名，会匹配不上
           lowerCaseServiceId: true
-#          默认根据eureka服务名路由
+          #          默认根据eureka服务名路由
           enabled: true
 eureka:
   instance:
     hostname: localhost
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/

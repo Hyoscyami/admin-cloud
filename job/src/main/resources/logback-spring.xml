@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="true" scanPeriod="1 seconds">
+    <contextName>job</contextName>
+    <springProperty scope="context" name="logName" source="spring.application.name" defaultValue="localhost.log"/>
+    <springProperty scope="context" name="logPath" source="logging.path" defaultValue="localhost.log"/>
+    <!--    只保留30天日志      -->
+    <property name="maxHistory" value="30"/>
+    <!--单个日志文件最大20M-->
+    <property name="maxFileSize" value="20MB"/>
+    <!--
+        %d{HH:mm:ss.SSS} 代表14:06:49.812格式，因日志文件以日期命名，可不打印出日期
+        %-4relative 输出从程序启动到创建日志记录的时间 进行左对齐 且最小宽度为4
+        %-5level    TRACE, DEBUG, INFO, WARN, ERROR，以该顺序从左显示，一直到ERROR
+        [%thread]   线程名
+        %logger{56} 输出日志的logger名，可有一个整形参数，功能是缩短logger名，设置为0表示只输入logger最右边点符号之后的字符串，设置为0后com.hyoscyami.test只输出test
+       .%method:%L  输出日志事件的发生位置，方法 + 行号
+        %msg        日志消息
+        %n          换行
+    -->
+    <property name="pattern" value="%d{HH:mm:ss.SSS} %-4relative %-5level  [%thread]  %logger{56}.%method:%L - %msg%n"/>
+
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logPath}${logName}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${logPath}${logName}/%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+            <maxFileSize>${maxFileSize}</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 控制台输出 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+    <root level="info">
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
+    </root>
+
+</configuration>

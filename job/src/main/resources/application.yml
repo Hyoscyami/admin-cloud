@@ -1,7 +1,7 @@
 server:
   port: 8768
   servlet:
-    context-path: /xxl-job-admin
+    context-path: /admin
 management:
   health:
     mail:
@@ -71,4 +71,7 @@ eureka:
     hostname: localhost
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+logging:
+  file:
+    path: /data/servers/logs/${spring.application.name}/

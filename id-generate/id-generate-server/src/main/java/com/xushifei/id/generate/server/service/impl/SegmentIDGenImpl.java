@@ -6,13 +6,12 @@ import com.xushifei.id.generate.server.entity.SegmentAlloc;
 import com.xushifei.id.generate.server.model.Segment;
 import com.xushifei.id.generate.server.model.SegmentBuffer;
 import com.xushifei.id.generate.server.service.IDGen;
-import com.xushifei.id.generate.server.support.ISegmentAllocSupport;
+import com.xushifei.id.generate.server.manager.SegmentAllocManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.StopWatch;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -51,7 +50,7 @@ public class SegmentIDGenImpl implements IDGen {
           new UpdateThreadFactory());
   private volatile boolean initOK = false;
   private Map<String, SegmentBuffer> cache = new ConcurrentHashMap<String, SegmentBuffer>();
-  private ISegmentAllocSupport segmentAllocSupport;
+  private SegmentAllocManager segmentAllocSupport;
 
   public static class UpdateThreadFactory implements ThreadFactory {
 

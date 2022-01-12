@@ -53,8 +53,8 @@ public class CodeGeneratorUtils {
           "modifierName");
 
   public static void main(String[] args) {
-    GeneratorCodeConfig config = getDefaultGenerator("support.server", "support");
-    config.setTableName("dict");
+    GeneratorCodeConfig config = getDefaultGenerator("id.generate.server", "id_generate");
+    config.setTableName("snowflake_alloc");
     generateCode(config);
   }
 

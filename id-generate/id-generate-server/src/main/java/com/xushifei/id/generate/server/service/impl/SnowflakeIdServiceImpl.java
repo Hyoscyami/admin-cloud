@@ -1,17 +1,21 @@
 package com.xushifei.id.generate.server.service.impl;
 
-import com.google.common.collect.Maps;
+import com.xushifei.core.cache.manager.CacheManager;
 import com.xushifei.id.generate.beans.dto.req.SnowflakeIdReq;
+import com.xushifei.id.generate.server.entity.SnowflakeAlloc;
+import com.xushifei.id.generate.server.enums.IDEnums;
 import com.xushifei.id.generate.server.manager.SnowflakeAllocManager;
 import com.xushifei.id.generate.server.service.IdGenerateService;
 import com.xushifei.id.generate.server.utils.SnowflakeIdWorker;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 雪花算法id生成
@@ -19,14 +23,15 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author xushifei
  * @date 2021/12/13
  */
+@Slf4j
 @Service("snowflakeIdService")
 @RequiredArgsConstructor
 public class SnowflakeIdServiceImpl implements IdGenerateService<SnowflakeIdReq> {
   /** id生成工具容器 */
-  private Map<String, SnowflakeIdWorker> CONTEXT = new ConcurrentHashMap<>();
+  private final Map<String, SnowflakeIdWorker> context = new ConcurrentHashMap<>();
 
-  private final SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1, 1);
   private final SnowflakeAllocManager snowflakeAllocManager;
+  private final CacheManager cacheManager;
   /**
    * 获取单个唯一id
    *
@@ -35,8 +40,18 @@ public class SnowflakeIdServiceImpl implements IdGenerateService<SnowflakeIdReq>
    */
   @Override
   public Long getId(SnowflakeIdReq req) {
-    // 根据hostname和serverPort查询本地缓存是否有记录
-    // 有记录，取出并生成id
+    // 获取id时预处理，本地缓存没有缓存id生成工具类时，进行缓存操作
+    this.preHandle(req);
+    SnowflakeIdWorker idWorker = this.context.get(req.getServerName());
+    if (Objects.nonNull(idWorker)) {
+      return idWorker.nextId();
+    }
+    // 数据库无记录则加锁生成一个workerId，防止重复
+    String key = IDEnums.ALLOC_SNOWFLAKE_ID_KEY.getCode();
+    boolean isLock = cacheManager.tryLock(key, TimeUnit.SECONDS, 2, 3);
+    if (!isLock) {
+      log.info("该节点没有争抢到生成workerId的分布式锁，");
+    }
     // 无记录，redis分布式锁，并生成一条hostname、serverPort与
     return idWorker.nextId();
   }
@@ -53,13 +68,21 @@ public class SnowflakeIdServiceImpl implements IdGenerateService<SnowflakeIdReq>
   }
 
   /**
-   * 获取id时预处理
+   * 获取id时预处理，本地缓存没有缓存id生成工具类时，进行缓存操作
    *
    * @param req
    */
   private void preHandle(SnowflakeIdReq req) {
-    SnowflakeIdWorker idWorker = this.CONTEXT.get(req.getServerName());
-    // 本地缓存没有该服务名的记录，去数据库查
-
+    SnowflakeIdWorker idWorker = this.context.get(req.getServerName());
+    if (Objects.isNull(idWorker)) {
+      // 本地缓存没有该服务名的记录，去数据库查
+      SnowflakeAlloc snowflakeAlloc =
+          snowflakeAllocManager
+              .lambdaQuery()
+              .eq(SnowflakeAlloc::getServerName, req.getServerName())
+              .one();
+      idWorker = new SnowflakeIdWorker(snowflakeAlloc.getWorkerId());
+      this.context.put(req.getServerName(), idWorker);
+    }
   }
 }

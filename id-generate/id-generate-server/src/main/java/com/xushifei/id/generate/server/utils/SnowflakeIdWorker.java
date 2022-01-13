@@ -13,58 +13,43 @@ import java.time.Instant;
 @Slf4j
 public class SnowflakeIdWorker {
 
-  // 下面两个每个5位，加起来就是10位的工作机器id
   /** 工作ID */
   private final long workerId;
-  /** 数据中心ID */
-  private final long datacenterId;
-  /** 12位的序列号 */
+  /** 14位的序列号 */
   private long sequence = 0L;
 
-  public SnowflakeIdWorker(long workerId, long datacenterId) {
+  public SnowflakeIdWorker(long workerId) {
     // sanity check for workerId
     if (workerId > maxWorkerId || workerId < 0) {
       throw new IllegalArgumentException(
           String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
     }
-    if (datacenterId > maxDatacenterId || datacenterId < 0) {
-      throw new IllegalArgumentException(
-          String.format("datacenter Id can't be greater than %d or less than 0", maxDatacenterId));
-    }
     log.info(
-        "worker starting. timestamp left shift {}, datacenter id bits {}, worker id bits {} sequence bits {}, workerid {}",
+        "worker starting. timestamp left shift {}, worker id bits {} sequence bits {}, workerid {}",
         timestampLeftShift,
-        datacenterIdBits,
         workerIdBits,
         sequenceBits,
         workerId);
 
     this.workerId = workerId;
-    this.datacenterId = datacenterId;
   }
 
   /** 初始时间戳2021-12-13 */
   private long startTimestamp = 1639405713277L;
 
   /** 工作ID长度 */
-  private final long workerIdBits = 5L;
-  /** 数据中心长度 */
-  private final long datacenterIdBits = 5L;
+  private final long workerIdBits = 8L;
   /** 工作id最大值 */
   private long maxWorkerId = ~(-1L << workerIdBits);
-  /** 数据中心id最大值 */
-  private long maxDatacenterId = ~(-1L << datacenterIdBits);
   /** 序列号id长度 */
-  private final long sequenceBits = 12L;
+  private final long sequenceBits = 14L;
   /** 序列号最大值 */
   private long sequenceMask = ~(-1L << sequenceBits);
 
-  /** 工作id需要左移的位数，12位 */
+  /** 工作id需要左移的位数，14位 */
   private long workerIdShift = sequenceBits;
-  /** 数据id需要左移位数 12+5=17位 */
-  private long datacenterIdShift = sequenceBits + workerIdBits;
-  /** 时间戳需要左移位数 12+5+5=22位 */
-  private final long timestampLeftShift = sequenceBits + workerIdBits + datacenterIdBits;
+  /** 时间戳需要左移位数 14+8=22位 */
+  private final long timestampLeftShift = sequenceBits + workerIdBits;
 
   /** 上次时间戳，初始值为负数 */
   private long lastTimestamp = -1L;
@@ -106,7 +91,6 @@ public class SnowflakeIdWorker {
      * y，只有当x，y都为0的时候结果才为0，其它情况结果都为1。 因为个部分只有相应位上的值有意义，其它位上都是0，所以将各部分的值进行 | 运算就能得到最终拼接好的id
      */
     return ((timestamp - startTimestamp) << timestampLeftShift)
-        | (datacenterId << datacenterIdShift)
         | (workerId << workerIdShift)
         | sequence;
   }

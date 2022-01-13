@@ -43,4 +43,22 @@ public interface CacheManager {
    * @return
    */
   boolean delete(String key);
+
+  /**
+   * 分布式锁
+   *
+   * @param lockKey
+   * @param unit
+   * @param waitTime
+   * @param leaseTime
+   * @return
+   */
+  boolean tryLock(String lockKey, TimeUnit unit, long waitTime, long leaseTime);
+
+  /**
+   * 解锁
+   *
+   * @param lockKey
+   */
+  void unlock(String lockKey);
 }

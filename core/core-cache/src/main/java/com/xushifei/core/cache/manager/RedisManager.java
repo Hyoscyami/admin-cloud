@@ -89,6 +89,7 @@ public class RedisManager implements CacheManager {
     return lock;
   }
 
+  @Override
   public boolean tryLock(String lockKey, TimeUnit unit, long waitTime, long leaseTime) {
     RLock lock = this.redissonClient.getLock(lockKey);
 
@@ -99,9 +100,12 @@ public class RedisManager implements CacheManager {
     }
   }
 
+  @Override
   public void unlock(String lockKey) {
     RLock lock = this.redissonClient.getLock(lockKey);
-    lock.unlock();
+    if (lock != null && lock.isLocked() && lock.isHeldByCurrentThread()) {
+      lock.unlock();
+    }
   }
 
   public void unlock(RLock lock) {

@@ -79,7 +79,7 @@ public class ClientController {
    * @return
    */
   @PostMapping("/getDetail")
-  public ApiResponse<Object> getDetail(@RequestParam("id") Long id) {
+  public ApiResponse<ClientVO> getDetail(@RequestParam("id") Long id) {
     return ResponseUtils.success(clientService.getVOById(id));
   }
 }

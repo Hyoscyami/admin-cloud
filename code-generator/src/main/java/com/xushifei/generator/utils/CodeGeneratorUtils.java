@@ -54,7 +54,7 @@ public class CodeGeneratorUtils {
 
   public static void main(String[] args) {
     GeneratorCodeConfig config = getDefaultGenerator("id.generate.server", "id_generate");
-    config.setTableName("snowflake_alloc");
+    // config.setTableName("org_resource_request");
     generateCode(config);
   }
 

@@ -4,23 +4,23 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.xushifei.id.generate.server.entity.SnowflakeAlloc">
-        <result column="id" property="id" />
-        <result column="deleted" property="deleted" />
-        <result column="sort" property="sort" />
-        <result column="note" property="note" />
-        <result column="server_name" property="serverName" />
-        <result column="worker_id" property="workerId" />
-        <result column="name" property="name" />
-        <result column="type" property="type" />
-        <result column="code" property="code" />
-        <result column="status" property="status" />
-        <result column="tenant_id" property="tenantId" />
-        <result column="create_time" property="createTime" />
-        <result column="creator_id" property="creatorId" />
-        <result column="creator_name" property="creatorName" />
-        <result column="modify_time" property="modifyTime" />
-        <result column="modifier_id" property="modifierId" />
-        <result column="modifier_name" property="modifierName" />
+        <result column="id" property="id"/>
+        <result column="deleted" property="deleted"/>
+        <result column="sort" property="sort"/>
+        <result column="note" property="note"/>
+        <result column="server_name" property="serverName"/>
+        <result column="worker_id" property="workerId"/>
+        <result column="name" property="name"/>
+        <result column="type" property="type"/>
+        <result column="code" property="code"/>
+        <result column="status" property="status"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="creator_id" property="creatorId"/>
+        <result column="creator_name" property="creatorName"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="modifier_id" property="modifierId"/>
+        <result column="modifier_name" property="modifierName"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -31,5 +31,11 @@
         note,
         server_name, worker_id, `name`, `type`, `code`, `status`, tenant_id, create_time, creator_id, creator_name, modify_time, modifier_id, modifier_name
     </sql>
+    <!--获取最大的workerId-->
+    <select id="getMaxWorkerId" resultType="java.lang.Long">
+        select max(worker_id)
+        from id_generate.snowflake_alloc
+        where deleted = 0
+    </select>
 
 </mapper>

@@ -7,14 +7,21 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
- * <p>
  * 雪花算法分配id 服务实现类
- * </p>
  *
  * @author xushifei
  * @since 2022-01-12
  */
 @Service
-public class SnowflakeAllocManagerImpl extends ServiceImpl<SnowflakeAllocMapper, SnowflakeAlloc> implements SnowflakeAllocManager {
-
+public class SnowflakeAllocManagerImpl extends ServiceImpl<SnowflakeAllocMapper, SnowflakeAlloc>
+    implements SnowflakeAllocManager {
+  /**
+   * 获取系统中能使用的最大workerId
+   *
+   * @return
+   */
+  @Override
+  public Long getMaxWorkerId() {
+    return this.baseMapper.getMaxWorkerId();
+  }
 }

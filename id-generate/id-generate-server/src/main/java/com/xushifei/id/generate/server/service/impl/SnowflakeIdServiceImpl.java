@@ -46,11 +46,20 @@ public class SnowflakeIdServiceImpl implements IdGenerateService<SnowflakeIdReq>
     if (Objects.nonNull(idWorker)) {
       return idWorker.nextId();
     }
-    // 数据库无记录则加锁生成一个workerId，防止重复
+    // 本地缓存没有，尝试从redis中获取服务的workerId
+    log.info("本地缓存没有，尝试从redis中获取服务的workerId,req:{}", req);
+    String workerIdKey =
+        String.format(IDEnums.SNOWFLAKE_WORKER_ID_KEY.getCode(), req.getServerName());
     String key = IDEnums.ALLOC_SNOWFLAKE_ID_KEY.getCode();
-    boolean isLock = cacheManager.tryLock(key, TimeUnit.SECONDS, 2, 3);
-    if (!isLock) {
-      log.info("该节点没有争抢到生成workerId的分布式锁，");
+    try {
+      boolean isLock = cacheManager.tryLock(key, TimeUnit.SECONDS, 2, 3);
+      if (!isLock) {
+        log.info("该节点没有争抢到生成workerId的分布式锁");
+      }
+    } catch (Exception e) {
+      log.error("尝试生成雪花算法id异常:", e);
+    } finally {
+      cacheManager.unlock(key);
     }
     // 无记录，redis分布式锁，并生成一条hostname、serverPort与
     return idWorker.nextId();

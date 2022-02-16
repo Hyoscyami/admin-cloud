@@ -7,8 +7,7 @@ import com.xushifei.authorization.server.dto.req.update.UpdateClientReq;
 import com.xushifei.authorization.server.service.ClientService;
 import com.xushifei.authorization.server.vo.ClientVO;
 import com.xushifei.common.dto.ApiResponse;
-import com.xushifei.common.utils.ResponseUtils;
-import com.xushifei.common.vo.BaseVO;
+import com.xushifei.common.util.ResponseUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

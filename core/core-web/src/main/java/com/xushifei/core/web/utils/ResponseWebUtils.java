@@ -1,8 +1,8 @@
 package com.xushifei.core.web.utils;
 
 import com.xushifei.common.enums.ApiCodeEnum;
-import com.xushifei.common.utils.JsonUtils;
-import com.xushifei.common.utils.ResponseUtils;
+import com.xushifei.common.util.JsonUtils;
+import com.xushifei.common.util.ResponseUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

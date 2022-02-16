@@ -1,4 +1,4 @@
-package com.xushifei.common.utils;
+package com.xushifei.common.util;
 
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;

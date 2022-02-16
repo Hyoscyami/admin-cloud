@@ -1,4 +1,4 @@
-package com.xushifei.common.utils;
+package com.xushifei.common.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -10,7 +10,6 @@ import com.xushifei.common.enums.ApiCodeEnum;
 import com.xushifei.common.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.util.Collections;

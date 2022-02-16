@@ -6,7 +6,7 @@ import com.xushifei.support.beans.dto.req.add.AddAdministrativeCodeReq;
 import com.xushifei.support.beans.dto.req.update.UpdateAdministrativeCodeReq;
 import com.xushifei.support.beans.dto.req.query.QueryAdministrativeCodeReq;
 import com.xushifei.common.dto.ApiResponse;
-import com.xushifei.common.utils.ResponseUtils;
+import com.xushifei.common.util.ResponseUtils;
 import com.xushifei.support.beans.dto.resp.AdministrativeCodeResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

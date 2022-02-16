@@ -1,4 +1,4 @@
-package com.xushifei.common.utils;
+package com.xushifei.common.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;

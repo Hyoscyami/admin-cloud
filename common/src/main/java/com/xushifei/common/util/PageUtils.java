@@ -1,4 +1,4 @@
-package com.xushifei.common.utils;
+package com.xushifei.common.util;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 

@@ -12,7 +12,7 @@ import com.xushifei.authorization.server.manager.ScopeManager;
 import com.xushifei.authorization.server.service.ClientService;
 import com.xushifei.authorization.server.vo.ClientVO;
 import com.xushifei.common.service.impl.BaseServiceImpl;
-import com.xushifei.common.utils.AssertUtils;
+import com.xushifei.common.util.AssertUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;

@@ -7,7 +7,7 @@ import com.xushifei.common.entity.BaseEntity;
 import com.xushifei.common.enums.ApiCodeEnum;
 import com.xushifei.common.exception.BusinessException;
 import com.xushifei.common.service.*;
-import com.xushifei.common.utils.PageUtils;
+import com.xushifei.common.util.PageUtils;
 import com.xushifei.common.vo.BaseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;

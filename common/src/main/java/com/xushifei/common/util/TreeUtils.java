@@ -1,4 +1,4 @@
-package com.xushifei.common.utils;
+package com.xushifei.common.util;
 
 import com.xushifei.common.SysConstants;
 import com.xushifei.common.vo.TreeVO;

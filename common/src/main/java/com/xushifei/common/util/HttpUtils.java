@@ -66,26 +66,6 @@ public class HttpUtils {
   }
 
   /**
-   * 获取json的http请求实体
-   *
-   * @param requestObj
-   */
-  private static HttpEntity<String> getJsonHttpEntity(Object requestObj) {
-    return getJsonHttpEntity(JsonUtils.objectToJson(requestObj));
-  }
-
-  /**
-   * 获取json的http请求实体
-   *
-   * @param requestJson
-   * @return
-   */
-  private static HttpEntity<String> getJsonHttpEntity(final String requestJson) {
-    HttpHeaders httpHeaders = new HttpHeaders();
-    httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-    return new HttpEntity<>(requestJson, httpHeaders);
-  }
-  /**
    * get请求，返回json报文
    *
    * @param requestUrl 请求地址
@@ -111,5 +91,26 @@ public class HttpUtils {
         REST_TEMPLATE.exchange(requestBuildUrl, HttpMethod.GET, httpEntity, clazz);
     log.info("get json响应报文:{}", responseEntity);
     return responseEntity.getBody();
+  }
+
+  /**
+   * 获取json的http请求实体
+   *
+   * @param requestObj
+   */
+  private static HttpEntity<String> getJsonHttpEntity(Object requestObj) {
+    return getJsonHttpEntity(JsonUtils.objectToJson(requestObj));
+  }
+
+  /**
+   * 获取json的http请求实体
+   *
+   * @param requestJson
+   * @return
+   */
+  private static HttpEntity<String> getJsonHttpEntity(final String requestJson) {
+    HttpHeaders httpHeaders = new HttpHeaders();
+    httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+    return new HttpEntity<>(requestJson, httpHeaders);
   }
 }

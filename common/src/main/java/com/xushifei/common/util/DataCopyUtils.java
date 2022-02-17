@@ -3,6 +3,7 @@ package com.xushifei.common.util;
 import com.xushifei.common.enums.ApiCodeEnum;
 import com.xushifei.common.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 
 import java.util.List;
 import java.util.Set;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
  * @date 2022/2/17
  */
 @Slf4j
-public class BeanUtils {
+public class DataCopyUtils {
   /**
    * 相同属性进行数据拷贝
    *
@@ -27,7 +28,7 @@ public class BeanUtils {
   public static <T> T copyProperties(Object source, Class<T> target) {
     try {
       T t = target.getDeclaredConstructor().newInstance();
-      org.springframework.beans.BeanUtils.copyProperties(source, t);
+      BeanUtils.copyProperties(source, t);
       return t;
     } catch (Exception e) {
       log.error("【数据转换】数据转换出错，目标对象{}构造函数异常", target.getName(), e);

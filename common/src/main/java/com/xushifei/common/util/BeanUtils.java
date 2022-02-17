@@ -1,0 +1,71 @@
+package com.xushifei.common.util;
+
+import com.xushifei.common.enums.ApiCodeEnum;
+import com.xushifei.common.exception.BusinessException;
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+/**
+ * bean工具类
+ *
+ * @author xushifei
+ * @date 2022/2/17
+ */
+@Slf4j
+public class BeanUtils {
+  /**
+   * 相同属性进行数据拷贝
+   *
+   * @param source 源对象
+   * @param target 目标对象
+   * @param <T>
+   * @return
+   */
+  public static <T> T copyProperties(Object source, Class<T> target) {
+    try {
+      T t = target.getDeclaredConstructor().newInstance();
+      org.springframework.beans.BeanUtils.copyProperties(source, t);
+      return t;
+    } catch (Exception e) {
+      log.error("【数据转换】数据转换出错，目标对象{}构造函数异常", target.getName(), e);
+      throw new BusinessException(ApiCodeEnum.SYSTEM_ERROR.getCode(), "系统转换数据异常");
+    }
+  }
+
+  /**
+   * 相同属性进行数据拷贝
+   *
+   * @param sourceList 源对象
+   * @param target 目标对象
+   * @param <T>
+   * @return
+   */
+  public static <T> List<T> copyWithCollection(List<?> sourceList, Class<T> target) {
+    try {
+      return sourceList.stream().map(s -> copyProperties(s, target)).collect(Collectors.toList());
+    } catch (Exception e) {
+      log.error("【数据转换】数据转换出错，目标对象{}构造函数异常", target.getName(), e);
+      throw new BusinessException(ApiCodeEnum.SYSTEM_ERROR.getCode(), "系统转换数据异常");
+    }
+  }
+
+  /**
+   * 相同属性进行数据拷贝
+   *
+   * @param sourceList 源对象
+   * @param target 目标对象
+   * @param <T>
+   * @return
+   */
+  public static <T> Set<T> copyWithCollection(Set<?> sourceList, Class<T> target) {
+    try {
+      return sourceList.stream().map(s -> copyProperties(s, target)).collect(Collectors.toSet());
+    } catch (Exception e) {
+      log.error("【数据转换】数据转换出错，目标对象{}构造函数异常", target.getName(), e);
+      throw new BusinessException(ApiCodeEnum.SYSTEM_ERROR.getCode(), "系统转换数据异常");
+    }
+  }
+}

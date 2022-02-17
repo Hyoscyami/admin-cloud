@@ -1,4 +1,4 @@
-package com.xushifei.common;
+package com.xushifei.common.constants;
 
 /**
  * 系统常量

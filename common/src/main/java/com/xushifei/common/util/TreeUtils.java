@@ -1,7 +1,8 @@
 package com.xushifei.common.util;
 
-import com.xushifei.common.SysConstants;
+import com.xushifei.common.constants.SysConstants;
 import com.xushifei.common.vo.TreeVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;
 
 import java.util.*;
